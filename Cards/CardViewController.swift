@@ -130,9 +130,7 @@ extension CardViewController: UITableViewDelegate, UITableViewDataSource {
 }
 
 class CardCell: UITableViewCell {
-    
-
-    
+        
     var mode: Mode = .light {
         didSet {
             switch mode {
