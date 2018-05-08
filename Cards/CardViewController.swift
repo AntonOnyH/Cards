@@ -7,6 +7,7 @@
 //
 
 import UIKit
+import LocalAuthentication
 
 enum Mode {
     case light
@@ -80,6 +81,7 @@ class CardViewController: UIViewController {
         configureNavigationBar()
     }
     
+    
     private func configureNavigationBar() {
         title = NSLocalizedString("Cards", comment: "")
         navigationController?.navigationBar.prefersLargeTitles = true
@@ -87,6 +89,7 @@ class CardViewController: UIViewController {
         navigationItem.rightBarButtonItem = UIBarButtonItem(title: "Add", style: .done, target: self, action: #selector(handleAddButtonTapped))
         navigationItem.leftBarButtonItem = UIBarButtonItem(title: "Settings", style: .plain, target: self, action: #selector(handleSettingsButtonTapped))
     }
+    
     
     @objc private func handleAddButtonTapped() {
         

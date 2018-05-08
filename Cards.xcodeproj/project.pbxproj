@@ -7,6 +7,7 @@
 	objects = {
 
 /* Begin PBXBuildFile section */
+		6E00230020A0D25C001106CD /* LoginViewController.swift in Sources */ = {isa = PBXBuildFile; fileRef = 6E0022FF20A0D25C001106CD /* LoginViewController.swift */; };
 		6E1D5031208CFA4B00CAFFF2 /* AppDelegate.swift in Sources */ = {isa = PBXBuildFile; fileRef = 6E1D5030208CFA4B00CAFFF2 /* AppDelegate.swift */; };
 		6E1D5036208CFA4B00CAFFF2 /* Main.storyboard in Resources */ = {isa = PBXBuildFile; fileRef = 6E1D5034208CFA4B00CAFFF2 /* Main.storyboard */; };
 		6E1D5038208CFA4D00CAFFF2 /* Assets.xcassets in Resources */ = {isa = PBXBuildFile; fileRef = 6E1D5037208CFA4D00CAFFF2 /* Assets.xcassets */; };
@@ -34,6 +35,7 @@
 /* End PBXContainerItemProxy section */
 
 /* Begin PBXFileReference section */
+		6E0022FF20A0D25C001106CD /* LoginViewController.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = LoginViewController.swift; sourceTree = "<group>"; };
 		6E1D502D208CFA4B00CAFFF2 /* Cards.app */ = {isa = PBXFileReference; explicitFileType = wrapper.application; includeInIndex = 0; path = Cards.app; sourceTree = BUILT_PRODUCTS_DIR; };
 		6E1D5030208CFA4B00CAFFF2 /* AppDelegate.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = AppDelegate.swift; sourceTree = "<group>"; };
 		6E1D5035208CFA4B00CAFFF2 /* Base */ = {isa = PBXFileReference; lastKnownFileType = file.storyboard; name = Base; path = Base.lproj/Main.storyboard; sourceTree = "<group>"; };
@@ -99,6 +101,7 @@
 			children = (
 				6E1D5030208CFA4B00CAFFF2 /* AppDelegate.swift */,
 				6E803B942095C1D20072EB47 /* CardViewController.swift */,
+				6E0022FF20A0D25C001106CD /* LoginViewController.swift */,
 				6E1D5034208CFA4B00CAFFF2 /* Main.storyboard */,
 				6E1D5037208CFA4D00CAFFF2 /* Assets.xcassets */,
 				6E1D5039208CFA4D00CAFFF2 /* LaunchScreen.storyboard */,
@@ -256,6 +259,7 @@
 			isa = PBXSourcesBuildPhase;
 			buildActionMask = 2147483647;
 			files = (
+				6E00230020A0D25C001106CD /* LoginViewController.swift in Sources */,
 				6E803B952095C1D20072EB47 /* CardViewController.swift in Sources */,
 				6E1D5031208CFA4B00CAFFF2 /* AppDelegate.swift in Sources */,
 			);

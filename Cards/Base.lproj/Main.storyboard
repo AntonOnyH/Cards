@@ -1,5 +1,5 @@
 <?xml version="1.0" encoding="UTF-8"?>
-<document type="com.apple.InterfaceBuilder3.CocoaTouch.Storyboard.XIB" version="3.0" toolsVersion="14109" targetRuntime="iOS.CocoaTouch" propertyAccessControl="none" useAutolayout="YES" useTraitCollections="YES" useSafeAreas="YES" colorMatched="YES" initialViewController="PSX-Ww-Zxp">
+<document type="com.apple.InterfaceBuilder3.CocoaTouch.Storyboard.XIB" version="3.0" toolsVersion="14109" targetRuntime="iOS.CocoaTouch" propertyAccessControl="none" useAutolayout="YES" useTraitCollections="YES" useSafeAreas="YES" colorMatched="YES" initialViewController="JSB-cm-RXR">
     <device id="retina4_7" orientation="portrait">
         <adaptation id="fullscreen"/>
     </device>
@@ -13,13 +13,13 @@
         <!--Card View Controller-->
         <scene sceneID="tne-QT-ifu">
             <objects>
-                <viewController id="BYZ-38-t0r" customClass="CardViewController" customModule="Cards" customModuleProvider="target" sceneMemberID="viewController">
+                <viewController storyboardIdentifier="CardViewController" useStoryboardIdentifierAsRestorationIdentifier="YES" id="BYZ-38-t0r" customClass="CardViewController" customModule="Cards" customModuleProvider="target" sceneMemberID="viewController">
                     <view key="view" contentMode="scaleToFill" id="8bC-Xf-vdC">
                         <rect key="frame" x="0.0" y="0.0" width="375" height="667"/>
                         <autoresizingMask key="autoresizingMask" widthSizable="YES" heightSizable="YES"/>
                         <subviews>
                             <tableView clipsSubviews="YES" contentMode="scaleToFill" alwaysBounceVertical="YES" dataMode="prototypes" style="plain" separatorStyle="none" allowsSelection="NO" rowHeight="-1" estimatedRowHeight="-1" sectionHeaderHeight="28" sectionFooterHeight="28" translatesAutoresizingMaskIntoConstraints="NO" id="nbz-h1-vaK">
-                                <rect key="frame" x="0.0" y="64" width="375" height="603"/>
+                                <rect key="frame" x="0.0" y="20" width="375" height="647"/>
                                 <color key="backgroundColor" white="0.0" alpha="0.0" colorSpace="custom" customColorSpace="genericGamma22GrayColorSpace"/>
                                 <prototypes>
                                     <tableViewCell clipsSubviews="YES" contentMode="scaleToFill" preservesSuperviewLayoutMargins="YES" selectionStyle="default" indentationWidth="10" reuseIdentifier="Cell" rowHeight="145" id="JjS-JR-s2r" customClass="CardCell" customModule="Cards" customModuleProvider="target">
@@ -49,25 +49,61 @@
                 </viewController>
                 <placeholder placeholderIdentifier="IBFirstResponder" id="dkx-z0-nzr" sceneMemberID="firstResponder"/>
             </objects>
-            <point key="canvasLocation" x="972" y="32.833583208395808"/>
+            <point key="canvasLocation" x="2850.4000000000001" y="32.833583208395808"/>
+        </scene>
+        <!--Login View Controller-->
+        <scene sceneID="J9b-o0-XRt">
+            <objects>
+                <viewController id="VlT-jp-dJw" customClass="LoginViewController" customModule="Cards" customModuleProvider="target" sceneMemberID="viewController">
+                    <view key="view" contentMode="scaleToFill" id="SJz-0k-4HP">
+                        <rect key="frame" x="0.0" y="0.0" width="375" height="667"/>
+                        <autoresizingMask key="autoresizingMask" widthSizable="YES" heightSizable="YES"/>
+                        <subviews>
+                            <button opaque="NO" contentMode="scaleToFill" contentHorizontalAlignment="center" contentVerticalAlignment="center" lineBreakMode="middleTruncation" translatesAutoresizingMaskIntoConstraints="NO" id="VU8-HX-xP4">
+                                <rect key="frame" x="162" y="308" width="50" height="50"/>
+                                <constraints>
+                                    <constraint firstAttribute="height" constant="50" id="PJH-6D-NTe"/>
+                                    <constraint firstAttribute="width" constant="50" id="Tod-5m-C2H"/>
+                                </constraints>
+                                <state key="normal" title="Button" image="faceid"/>
+                                <connections>
+                                    <action selector="handleLoginButtonTapped:" destination="VlT-jp-dJw" eventType="touchUpInside" id="tJV-6f-rla"/>
+                                </connections>
+                            </button>
+                        </subviews>
+                        <color key="backgroundColor" white="0.0" alpha="1" colorSpace="custom" customColorSpace="genericGamma22GrayColorSpace"/>
+                        <constraints>
+                            <constraint firstItem="VU8-HX-xP4" firstAttribute="centerY" secondItem="SJz-0k-4HP" secondAttribute="centerY" id="khu-Qp-eMk"/>
+                            <constraint firstItem="VU8-HX-xP4" firstAttribute="centerX" secondItem="SJz-0k-4HP" secondAttribute="centerX" id="z9r-zW-nz7"/>
+                        </constraints>
+                        <viewLayoutGuide key="safeArea" id="HFu-0K-tzn"/>
+                    </view>
+                    <navigationItem key="navigationItem" id="pnt-vo-Xj6"/>
+                </viewController>
+                <placeholder placeholderIdentifier="IBFirstResponder" id="GFY-Gs-oUe" userLabel="First Responder" sceneMemberID="firstResponder"/>
+            </objects>
+            <point key="canvasLocation" x="580" y="32.833583208395808"/>
         </scene>
         <!--Navigation Controller-->
-        <scene sceneID="gDf-d4-pht">
+        <scene sceneID="woh-Nq-NOY">
             <objects>
-                <navigationController automaticallyAdjustsScrollViewInsets="NO" id="PSX-Ww-Zxp" sceneMemberID="viewController">
+                <navigationController automaticallyAdjustsScrollViewInsets="NO" id="JSB-cm-RXR" sceneMemberID="viewController">
                     <toolbarItems/>
-                    <navigationBar key="navigationBar" contentMode="scaleToFill" insetsLayoutMarginsFromSafeArea="NO" barStyle="black" id="Yuf-yi-YYw">
+                    <navigationBar key="navigationBar" contentMode="scaleToFill" insetsLayoutMarginsFromSafeArea="NO" barStyle="black" id="QgP-Mp-nJJ">
                         <rect key="frame" x="0.0" y="20" width="375" height="44"/>
                         <autoresizingMask key="autoresizingMask"/>
                     </navigationBar>
                     <nil name="viewControllers"/>
                     <connections>
-                        <segue destination="BYZ-38-t0r" kind="relationship" relationship="rootViewController" id="G8g-r6-iHZ"/>
+                        <segue destination="VlT-jp-dJw" kind="relationship" relationship="rootViewController" id="BuY-y2-c4v"/>
                     </connections>
                 </navigationController>
-                <placeholder placeholderIdentifier="IBFirstResponder" id="v0c-CR-bVu" userLabel="First Responder" sceneMemberID="firstResponder"/>
+                <placeholder placeholderIdentifier="IBFirstResponder" id="XBv-HF-pm9" userLabel="First Responder" sceneMemberID="firstResponder"/>
             </objects>
-            <point key="canvasLocation" x="32.799999999999997" y="32.833583208395808"/>
+            <point key="canvasLocation" x="-359.19999999999999" y="32.833583208395808"/>
         </scene>
     </scenes>
+    <resources>
+        <image name="faceid" width="1024" height="1024"/>
+    </resources>
 </document>
