@@ -1,6 +1,0 @@
-framework module CodableKeychain {
-  umbrella header "CodableKeychain-umbrella.h"
-
-  export *
-  module * { export * }
-}

@@ -10,10 +10,6 @@ import UIKit
 
 class NewCardViewController: UIViewController {
     
-    enum CardType {
-        case store
-        case bank
-    }
 
     @IBOutlet weak var segmentControl: UISegmentedControl!
     @IBOutlet weak var cardNumberTextField: UITextField!

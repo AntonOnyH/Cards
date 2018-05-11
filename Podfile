@@ -7,7 +7,8 @@ target 'Cards' do
 
   # Pods for Cards
 
-pod 'CodableKeychain', '~> 0.8.1'
+   pod 'SwiftKeychainWrapper'
+
 
   target 'CardsTests' do
     inherit! :search_paths

@@ -1,16 +1,16 @@
 PODS:
-  - CodableKeychain (0.8.1)
+  - SwiftKeychainWrapper (3.0.1)
 
 DEPENDENCIES:
-  - CodableKeychain (~> 0.8.1)
+  - SwiftKeychainWrapper
 
 SPEC REPOS:
   https://github.com/CocoaPods/Specs.git:
-    - CodableKeychain
+    - SwiftKeychainWrapper
 
 SPEC CHECKSUMS:
-  CodableKeychain: 926db6e9b92731e0cf31a45cd3bc04df494e8868
+  SwiftKeychainWrapper: 38952a3636320ae61bad3513cadd870929de7a4a
 
-PODFILE CHECKSUM: 4e910d58d3e36482d1da59ebb7304683e58ebf90
+PODFILE CHECKSUM: 4b7294ce4032aef817ba9dd3e2eccde657c7efb5
 
 COCOAPODS: 1.5.0

@@ -10,7 +10,8 @@
 #endif
 #endif
 
+#import "SwiftKeychainWrapper.h"
 
-FOUNDATION_EXPORT double CodableKeychainVersionNumber;
-FOUNDATION_EXPORT const unsigned char CodableKeychainVersionString[];
+FOUNDATION_EXPORT double SwiftKeychainWrapperVersionNumber;
+FOUNDATION_EXPORT const unsigned char SwiftKeychainWrapperVersionString[];
 

@@ -14,7 +14,22 @@ enum Mode {
     case dark
 }
 
-enum Card {
+struct SampleCardProvider: CardProvider {
+    
+    private let cards: [CardTheme] = [.black, .gray, .criene, .pearl, .yolo]
+    
+    func numberOfCards() -> Int {
+        return cards.count
+    }
+    
+    func cardAt(_ index: Int) -> CardTheme {
+        return cards[index]
+    }
+    
+}
+
+
+enum CardTheme {
     case black
     case gray
     case criene
@@ -46,25 +61,8 @@ enum Card {
     }
 }
 
-protocol CardProvider {
-    func numberOfCards() -> Int
-    func cardAt(_ index: Int) -> Card
-}
 
-struct SampleCardProvider: CardProvider {
-    
-    private let cards: [Card] = [.black, .gray, .criene, .pearl, .yolo]
-    
-    func numberOfCards() -> Int {
-        return cards.count
-    }
-    
-    func cardAt(_ index: Int) -> Card {
-        return cards[index]
-    }
-    
-    
-}
+
 
 class CardViewController: UIViewController {
     
@@ -79,6 +77,9 @@ class CardViewController: UIViewController {
         tableView.register(CardCell.self, forCellReuseIdentifier: "Cell")
 
         configureNavigationBar()
+        
+        let m = CardManager()
+        m.addCard(Card(name: "Test", cardNumber: "12345", expiry: "1234", cvv: "123", cardType: .bank))
     }
     
     
