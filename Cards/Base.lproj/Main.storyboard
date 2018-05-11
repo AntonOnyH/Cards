@@ -6,6 +6,7 @@
     <dependencies>
         <deployment identifier="iOS"/>
         <plugIn identifier="com.apple.InterfaceBuilder.IBCocoaTouchPlugin" version="14088"/>
+        <capability name="Constraints with non-1.0 multipliers" minToolsVersion="5.1"/>
         <capability name="Safe area layout guides" minToolsVersion="9.0"/>
         <capability name="documents saved in the Xcode 8 format" minToolsVersion="8.0"/>
     </dependencies>
@@ -49,7 +50,109 @@
                 </viewController>
                 <placeholder placeholderIdentifier="IBFirstResponder" id="dkx-z0-nzr" sceneMemberID="firstResponder"/>
             </objects>
-            <point key="canvasLocation" x="2850.4000000000001" y="32.833583208395808"/>
+            <point key="canvasLocation" x="1441" y="33"/>
+        </scene>
+        <!--New Card View Controller-->
+        <scene sceneID="4yU-tM-N8B">
+            <objects>
+                <viewController storyboardIdentifier="NewCardController" useStoryboardIdentifierAsRestorationIdentifier="YES" id="FnP-qL-Yqi" customClass="NewCardViewController" customModule="Cards" customModuleProvider="target" sceneMemberID="viewController">
+                    <view key="view" contentMode="scaleToFill" id="twj-FM-5Dx">
+                        <rect key="frame" x="0.0" y="0.0" width="375" height="667"/>
+                        <autoresizingMask key="autoresizingMask" widthSizable="YES" heightSizable="YES"/>
+                        <subviews>
+                            <stackView opaque="NO" contentMode="scaleToFill" axis="vertical" distribution="fillProportionally" spacing="20" translatesAutoresizingMaskIntoConstraints="NO" id="8aP-4M-rUo">
+                                <rect key="frame" x="30" y="120" width="315" height="400"/>
+                                <subviews>
+                                    <segmentedControl opaque="NO" contentMode="scaleToFill" contentHorizontalAlignment="left" contentVerticalAlignment="top" segmentControlStyle="plain" selectedSegmentIndex="0" translatesAutoresizingMaskIntoConstraints="NO" id="SHl-hZ-eWQ">
+                                        <rect key="frame" x="0.0" y="0.0" width="315" height="51"/>
+                                        <constraints>
+                                            <constraint firstAttribute="height" constant="50" id="e5T-Jv-A4f"/>
+                                        </constraints>
+                                        <segments>
+                                            <segment title="Bank"/>
+                                            <segment title="Store"/>
+                                        </segments>
+                                        <connections>
+                                            <action selector="handleSegmentChanged:" destination="FnP-qL-Yqi" eventType="valueChanged" id="z9d-84-kqy"/>
+                                        </connections>
+                                    </segmentedControl>
+                                    <textField opaque="NO" contentMode="scaleToFill" contentHorizontalAlignment="left" contentVerticalAlignment="center" placeholder="Card Number" textAlignment="natural" minimumFontSize="17" translatesAutoresizingMaskIntoConstraints="NO" id="KWc-09-FRQ">
+                                        <rect key="frame" x="0.0" y="70" width="315" height="50"/>
+                                        <color key="backgroundColor" white="1" alpha="0.15194242294520549" colorSpace="custom" customColorSpace="genericGamma22GrayColorSpace"/>
+                                        <constraints>
+                                            <constraint firstAttribute="height" constant="50" id="epO-gd-Bfm"/>
+                                        </constraints>
+                                        <color key="textColor" white="1" alpha="1" colorSpace="custom" customColorSpace="genericGamma22GrayColorSpace"/>
+                                        <fontDescription key="fontDescription" type="system" pointSize="14"/>
+                                        <textInputTraits key="textInputTraits" autocorrectionType="no" keyboardType="decimalPad"/>
+                                    </textField>
+                                    <textField opaque="NO" contentMode="scaleToFill" contentHorizontalAlignment="left" contentVerticalAlignment="center" placeholder="Name on card" textAlignment="natural" minimumFontSize="17" translatesAutoresizingMaskIntoConstraints="NO" id="EGA-Ro-Ydi">
+                                        <rect key="frame" x="0.0" y="140" width="315" height="50"/>
+                                        <color key="backgroundColor" white="1" alpha="0.15194242294520549" colorSpace="custom" customColorSpace="genericGamma22GrayColorSpace"/>
+                                        <constraints>
+                                            <constraint firstAttribute="height" constant="50" id="zl3-UQ-qw4"/>
+                                        </constraints>
+                                        <color key="textColor" white="1" alpha="1" colorSpace="custom" customColorSpace="genericGamma22GrayColorSpace"/>
+                                        <fontDescription key="fontDescription" type="system" pointSize="14"/>
+                                        <textInputTraits key="textInputTraits" autocorrectionType="no"/>
+                                    </textField>
+                                    <textField opaque="NO" contentMode="scaleToFill" contentHorizontalAlignment="left" contentVerticalAlignment="center" placeholder="Expiry Date" textAlignment="natural" minimumFontSize="17" translatesAutoresizingMaskIntoConstraints="NO" id="Zvf-c6-CEx">
+                                        <rect key="frame" x="0.0" y="210" width="315" height="50"/>
+                                        <color key="backgroundColor" white="1" alpha="0.15194242294520549" colorSpace="custom" customColorSpace="genericGamma22GrayColorSpace"/>
+                                        <constraints>
+                                            <constraint firstAttribute="height" constant="50" id="4ta-Mz-6NJ"/>
+                                        </constraints>
+                                        <color key="textColor" white="1" alpha="1" colorSpace="custom" customColorSpace="genericGamma22GrayColorSpace"/>
+                                        <fontDescription key="fontDescription" type="system" pointSize="14"/>
+                                        <textInputTraits key="textInputTraits" autocorrectionType="no" keyboardType="numbersAndPunctuation"/>
+                                    </textField>
+                                    <textField opaque="NO" contentMode="scaleToFill" contentHorizontalAlignment="left" contentVerticalAlignment="center" placeholder="CVC" textAlignment="natural" minimumFontSize="17" translatesAutoresizingMaskIntoConstraints="NO" id="apW-aB-ryi">
+                                        <rect key="frame" x="0.0" y="280" width="315" height="50"/>
+                                        <color key="backgroundColor" white="1" alpha="0.15194242294520549" colorSpace="custom" customColorSpace="genericGamma22GrayColorSpace"/>
+                                        <constraints>
+                                            <constraint firstAttribute="height" constant="50" id="MVJ-fm-1ts"/>
+                                        </constraints>
+                                        <color key="textColor" white="1" alpha="1" colorSpace="custom" customColorSpace="genericGamma22GrayColorSpace"/>
+                                        <fontDescription key="fontDescription" type="system" pointSize="14"/>
+                                        <textInputTraits key="textInputTraits" autocorrectionType="no" keyboardType="numberPad"/>
+                                    </textField>
+                                    <button opaque="NO" contentMode="scaleToFill" contentHorizontalAlignment="center" contentVerticalAlignment="center" buttonType="roundedRect" lineBreakMode="middleTruncation" translatesAutoresizingMaskIntoConstraints="NO" id="skP-0u-pIE">
+                                        <rect key="frame" x="0.0" y="350" width="315" height="50"/>
+                                        <color key="backgroundColor" red="0.16862745098039217" green="0.49019607843137253" blue="0.96470588235294119" alpha="1" colorSpace="custom" customColorSpace="sRGB"/>
+                                        <constraints>
+                                            <constraint firstAttribute="height" constant="50" id="Evk-Y6-G69"/>
+                                        </constraints>
+                                        <fontDescription key="fontDescription" style="UICTFontTextStyleTitle3"/>
+                                        <state key="normal" title="Save">
+                                            <color key="titleColor" white="1" alpha="1" colorSpace="custom" customColorSpace="genericGamma22GrayColorSpace"/>
+                                        </state>
+                                        <connections>
+                                            <action selector="handleSaveButtonTapped:" destination="FnP-qL-Yqi" eventType="touchUpInside" id="aZD-iJ-btB"/>
+                                        </connections>
+                                    </button>
+                                </subviews>
+                            </stackView>
+                        </subviews>
+                        <color key="backgroundColor" white="0.0" alpha="1" colorSpace="custom" customColorSpace="genericGamma22GrayColorSpace"/>
+                        <constraints>
+                            <constraint firstItem="8aP-4M-rUo" firstAttribute="leading" secondItem="9pL-B8-bdy" secondAttribute="leading" constant="30" id="0DE-TE-ZIl"/>
+                            <constraint firstItem="8aP-4M-rUo" firstAttribute="centerX" secondItem="twj-FM-5Dx" secondAttribute="centerX" id="Fqf-7X-gPD"/>
+                            <constraint firstItem="8aP-4M-rUo" firstAttribute="top" secondItem="9pL-B8-bdy" secondAttribute="top" constant="100" id="mQh-lb-Hgi"/>
+                        </constraints>
+                        <viewLayoutGuide key="safeArea" id="9pL-B8-bdy"/>
+                    </view>
+                    <connections>
+                        <outlet property="cardNumberTextField" destination="KWc-09-FRQ" id="0NY-nr-c4l"/>
+                        <outlet property="cvcTextField" destination="apW-aB-ryi" id="leq-zY-N09"/>
+                        <outlet property="expiryDateTextField" destination="Zvf-c6-CEx" id="JGd-sR-NwE"/>
+                        <outlet property="nameTextField" destination="EGA-Ro-Ydi" id="htE-aH-bY6"/>
+                        <outlet property="segmentControl" destination="SHl-hZ-eWQ" id="Ph3-97-VY4"/>
+                        <outlet property="stackView" destination="8aP-4M-rUo" id="xTB-EI-okn"/>
+                    </connections>
+                </viewController>
+                <placeholder placeholderIdentifier="IBFirstResponder" id="oCA-yd-BCG" userLabel="First Responder" sceneMemberID="firstResponder"/>
+            </objects>
+            <point key="canvasLocation" x="2479.1999999999998" y="45.42728635682159"/>
         </scene>
         <!--Login View Controller-->
         <scene sceneID="J9b-o0-XRt">
@@ -59,26 +162,174 @@
                         <rect key="frame" x="0.0" y="0.0" width="375" height="667"/>
                         <autoresizingMask key="autoresizingMask" widthSizable="YES" heightSizable="YES"/>
                         <subviews>
-                            <button opaque="NO" contentMode="scaleToFill" contentHorizontalAlignment="center" contentVerticalAlignment="center" lineBreakMode="middleTruncation" translatesAutoresizingMaskIntoConstraints="NO" id="VU8-HX-xP4">
-                                <rect key="frame" x="162" y="308" width="50" height="50"/>
+                            <stackView opaque="NO" contentMode="scaleToFill" distribution="fillEqually" spacing="10" translatesAutoresizingMaskIntoConstraints="NO" id="xt6-QZ-MvV">
+                                <rect key="frame" x="98" y="194" width="180" height="12"/>
+                                <subviews>
+                                    <imageView userInteractionEnabled="NO" alpha="0.40000000000000002" contentMode="scaleAspectFit" horizontalHuggingPriority="251" verticalHuggingPriority="251" image="dot" translatesAutoresizingMaskIntoConstraints="NO" id="Vzy-jx-K8z">
+                                        <rect key="frame" x="0.0" y="0.0" width="37.5" height="12"/>
+                                    </imageView>
+                                    <imageView userInteractionEnabled="NO" alpha="0.40000000000000002" contentMode="scaleAspectFit" horizontalHuggingPriority="251" verticalHuggingPriority="251" image="dot" translatesAutoresizingMaskIntoConstraints="NO" id="aoe-bV-5Ew">
+                                        <rect key="frame" x="47.5" y="0.0" width="37.5" height="12"/>
+                                    </imageView>
+                                    <imageView userInteractionEnabled="NO" alpha="0.40000000000000002" contentMode="scaleAspectFit" horizontalHuggingPriority="251" verticalHuggingPriority="251" image="dot" translatesAutoresizingMaskIntoConstraints="NO" id="pFq-or-OHP">
+                                        <rect key="frame" x="95" y="0.0" width="37.5" height="12"/>
+                                    </imageView>
+                                    <imageView userInteractionEnabled="NO" alpha="0.40000000000000002" contentMode="scaleAspectFit" horizontalHuggingPriority="251" verticalHuggingPriority="251" image="dot" translatesAutoresizingMaskIntoConstraints="NO" id="Lce-yK-xaT">
+                                        <rect key="frame" x="142.5" y="0.0" width="37.5" height="12"/>
+                                    </imageView>
+                                </subviews>
                                 <constraints>
-                                    <constraint firstAttribute="height" constant="50" id="PJH-6D-NTe"/>
-                                    <constraint firstAttribute="width" constant="50" id="Tod-5m-C2H"/>
+                                    <constraint firstAttribute="height" constant="12" id="0AU-iw-wlX"/>
+                                    <constraint firstAttribute="width" constant="180" id="grJ-YD-WpC"/>
                                 </constraints>
-                                <state key="normal" title="Button" image="faceid"/>
-                                <connections>
-                                    <action selector="handleLoginButtonTapped:" destination="VlT-jp-dJw" eventType="touchUpInside" id="tJV-6f-rla"/>
-                                </connections>
-                            </button>
+                            </stackView>
+                            <stackView opaque="NO" contentMode="scaleToFill" axis="vertical" distribution="fillEqually" translatesAutoresizingMaskIntoConstraints="NO" id="gLD-ne-Dre">
+                                <rect key="frame" x="24" y="286" width="327" height="357"/>
+                                <subviews>
+                                    <stackView opaque="NO" contentMode="scaleToFill" distribution="fillEqually" translatesAutoresizingMaskIntoConstraints="NO" id="fHv-vK-Csf">
+                                        <rect key="frame" x="0.0" y="0.0" width="327" height="89.5"/>
+                                        <subviews>
+                                            <button opaque="NO" contentMode="scaleToFill" contentHorizontalAlignment="center" contentVerticalAlignment="center" buttonType="roundedRect" lineBreakMode="middleTruncation" translatesAutoresizingMaskIntoConstraints="NO" id="jYE-fJ-O79">
+                                                <rect key="frame" x="0.0" y="0.0" width="109" height="89.5"/>
+                                                <fontDescription key="fontDescription" name="HelveticaNeue-Medium" family="Helvetica Neue" pointSize="20"/>
+                                                <state key="normal" title="1"/>
+                                                <connections>
+                                                    <action selector="handleNumberOneButtonTapped:" destination="VlT-jp-dJw" eventType="touchUpInside" id="we1-W9-Osl"/>
+                                                </connections>
+                                            </button>
+                                            <button opaque="NO" contentMode="scaleToFill" contentHorizontalAlignment="center" contentVerticalAlignment="center" buttonType="roundedRect" lineBreakMode="middleTruncation" translatesAutoresizingMaskIntoConstraints="NO" id="etT-AC-uho">
+                                                <rect key="frame" x="109" y="0.0" width="109" height="89.5"/>
+                                                <fontDescription key="fontDescription" name="HelveticaNeue-Medium" family="Helvetica Neue" pointSize="20"/>
+                                                <state key="normal" title="2"/>
+                                                <connections>
+                                                    <action selector="handleNumberTwoButtonTapped:" destination="VlT-jp-dJw" eventType="touchUpInside" id="u4S-gR-QAe"/>
+                                                </connections>
+                                            </button>
+                                            <button opaque="NO" contentMode="scaleToFill" contentHorizontalAlignment="center" contentVerticalAlignment="center" buttonType="roundedRect" lineBreakMode="middleTruncation" translatesAutoresizingMaskIntoConstraints="NO" id="Y35-rh-0YN">
+                                                <rect key="frame" x="218" y="0.0" width="109" height="89.5"/>
+                                                <fontDescription key="fontDescription" name="HelveticaNeue-Medium" family="Helvetica Neue" pointSize="20"/>
+                                                <state key="normal" title="3"/>
+                                                <connections>
+                                                    <action selector="handleNumberThreeButtonTapped:" destination="VlT-jp-dJw" eventType="touchUpInside" id="fRH-VG-On4"/>
+                                                </connections>
+                                            </button>
+                                        </subviews>
+                                    </stackView>
+                                    <stackView opaque="NO" contentMode="scaleToFill" distribution="fillEqually" translatesAutoresizingMaskIntoConstraints="NO" id="IkP-Ab-wwZ">
+                                        <rect key="frame" x="0.0" y="89.5" width="327" height="89"/>
+                                        <subviews>
+                                            <button opaque="NO" contentMode="scaleToFill" contentHorizontalAlignment="center" contentVerticalAlignment="center" buttonType="roundedRect" lineBreakMode="middleTruncation" translatesAutoresizingMaskIntoConstraints="NO" id="obf-AA-Qcn">
+                                                <rect key="frame" x="0.0" y="0.0" width="109" height="89"/>
+                                                <fontDescription key="fontDescription" name="HelveticaNeue-Medium" family="Helvetica Neue" pointSize="20"/>
+                                                <state key="normal" title="4"/>
+                                                <connections>
+                                                    <action selector="handleNumberFourButtonTapped:" destination="VlT-jp-dJw" eventType="touchUpInside" id="xnA-40-Mvw"/>
+                                                </connections>
+                                            </button>
+                                            <button opaque="NO" contentMode="scaleToFill" contentHorizontalAlignment="center" contentVerticalAlignment="center" buttonType="roundedRect" lineBreakMode="middleTruncation" translatesAutoresizingMaskIntoConstraints="NO" id="64b-hf-w4F">
+                                                <rect key="frame" x="109" y="0.0" width="109" height="89"/>
+                                                <fontDescription key="fontDescription" name="HelveticaNeue-Medium" family="Helvetica Neue" pointSize="20"/>
+                                                <state key="normal" title="5"/>
+                                                <connections>
+                                                    <action selector="handleNumberFiveButtonTapped:" destination="VlT-jp-dJw" eventType="touchUpInside" id="E9m-2a-h67"/>
+                                                </connections>
+                                            </button>
+                                            <button opaque="NO" contentMode="scaleToFill" contentHorizontalAlignment="center" contentVerticalAlignment="center" buttonType="roundedRect" lineBreakMode="middleTruncation" translatesAutoresizingMaskIntoConstraints="NO" id="WZD-s6-lrM">
+                                                <rect key="frame" x="218" y="0.0" width="109" height="89"/>
+                                                <fontDescription key="fontDescription" name="HelveticaNeue-Medium" family="Helvetica Neue" pointSize="20"/>
+                                                <state key="normal" title="6"/>
+                                                <connections>
+                                                    <action selector="handleNumberSixButtonTapped:" destination="VlT-jp-dJw" eventType="touchUpInside" id="UAR-yj-Zbk"/>
+                                                </connections>
+                                            </button>
+                                        </subviews>
+                                    </stackView>
+                                    <stackView opaque="NO" contentMode="scaleToFill" distribution="fillEqually" translatesAutoresizingMaskIntoConstraints="NO" id="cOE-Ma-537">
+                                        <rect key="frame" x="0.0" y="178.5" width="327" height="89.5"/>
+                                        <subviews>
+                                            <button opaque="NO" contentMode="scaleToFill" contentHorizontalAlignment="center" contentVerticalAlignment="center" buttonType="roundedRect" lineBreakMode="middleTruncation" translatesAutoresizingMaskIntoConstraints="NO" id="3Zc-wU-j5Z">
+                                                <rect key="frame" x="0.0" y="0.0" width="109" height="89.5"/>
+                                                <fontDescription key="fontDescription" name="HelveticaNeue-Medium" family="Helvetica Neue" pointSize="20"/>
+                                                <state key="normal" title="7"/>
+                                                <connections>
+                                                    <action selector="handleNumberSevenButtonTapped:" destination="VlT-jp-dJw" eventType="touchUpInside" id="bAh-Of-DaQ"/>
+                                                </connections>
+                                            </button>
+                                            <button opaque="NO" contentMode="scaleToFill" contentHorizontalAlignment="center" contentVerticalAlignment="center" buttonType="roundedRect" lineBreakMode="middleTruncation" translatesAutoresizingMaskIntoConstraints="NO" id="CtC-ef-4Fg">
+                                                <rect key="frame" x="109" y="0.0" width="109" height="89.5"/>
+                                                <fontDescription key="fontDescription" name="HelveticaNeue-Medium" family="Helvetica Neue" pointSize="20"/>
+                                                <state key="normal" title="8"/>
+                                                <connections>
+                                                    <action selector="handleNumberEightButtonTapped:" destination="VlT-jp-dJw" eventType="touchUpInside" id="DhV-hw-kaz"/>
+                                                </connections>
+                                            </button>
+                                            <button opaque="NO" contentMode="scaleToFill" contentHorizontalAlignment="center" contentVerticalAlignment="center" buttonType="roundedRect" lineBreakMode="middleTruncation" translatesAutoresizingMaskIntoConstraints="NO" id="XSU-q8-C7V">
+                                                <rect key="frame" x="218" y="0.0" width="109" height="89.5"/>
+                                                <fontDescription key="fontDescription" name="HelveticaNeue-Medium" family="Helvetica Neue" pointSize="20"/>
+                                                <state key="normal" title="9"/>
+                                                <connections>
+                                                    <action selector="handleNumberNineButtonTapped:" destination="VlT-jp-dJw" eventType="touchUpInside" id="VdN-Ht-TNc"/>
+                                                </connections>
+                                            </button>
+                                        </subviews>
+                                    </stackView>
+                                    <stackView opaque="NO" contentMode="scaleToFill" distribution="fillEqually" alignment="center" translatesAutoresizingMaskIntoConstraints="NO" id="Oyq-7q-UXG">
+                                        <rect key="frame" x="0.0" y="268" width="327" height="89"/>
+                                        <subviews>
+                                            <button opaque="NO" alpha="0.20000000000000001" contentMode="scaleToFill" contentHorizontalAlignment="center" contentVerticalAlignment="center" buttonType="roundedRect" lineBreakMode="middleTruncation" translatesAutoresizingMaskIntoConstraints="NO" id="e13-OF-jLK">
+                                                <rect key="frame" x="0.0" y="29.5" width="109" height="30"/>
+                                                <state key="normal" title="forgot"/>
+                                            </button>
+                                            <button opaque="NO" contentMode="scaleToFill" contentHorizontalAlignment="center" contentVerticalAlignment="center" buttonType="roundedRect" lineBreakMode="middleTruncation" translatesAutoresizingMaskIntoConstraints="NO" id="uza-41-VG1">
+                                                <rect key="frame" x="109" y="26.5" width="109" height="36"/>
+                                                <fontDescription key="fontDescription" name="HelveticaNeue-Medium" family="Helvetica Neue" pointSize="20"/>
+                                                <state key="normal" title="0"/>
+                                                <connections>
+                                                    <action selector="handleNumberZeroButtonTapped:" destination="VlT-jp-dJw" eventType="touchUpInside" id="e9M-1C-10G"/>
+                                                </connections>
+                                            </button>
+                                            <button opaque="NO" contentMode="scaleToFill" contentHorizontalAlignment="center" contentVerticalAlignment="center" lineBreakMode="middleTruncation" translatesAutoresizingMaskIntoConstraints="NO" id="VU8-HX-xP4">
+                                                <rect key="frame" x="218" y="27.5" width="109" height="34"/>
+                                                <state key="normal" title="FaceID">
+                                                    <color key="titleColor" red="0.16862745100000001" green="0.49019607840000001" blue="0.96470588239999999" alpha="1" colorSpace="custom" customColorSpace="sRGB"/>
+                                                </state>
+                                                <connections>
+                                                    <action selector="handleLoginButtonTapped:" destination="VlT-jp-dJw" eventType="touchUpInside" id="tJV-6f-rla"/>
+                                                </connections>
+                                            </button>
+                                        </subviews>
+                                    </stackView>
+                                </subviews>
+                            </stackView>
                         </subviews>
                         <color key="backgroundColor" white="0.0" alpha="1" colorSpace="custom" customColorSpace="genericGamma22GrayColorSpace"/>
                         <constraints>
-                            <constraint firstItem="VU8-HX-xP4" firstAttribute="centerY" secondItem="SJz-0k-4HP" secondAttribute="centerY" id="khu-Qp-eMk"/>
-                            <constraint firstItem="VU8-HX-xP4" firstAttribute="centerX" secondItem="SJz-0k-4HP" secondAttribute="centerX" id="z9r-zW-nz7"/>
+                            <constraint firstItem="gLD-ne-Dre" firstAttribute="top" secondItem="xt6-QZ-MvV" secondAttribute="bottom" constant="80" id="Dji-Sr-tw1"/>
+                            <constraint firstItem="xt6-QZ-MvV" firstAttribute="centerX" secondItem="SJz-0k-4HP" secondAttribute="centerX" id="O6J-fP-SBX"/>
+                            <constraint firstItem="gLD-ne-Dre" firstAttribute="centerX" secondItem="SJz-0k-4HP" secondAttribute="centerX" id="YJh-hr-XoF"/>
+                            <constraint firstItem="gLD-ne-Dre" firstAttribute="leading" secondItem="HFu-0K-tzn" secondAttribute="leading" constant="24" id="YoZ-cw-cow"/>
+                            <constraint firstItem="HFu-0K-tzn" firstAttribute="bottom" secondItem="gLD-ne-Dre" secondAttribute="bottom" constant="24" id="cIh-Kz-2Wp"/>
+                            <constraint firstItem="xt6-QZ-MvV" firstAttribute="centerY" secondItem="SJz-0k-4HP" secondAttribute="centerY" multiplier="0.6" id="i0q-ik-R3M"/>
                         </constraints>
                         <viewLayoutGuide key="safeArea" id="HFu-0K-tzn"/>
                     </view>
                     <navigationItem key="navigationItem" id="pnt-vo-Xj6"/>
+                    <connections>
+                        <outlet property="dotFour" destination="Lce-yK-xaT" id="56L-8q-ByD"/>
+                        <outlet property="dotOne" destination="Vzy-jx-K8z" id="Vv7-VF-jGQ"/>
+                        <outlet property="dotThree" destination="pFq-or-OHP" id="kK9-Lz-DBm"/>
+                        <outlet property="dotTwo" destination="aoe-bV-5Ew" id="Dzz-gY-Ing"/>
+                        <outlet property="eightButton" destination="CtC-ef-4Fg" id="oTl-xI-ATZ"/>
+                        <outlet property="fiveButton" destination="64b-hf-w4F" id="xhQ-am-CSd"/>
+                        <outlet property="fourButton" destination="obf-AA-Qcn" id="u8D-Dq-hBl"/>
+                        <outlet property="nineButton" destination="XSU-q8-C7V" id="x73-sS-Mra"/>
+                        <outlet property="oneButton" destination="jYE-fJ-O79" id="WAE-wN-OAf"/>
+                        <outlet property="sevenButton" destination="3Zc-wU-j5Z" id="wwb-Gk-1Y4"/>
+                        <outlet property="sixButton" destination="WZD-s6-lrM" id="4fI-6T-Mt0"/>
+                        <outlet property="threeButton" destination="Y35-rh-0YN" id="9Ob-9Y-oCy"/>
+                        <outlet property="twoButton" destination="etT-AC-uho" id="OFb-Q2-7g0"/>
+                        <outlet property="zeroButton" destination="uza-41-VG1" id="2et-Nl-xNm"/>
+                    </connections>
                 </viewController>
                 <placeholder placeholderIdentifier="IBFirstResponder" id="GFY-Gs-oUe" userLabel="First Responder" sceneMemberID="firstResponder"/>
             </objects>
@@ -104,6 +355,6 @@
         </scene>
     </scenes>
     <resources>
-        <image name="faceid" width="1024" height="1024"/>
+        <image name="dot" width="140" height="140"/>
     </resources>
 </document>

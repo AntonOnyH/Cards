@@ -92,7 +92,9 @@ class CardViewController: UIViewController {
     
     
     @objc private func handleAddButtonTapped() {
-        
+        if let vc = storyboard?.instantiateViewController(withIdentifier: "NewCardController") {
+            navigationController?.present(vc, animated: true)
+        }
     }
     
     @objc private func handleSettingsButtonTapped() {
