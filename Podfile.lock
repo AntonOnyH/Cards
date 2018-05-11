@@ -1,0 +1,16 @@
+PODS:
+  - CodableKeychain (0.8.1)
+
+DEPENDENCIES:
+  - CodableKeychain (~> 0.8.1)
+
+SPEC REPOS:
+  https://github.com/CocoaPods/Specs.git:
+    - CodableKeychain
+
+SPEC CHECKSUMS:
+  CodableKeychain: 926db6e9b92731e0cf31a45cd3bc04df494e8868
+
+PODFILE CHECKSUM: 4e910d58d3e36482d1da59ebb7304683e58ebf90
+
+COCOAPODS: 1.5.0
