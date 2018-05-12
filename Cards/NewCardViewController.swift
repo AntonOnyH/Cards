@@ -91,6 +91,7 @@ class NewCardViewController: UIViewController {
         let c = Card(name: nameTextField.text!, cardNumber: cardNumberTextField.text!, expiry: expiryDateTextField.text!, cvv: cvcTextField.text!, bankType: bankType(), cardTheme: .pearl, cardType: .bank)
         cardManager?.addCard(c, completion: {
             dismiss(animated: true)
+            
         })
     }
     

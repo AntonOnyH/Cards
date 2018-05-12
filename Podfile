@@ -8,6 +8,7 @@ target 'Cards' do
   # Pods for Cards
 
    pod 'SwiftKeychainWrapper'
+   pod 'Mixpanel'
 
 
   target 'CardsTests' do

@@ -8,7 +8,7 @@
 
 import UIKit
 import LocalAuthentication
-
+import Mixpanel
 
 
 
@@ -20,6 +20,8 @@ class CardViewController: UIViewController {
     
     override func viewDidLoad() {
         super.viewDidLoad()
+        Mixpanel.sharedInstance()?.track("CardFeed - Viewed")
+
         tableView.dataSource = self
         tableView.delegate = self
         tableView.register(CardCell.self, forCellReuseIdentifier: "Cell")

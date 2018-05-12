@@ -8,6 +8,7 @@
 
 import Foundation
 import SwiftKeychainWrapper
+import Mixpanel
 
 enum CardType {
     case store
@@ -84,6 +85,7 @@ class CardManager: CardService {
         
         if saveSuccessful {
             completion()
+            Mixpanel.sharedInstance()?.track("Card added")
         } else {
             print("Failed to save cards")
         }
