@@ -129,6 +129,7 @@ class CardCell: UITableViewCell {
         
     }
     
+    
     private func addCornerRadius() {
         cardImageView.layer.cornerRadius = 8
         cardImageView.clipsToBounds = true
