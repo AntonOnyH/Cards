@@ -132,16 +132,27 @@
                                     </button>
                                 </subviews>
                             </stackView>
+                            <segmentedControl opaque="NO" contentMode="scaleToFill" contentHorizontalAlignment="left" contentVerticalAlignment="top" segmentControlStyle="plain" selectedSegmentIndex="0" translatesAutoresizingMaskIntoConstraints="NO" id="yYO-pT-LuA">
+                                <rect key="frame" x="40" y="58" width="295" height="29"/>
+                                <segments>
+                                    <segment title="Visa"/>
+                                    <segment title="MasterCard"/>
+                                </segments>
+                            </segmentedControl>
                         </subviews>
                         <color key="backgroundColor" white="0.0" alpha="1" colorSpace="custom" customColorSpace="genericGamma22GrayColorSpace"/>
                         <constraints>
                             <constraint firstItem="8aP-4M-rUo" firstAttribute="leading" secondItem="9pL-B8-bdy" secondAttribute="leading" constant="30" id="0DE-TE-ZIl"/>
+                            <constraint firstItem="yYO-pT-LuA" firstAttribute="centerX" secondItem="twj-FM-5Dx" secondAttribute="centerX" id="0ut-nu-CKM"/>
                             <constraint firstItem="8aP-4M-rUo" firstAttribute="centerX" secondItem="twj-FM-5Dx" secondAttribute="centerX" id="Fqf-7X-gPD"/>
+                            <constraint firstItem="yYO-pT-LuA" firstAttribute="top" secondItem="9pL-B8-bdy" secondAttribute="top" constant="38" id="OKf-u9-64t"/>
                             <constraint firstItem="8aP-4M-rUo" firstAttribute="top" secondItem="9pL-B8-bdy" secondAttribute="top" constant="100" id="mQh-lb-Hgi"/>
+                            <constraint firstItem="yYO-pT-LuA" firstAttribute="leading" secondItem="9pL-B8-bdy" secondAttribute="leading" constant="40" id="oXK-Sd-hia"/>
                         </constraints>
                         <viewLayoutGuide key="safeArea" id="9pL-B8-bdy"/>
                     </view>
                     <connections>
+                        <outlet property="bankTypeSegment" destination="yYO-pT-LuA" id="dJl-5n-EiO"/>
                         <outlet property="cardNumberTextField" destination="KWc-09-FRQ" id="0NY-nr-c4l"/>
                         <outlet property="cvcTextField" destination="apW-aB-ryi" id="leq-zY-N09"/>
                         <outlet property="expiryDateTextField" destination="Zvf-c6-CEx" id="JGd-sR-NwE"/>

@@ -27,6 +27,8 @@ struct Card: Codable {
     let cardNumber: String
     let expiry: String
     let cvv: String
+    let bankType: BankType
+    let cardTheme: CardTheme
     
     let cardType: CardType
     
