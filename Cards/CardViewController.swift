@@ -14,20 +14,6 @@ enum Mode {
     case dark
 }
 
-struct SampleCardProvider: CardProvider {
-    
-    private let cards: [CardTheme] = [.black, .gray, .criene, .pearl, .yolo]
-    
-    func numberOfCards() -> Int {
-        return cards.count
-    }
-    
-    func cardAt(_ index: Int) -> CardTheme {
-        return cards[index]
-    }
-    
-}
-
 
 enum CardTheme {
     case black
@@ -68,7 +54,7 @@ class CardViewController: UIViewController {
     
     @IBOutlet weak var tableView: UITableView!
     
-    private let cardsProvider = SampleCardProvider()
+    private let cardManager = CardManager()
     
     override func viewDidLoad() {
         super.viewDidLoad()
@@ -76,10 +62,13 @@ class CardViewController: UIViewController {
         tableView.delegate = self
         tableView.register(CardCell.self, forCellReuseIdentifier: "Cell")
 
+        cardManager.fetch()
         configureNavigationBar()
-        
-        let m = CardManager()
-        m.addCard(Card(name: "Test", cardNumber: "12345", expiry: "1234", cvv: "123", cardType: .bank))
+    }
+    
+    override func viewWillAppear(_ animated: Bool) {
+        super.viewWillAppear(animated)
+        tableView.reloadData()
     }
     
     
@@ -93,7 +82,8 @@ class CardViewController: UIViewController {
     
     
     @objc private func handleAddButtonTapped() {
-        if let vc = storyboard?.instantiateViewController(withIdentifier: "NewCardController") {
+        if let vc = storyboard?.instantiateViewController(withIdentifier: "NewCardController") as? NewCardViewController {
+            vc.cardManager = self.cardManager
             navigationController?.present(vc, animated: true)
         }
     }
@@ -109,18 +99,17 @@ extension CardViewController: UITableViewDelegate, UITableViewDataSource {
     }
     
     func tableView(_ tableView: UITableView, numberOfRowsInSection section: Int) -> Int {
-        return cardsProvider.numberOfCards()
+        return cardManager.numberOfCards()
     }
     
     func tableView(_ tableView: UITableView, cellForRowAt indexPath: IndexPath) -> UITableViewCell {
         let cell = tableView.dequeueReusableCell(withIdentifier: "Cell", for: indexPath) as! CardCell
-        let item = cardsProvider.cardAt(indexPath.row)
-        cell.cardImageView.backgroundColor = item.color
-        cell.mode = item.mode
+        let item = cardManager.cardAtIndex(indexPath.row)
+        cell.cardImageView.backgroundColor = .red
+        cell.mode = .light
         
-//        cell.cardImageView.image = #imageLiteral(resourceName: "card")
-        cell.numberLabel.text = "1234567890"
-        cell.titleLabel.text = "Card Title"
+        cell.numberLabel.text = item.cardNumber
+        cell.titleLabel.text = item.name
         return cell
     }
     

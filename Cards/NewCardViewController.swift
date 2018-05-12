@@ -17,6 +17,8 @@ class NewCardViewController: UIViewController {
     @IBOutlet weak var expiryDateTextField: UITextField!
     @IBOutlet weak var cvcTextField: UITextField!
     @IBOutlet weak var stackView: UIStackView!
+    
+    var cardManager: CardManager?
 
     override func viewDidLoad() {
         super.viewDidLoad()
@@ -33,8 +35,10 @@ class NewCardViewController: UIViewController {
     }
     
     @IBAction func handleSaveButtonTapped(_ sender: UIButton) {
-        // Save card
-        dismiss(animated: true)
+        let c = Card(name: nameTextField.text!, cardNumber: cardNumberTextField.text!, expiry: expiryDateTextField.text!, cvv: cvcTextField.text!, cardType: .bank)
+        cardManager?.addCard(c, completion: {
+            dismiss(animated: true)
+        })
     }
     
     private func showFields(for type: CardType) {
