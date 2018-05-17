@@ -26,6 +26,10 @@ class CardViewController: UIViewController {
 
         cardManager.fetch()
         configureNavigationBar()
+        
+        let longPress = UILongPressGestureRecognizer(target: self, action: #selector(handleLongPress(_:)))
+        tableView.addGestureRecognizer(longPress)
+
     }
     
     override func viewWillAppear(_ animated: Bool) {
@@ -52,6 +56,38 @@ class CardViewController: UIViewController {
     @objc private func handleSettingsButtonTapped() {
         
     }
+    
+    @objc func handleLongPress(_ gestureRecognizer: UILongPressGestureRecognizer) {
+        guard gestureRecognizer.state == .began else { return }
+        let location = gestureRecognizer.location(in: tableView)
+        guard let indexPath = tableView.indexPathForRow(at: location), let cell = tableView.cellForRow(at: indexPath) else {
+            return
+        }
+        
+        presentMoreOptions(index: indexPath.row, fromView: cell)
+    }
+    
+    fileprivate func presentMoreOptions(index: Int, fromView: UIView?) {
+        
+        let alert = UIAlertController(title: nil, message: nil, preferredStyle: .actionSheet)
+        let action = UIAlertAction(title: NSLocalizedString("Delete", comment: "removing file"), style: .destructive) { _ in
+            self.cardManager.deleteCardAtIndex(index, completion: {
+                self.tableView.reloadData()
+            })
+        }
+        alert.addAction(action)
+        
+        let cancelAction = UIAlertAction(title: NSLocalizedString("Cancel", comment: ""), style: .cancel, handler: nil)
+        alert.addAction(cancelAction)
+        
+        if let v = fromView {
+            alert.popoverPresentationController?.sourceView = v
+            alert.popoverPresentationController?.sourceRect = v.bounds
+        }
+        
+        present(alert, animated: true, completion: nil)
+    }
+
 }
 
 extension CardViewController: UITableViewDelegate, UITableViewDataSource {

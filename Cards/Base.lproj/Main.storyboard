@@ -7,6 +7,7 @@
         <deployment identifier="iOS"/>
         <plugIn identifier="com.apple.InterfaceBuilder.IBCocoaTouchPlugin" version="14088"/>
         <capability name="Constraints with non-1.0 multipliers" minToolsVersion="5.1"/>
+        <capability name="Named colors" minToolsVersion="9.0"/>
         <capability name="Safe area layout guides" minToolsVersion="9.0"/>
         <capability name="documents saved in the Xcode 8 format" minToolsVersion="8.0"/>
     </dependencies>
@@ -178,15 +179,19 @@
                                 <subviews>
                                     <imageView userInteractionEnabled="NO" alpha="0.40000000000000002" contentMode="scaleAspectFit" horizontalHuggingPriority="251" verticalHuggingPriority="251" image="dot" translatesAutoresizingMaskIntoConstraints="NO" id="Vzy-jx-K8z">
                                         <rect key="frame" x="0.0" y="0.0" width="37.5" height="12"/>
+                                        <color key="tintColor" name="C4"/>
                                     </imageView>
                                     <imageView userInteractionEnabled="NO" alpha="0.40000000000000002" contentMode="scaleAspectFit" horizontalHuggingPriority="251" verticalHuggingPriority="251" image="dot" translatesAutoresizingMaskIntoConstraints="NO" id="aoe-bV-5Ew">
                                         <rect key="frame" x="47.5" y="0.0" width="37.5" height="12"/>
+                                        <color key="tintColor" name="C4"/>
                                     </imageView>
                                     <imageView userInteractionEnabled="NO" alpha="0.40000000000000002" contentMode="scaleAspectFit" horizontalHuggingPriority="251" verticalHuggingPriority="251" image="dot" translatesAutoresizingMaskIntoConstraints="NO" id="pFq-or-OHP">
                                         <rect key="frame" x="95" y="0.0" width="37.5" height="12"/>
+                                        <color key="tintColor" name="C4"/>
                                     </imageView>
                                     <imageView userInteractionEnabled="NO" alpha="0.40000000000000002" contentMode="scaleAspectFit" horizontalHuggingPriority="251" verticalHuggingPriority="251" image="dot" translatesAutoresizingMaskIntoConstraints="NO" id="Lce-yK-xaT">
                                         <rect key="frame" x="142.5" y="0.0" width="37.5" height="12"/>
+                                        <color key="tintColor" name="C4"/>
                                     </imageView>
                                 </subviews>
                                 <constraints>
@@ -203,7 +208,9 @@
                                             <button opaque="NO" contentMode="scaleToFill" contentHorizontalAlignment="center" contentVerticalAlignment="center" buttonType="roundedRect" lineBreakMode="middleTruncation" translatesAutoresizingMaskIntoConstraints="NO" id="jYE-fJ-O79">
                                                 <rect key="frame" x="0.0" y="0.0" width="109" height="89.5"/>
                                                 <fontDescription key="fontDescription" name="HelveticaNeue-Medium" family="Helvetica Neue" pointSize="20"/>
-                                                <state key="normal" title="1"/>
+                                                <state key="normal" title="1">
+                                                    <color key="titleColor" name="C4"/>
+                                                </state>
                                                 <connections>
                                                     <action selector="handleNumberOneButtonTapped:" destination="VlT-jp-dJw" eventType="touchUpInside" id="we1-W9-Osl"/>
                                                 </connections>
@@ -211,7 +218,9 @@
                                             <button opaque="NO" contentMode="scaleToFill" contentHorizontalAlignment="center" contentVerticalAlignment="center" buttonType="roundedRect" lineBreakMode="middleTruncation" translatesAutoresizingMaskIntoConstraints="NO" id="etT-AC-uho">
                                                 <rect key="frame" x="109" y="0.0" width="109" height="89.5"/>
                                                 <fontDescription key="fontDescription" name="HelveticaNeue-Medium" family="Helvetica Neue" pointSize="20"/>
-                                                <state key="normal" title="2"/>
+                                                <state key="normal" title="2">
+                                                    <color key="titleColor" name="C4"/>
+                                                </state>
                                                 <connections>
                                                     <action selector="handleNumberTwoButtonTapped:" destination="VlT-jp-dJw" eventType="touchUpInside" id="u4S-gR-QAe"/>
                                                 </connections>
@@ -219,7 +228,9 @@
                                             <button opaque="NO" contentMode="scaleToFill" contentHorizontalAlignment="center" contentVerticalAlignment="center" buttonType="roundedRect" lineBreakMode="middleTruncation" translatesAutoresizingMaskIntoConstraints="NO" id="Y35-rh-0YN">
                                                 <rect key="frame" x="218" y="0.0" width="109" height="89.5"/>
                                                 <fontDescription key="fontDescription" name="HelveticaNeue-Medium" family="Helvetica Neue" pointSize="20"/>
-                                                <state key="normal" title="3"/>
+                                                <state key="normal" title="3">
+                                                    <color key="titleColor" name="C4"/>
+                                                </state>
                                                 <connections>
                                                     <action selector="handleNumberThreeButtonTapped:" destination="VlT-jp-dJw" eventType="touchUpInside" id="fRH-VG-On4"/>
                                                 </connections>
@@ -232,7 +243,9 @@
                                             <button opaque="NO" contentMode="scaleToFill" contentHorizontalAlignment="center" contentVerticalAlignment="center" buttonType="roundedRect" lineBreakMode="middleTruncation" translatesAutoresizingMaskIntoConstraints="NO" id="obf-AA-Qcn">
                                                 <rect key="frame" x="0.0" y="0.0" width="109" height="89"/>
                                                 <fontDescription key="fontDescription" name="HelveticaNeue-Medium" family="Helvetica Neue" pointSize="20"/>
-                                                <state key="normal" title="4"/>
+                                                <state key="normal" title="4">
+                                                    <color key="titleColor" name="C4"/>
+                                                </state>
                                                 <connections>
                                                     <action selector="handleNumberFourButtonTapped:" destination="VlT-jp-dJw" eventType="touchUpInside" id="xnA-40-Mvw"/>
                                                 </connections>
@@ -240,7 +253,9 @@
                                             <button opaque="NO" contentMode="scaleToFill" contentHorizontalAlignment="center" contentVerticalAlignment="center" buttonType="roundedRect" lineBreakMode="middleTruncation" translatesAutoresizingMaskIntoConstraints="NO" id="64b-hf-w4F">
                                                 <rect key="frame" x="109" y="0.0" width="109" height="89"/>
                                                 <fontDescription key="fontDescription" name="HelveticaNeue-Medium" family="Helvetica Neue" pointSize="20"/>
-                                                <state key="normal" title="5"/>
+                                                <state key="normal" title="5">
+                                                    <color key="titleColor" name="C4"/>
+                                                </state>
                                                 <connections>
                                                     <action selector="handleNumberFiveButtonTapped:" destination="VlT-jp-dJw" eventType="touchUpInside" id="E9m-2a-h67"/>
                                                 </connections>
@@ -248,7 +263,9 @@
                                             <button opaque="NO" contentMode="scaleToFill" contentHorizontalAlignment="center" contentVerticalAlignment="center" buttonType="roundedRect" lineBreakMode="middleTruncation" translatesAutoresizingMaskIntoConstraints="NO" id="WZD-s6-lrM">
                                                 <rect key="frame" x="218" y="0.0" width="109" height="89"/>
                                                 <fontDescription key="fontDescription" name="HelveticaNeue-Medium" family="Helvetica Neue" pointSize="20"/>
-                                                <state key="normal" title="6"/>
+                                                <state key="normal" title="6">
+                                                    <color key="titleColor" name="C4"/>
+                                                </state>
                                                 <connections>
                                                     <action selector="handleNumberSixButtonTapped:" destination="VlT-jp-dJw" eventType="touchUpInside" id="UAR-yj-Zbk"/>
                                                 </connections>
@@ -261,7 +278,9 @@
                                             <button opaque="NO" contentMode="scaleToFill" contentHorizontalAlignment="center" contentVerticalAlignment="center" buttonType="roundedRect" lineBreakMode="middleTruncation" translatesAutoresizingMaskIntoConstraints="NO" id="3Zc-wU-j5Z">
                                                 <rect key="frame" x="0.0" y="0.0" width="109" height="89.5"/>
                                                 <fontDescription key="fontDescription" name="HelveticaNeue-Medium" family="Helvetica Neue" pointSize="20"/>
-                                                <state key="normal" title="7"/>
+                                                <state key="normal" title="7">
+                                                    <color key="titleColor" name="C4"/>
+                                                </state>
                                                 <connections>
                                                     <action selector="handleNumberSevenButtonTapped:" destination="VlT-jp-dJw" eventType="touchUpInside" id="bAh-Of-DaQ"/>
                                                 </connections>
@@ -269,7 +288,9 @@
                                             <button opaque="NO" contentMode="scaleToFill" contentHorizontalAlignment="center" contentVerticalAlignment="center" buttonType="roundedRect" lineBreakMode="middleTruncation" translatesAutoresizingMaskIntoConstraints="NO" id="CtC-ef-4Fg">
                                                 <rect key="frame" x="109" y="0.0" width="109" height="89.5"/>
                                                 <fontDescription key="fontDescription" name="HelveticaNeue-Medium" family="Helvetica Neue" pointSize="20"/>
-                                                <state key="normal" title="8"/>
+                                                <state key="normal" title="8">
+                                                    <color key="titleColor" name="C4"/>
+                                                </state>
                                                 <connections>
                                                     <action selector="handleNumberEightButtonTapped:" destination="VlT-jp-dJw" eventType="touchUpInside" id="DhV-hw-kaz"/>
                                                 </connections>
@@ -277,7 +298,9 @@
                                             <button opaque="NO" contentMode="scaleToFill" contentHorizontalAlignment="center" contentVerticalAlignment="center" buttonType="roundedRect" lineBreakMode="middleTruncation" translatesAutoresizingMaskIntoConstraints="NO" id="XSU-q8-C7V">
                                                 <rect key="frame" x="218" y="0.0" width="109" height="89.5"/>
                                                 <fontDescription key="fontDescription" name="HelveticaNeue-Medium" family="Helvetica Neue" pointSize="20"/>
-                                                <state key="normal" title="9"/>
+                                                <state key="normal" title="9">
+                                                    <color key="titleColor" name="C4"/>
+                                                </state>
                                                 <connections>
                                                     <action selector="handleNumberNineButtonTapped:" destination="VlT-jp-dJw" eventType="touchUpInside" id="VdN-Ht-TNc"/>
                                                 </connections>
@@ -294,7 +317,9 @@
                                             <button opaque="NO" contentMode="scaleToFill" contentHorizontalAlignment="center" contentVerticalAlignment="center" buttonType="roundedRect" lineBreakMode="middleTruncation" translatesAutoresizingMaskIntoConstraints="NO" id="uza-41-VG1">
                                                 <rect key="frame" x="109" y="26.5" width="109" height="36"/>
                                                 <fontDescription key="fontDescription" name="HelveticaNeue-Medium" family="Helvetica Neue" pointSize="20"/>
-                                                <state key="normal" title="0"/>
+                                                <state key="normal" title="0">
+                                                    <color key="titleColor" name="C4"/>
+                                                </state>
                                                 <connections>
                                                     <action selector="handleNumberZeroButtonTapped:" destination="VlT-jp-dJw" eventType="touchUpInside" id="e9M-1C-10G"/>
                                                 </connections>
@@ -302,7 +327,7 @@
                                             <button opaque="NO" contentMode="scaleToFill" contentHorizontalAlignment="center" contentVerticalAlignment="center" lineBreakMode="middleTruncation" translatesAutoresizingMaskIntoConstraints="NO" id="VU8-HX-xP4">
                                                 <rect key="frame" x="218" y="27.5" width="109" height="34"/>
                                                 <state key="normal" title="FaceID">
-                                                    <color key="titleColor" red="0.16862745100000001" green="0.49019607840000001" blue="0.96470588239999999" alpha="1" colorSpace="custom" customColorSpace="sRGB"/>
+                                                    <color key="titleColor" red="0.21176470589999999" green="0.46274509800000002" blue="0.96470588239999999" alpha="1" colorSpace="custom" customColorSpace="sRGB"/>
                                                 </state>
                                                 <connections>
                                                     <action selector="handleLoginButtonTapped:" destination="VlT-jp-dJw" eventType="touchUpInside" id="tJV-6f-rla"/>
@@ -375,5 +400,8 @@
     </scenes>
     <resources>
         <image name="dot" width="140" height="140"/>
+        <namedColor name="C4">
+            <color red="0.93699997663497925" green="0.93699997663497925" blue="0.93699997663497925" alpha="1" colorSpace="custom" customColorSpace="sRGB"/>
+        </namedColor>
     </resources>
 </document>

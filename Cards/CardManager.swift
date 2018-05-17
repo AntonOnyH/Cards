@@ -19,7 +19,7 @@ protocol CardService {
     func numberOfCards() -> Int
     func cardAtIndex(_ index: Int) -> Card
     func addCard(_ card: Card, completion: () -> Void)
-     func deleteCardAtIndex(_ index: Int) 
+    func deleteCardAtIndex(_ index: Int, completion: () -> Void)
 }
 
 
@@ -73,8 +73,13 @@ class CardManager: CardService {
 
     }
     
-     func deleteCardAtIndex(_ index: Int) {
+     func deleteCardAtIndex(_ index: Int, completion: () -> Void) {
         cards.remove(at: index)
+        deleteCard {
+            saveCardsToKeychain(completion: {
+                completion()
+            })
+        }
     }
     
     private func saveCardsToKeychain(completion: () -> Void) {
@@ -88,6 +93,13 @@ class CardManager: CardService {
             Mixpanel.sharedInstance()?.track("Card added")
         } else {
             print("Failed to save cards")
+        }
+    }
+    
+    private func deleteCard(completion: () -> Void) {
+        let removedSuccess = KeychainWrapper.standard.removeObject(forKey: "Cards")
+        if removedSuccess {
+            completion()
         }
     }
     
