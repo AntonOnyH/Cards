@@ -42,6 +42,7 @@ class LoginViewController: UIViewController {
     
     override func viewDidLoad() {
         super.viewDidLoad()
+        setBackgroundColor()
         title = NSLocalizedString("Cards", comment: "")
         navigationController?.navigationBar.prefersLargeTitles = true
         

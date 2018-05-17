@@ -32,7 +32,6 @@ class CardCell: UITableViewCell {
         let i = UIImageView()
         i.translatesAutoresizingMaskIntoConstraints = false
         i.contentMode = .scaleAspectFit
-        i.backgroundColor = .gray
         return i
     }()
     
@@ -105,6 +104,7 @@ class CardCell: UITableViewCell {
         cardImageView.topAnchor.constraint(equalTo: topAnchor, constant: 8).isActive = true
         cardImageView.centerYAnchor.constraint(equalTo: centerYAnchor).isActive = true
         cardImageView.centerXAnchor.constraint(equalTo: centerXAnchor).isActive = true
+        cardImageView.backgroundColor = UIColor(named: "CardC3") ?? .white
         
         numberLabel.leadingAnchor.constraint(equalTo: cardImageView.leadingAnchor, constant: 16).isActive = true
         numberLabel.centerXAnchor.constraint(equalTo: cardImageView.centerXAnchor).isActive = true

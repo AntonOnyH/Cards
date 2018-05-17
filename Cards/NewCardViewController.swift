@@ -33,6 +33,7 @@ enum CardTheme: Int, Codable {
     case criene
     case pearl
     case yolo
+    case alpha
     
     var color: UIColor {
         switch self {
@@ -46,12 +47,14 @@ enum CardTheme: Int, Codable {
             return UIColor(named: "C4") ?? .gray
         case .yolo:
             return UIColor(named: "C5") ?? .gray
+        case .alpha:
+            return UIColor(named: "CardC1") ?? .white
         }
     }
     
     var mode: Mode {
         switch self {
-        case .black, .gray, .criene:
+        case .black, .gray, .criene, .alpha:
             return .dark
         case .pearl, .yolo:
             return .light
@@ -88,7 +91,7 @@ class NewCardViewController: UIViewController {
     
     @IBAction func handleSaveButtonTapped(_ sender: UIButton) {
         
-        let c = Card(name: nameTextField.text!, cardNumber: cardNumberTextField.text!, expiry: expiryDateTextField.text!, cvv: cvcTextField.text!, bankType: bankType(), cardTheme: .pearl, cardType: .bank)
+        let c = Card(name: nameTextField.text!, cardNumber: cardNumberTextField.text!, expiry: expiryDateTextField.text!, cvv: cvcTextField.text!, bankType: bankType(), cardTheme: .alpha, cardType: .bank)
         cardManager?.addCard(c, completion: {
             dismiss(animated: true)
             

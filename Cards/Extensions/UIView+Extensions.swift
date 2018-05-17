@@ -20,3 +20,38 @@ extension UIView {
         layer.insertSublayer(gradientLayer, at: 0)
     }
 }
+
+extension UIViewController {
+    func setBackgroundColor() {
+        let color1: UIColor = UIColor(named: "BackgroundC1") ?? .white
+        let color2: UIColor = UIColor(named: "BackgroundC2") ?? .white
+        view.setGradientBackground(colorOne: color1, colorTwo: color2)
+    }
+}
+
+extension UIView {
+    func addGradientToView(view: UIView)
+    {
+        //gradient layer
+        let gradientLayer = CAGradientLayer()
+        
+        //define colors
+        gradientLayer.colors = [UIColor.red.cgColor,    UIColor.green.cgColor, UIColor.blue.cgColor]
+        
+        //define locations of colors as NSNumbers in range from 0.0 to 1.0
+        //if locations not provided the colors will spread evenly
+        gradientLayer.locations = [0.0, 0.6, 0.8]
+        
+        //define frame
+        gradientLayer.frame = view.bounds
+        
+        //insert the gradient layer to the view layer
+        view.layer.insertSublayer(gradientLayer, at: 0)
+    }
+    
+    func setCardColor() {
+        let color1: UIColor = UIColor(named: "CardC1") ?? .white
+        let color2: UIColor = UIColor(named: "CardC2") ?? .white
+        setGradientBackground(colorOne: color1, colorTwo: color2)
+    }
+}

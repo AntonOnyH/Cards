@@ -18,6 +18,7 @@ class CardViewController: UIViewController {
     
     override func viewDidLoad() {
         super.viewDidLoad()
+        setBackgroundColor()
         Mixpanel.sharedInstance()?.track("CardFeed - Viewed")
         tableView.dataSource = self
         tableView.delegate = self
@@ -65,7 +66,7 @@ extension CardViewController: UITableViewDelegate, UITableViewDataSource {
     func tableView(_ tableView: UITableView, cellForRowAt indexPath: IndexPath) -> UITableViewCell {
         let cell = tableView.dequeueReusableCell(withIdentifier: "Cell", for: indexPath) as! CardCell
         let item = cardManager.cardAtIndex(indexPath.row)
-        cell.cardImageView.backgroundColor = item.cardTheme.color
+//        cell.cardImageView.backgroundColor = item.cardTheme.color
         cell.mode = .light
         cell.bankTypeImageView.image = item.bankType.image
         cell.expiryLabel.text = item.expiry
