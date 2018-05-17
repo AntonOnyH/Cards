@@ -323,6 +323,14 @@
                             <constraint firstItem="xt6-QZ-MvV" firstAttribute="centerY" secondItem="SJz-0k-4HP" secondAttribute="centerY" multiplier="0.6" id="i0q-ik-R3M"/>
                         </constraints>
                         <viewLayoutGuide key="safeArea" id="HFu-0K-tzn"/>
+                        <userDefinedRuntimeAttributes>
+                            <userDefinedRuntimeAttribute type="color" keyPath="topColor">
+                                <color key="value" red="0.21176470589999999" green="0.46274509800000002" blue="0.96470588239999999" alpha="1" colorSpace="custom" customColorSpace="sRGB"/>
+                            </userDefinedRuntimeAttribute>
+                            <userDefinedRuntimeAttribute type="color" keyPath="bottomColor">
+                                <color key="value" red="0.53725490200000003" green="0.54901960780000003" blue="0.59999999999999998" alpha="1" colorSpace="custom" customColorSpace="sRGB"/>
+                            </userDefinedRuntimeAttribute>
+                        </userDefinedRuntimeAttributes>
                     </view>
                     <navigationItem key="navigationItem" id="pnt-vo-Xj6"/>
                     <connections>
