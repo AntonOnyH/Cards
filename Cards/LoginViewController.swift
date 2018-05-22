@@ -20,14 +20,17 @@ class LoginViewController: UIViewController {
     
     private var passcode: String = "" {
         didSet {
-            if passcode.count < 5 {
+            print("Count \(passcode.count)")
+            if passcode.count < 5 && passcode.count != 0 {
                 dots[passcode.count - 1].alpha = 1
             }
-            if passcode.count == 4 && isRegistered {
+            if passcode.count == 4 {
                 auth()
             }
         }
     }
+    
+    private var registerKey: String?
     
     private func auth() {
         if isRegistered {
@@ -40,7 +43,28 @@ class LoginViewController: UIViewController {
             }
         } else {
             currentSession = .newUser
+            registerAttempt()
         }
+    }
+    
+    private func registerAttempt() {
+        guard !passcode.isEmpty else { return }
+        if registerKey == nil {
+            registerKey = passcode
+            title = NSLocalizedString("Repeat", comment: "")
+            resetPassItems()
+        } else {
+            if registerKey == passcode {
+                setUserInfo()
+            }
+        }
+    }
+    
+    private func resetPassItems() {
+        for dot in dots {
+            dot.alpha = 0.4
+        }
+        passcode = ""
     }
     
     private var isRegistered: Bool {
