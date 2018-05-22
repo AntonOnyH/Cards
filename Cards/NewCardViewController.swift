@@ -65,6 +65,7 @@ enum CardTheme: Int, Codable {
 
 class NewCardViewController: UIViewController {
     
+    @IBOutlet weak var logoImageView: UIImageView!
     @IBOutlet weak var bankTypeSegment: UISegmentedControl!
     @IBOutlet weak var segmentControl: UISegmentedControl!
     @IBOutlet weak var cardNumberTextField: UITextField!
@@ -77,11 +78,15 @@ class NewCardViewController: UIViewController {
 
     override func viewDidLoad() {
         super.viewDidLoad()
+        setBackgroundColor()
+        
         nameTextField.delegate = self
         cardNumberTextField.delegate = self
         expiryDateTextField.delegate = self
         expiryDateTextField.delegate = self
         cvcTextField.delegate = self
+        
+        showFields(for: .bank)
     }
 
     @IBAction func handleSegmentChanged(_ sender: UISegmentedControl) {
@@ -112,11 +117,13 @@ class NewCardViewController: UIViewController {
     private func showFields(for type: CardType) {
         switch type {
         case .bank:
+            logoImageView.isHidden = true
             nameTextField.isHidden = false
             expiryDateTextField.isHidden = false
             cvcTextField.isHidden = false
             bankTypeSegment.isHidden = false
         case .store:
+            logoImageView.isHidden = false
             nameTextField.isHidden = false
             expiryDateTextField.isHidden = true
             cvcTextField.isHidden = true

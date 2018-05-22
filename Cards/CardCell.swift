@@ -28,6 +28,14 @@ class CardCell: UITableViewCell {
         }
     }
     
+    private let logoImageView: UIImageView = {
+        let i = UIImageView()
+        i.translatesAutoresizingMaskIntoConstraints = false
+        i.contentMode = .scaleAspectFit
+        i.backgroundColor = .gray
+        return i
+    }()
+    
     let cardImageView: UIImageView = {
         let i = UIImageView()
         i.translatesAutoresizingMaskIntoConstraints = false
@@ -104,11 +112,13 @@ class CardCell: UITableViewCell {
             cvvLabel.isHidden = false
             bankTypeImageView.isHidden = false
             expiryLabel.isHidden = false
+            logoImageView.isHidden = true
             cardImageView.backgroundColor = UIColor(named: "C4") ?? .white
         case .store:
             cvvLabel.isHidden = true
             bankTypeImageView.isHidden = true
             expiryLabel.isHidden = true
+            logoImageView.isHidden = false
             cardImageView.backgroundColor = UIColor(named: "C5") ?? .white
         }
     }
@@ -126,6 +136,7 @@ class CardCell: UITableViewCell {
         cardImageView.addSubview(bankTypeImageView)
         cardImageView.addSubview(expiryLabel)
         cardImageView.addSubview(cvvLabel)
+        cardImageView.addSubview(logoImageView)
         
         cardImageView.leadingAnchor.constraint(equalTo: leadingAnchor, constant: 16).isActive = true
         cardImageView.topAnchor.constraint(equalTo: topAnchor, constant: 8).isActive = true
@@ -142,8 +153,6 @@ class CardCell: UITableViewCell {
         cvvLabel.trailingAnchor.constraint(equalTo: cardImageView.trailingAnchor, constant: -16).isActive = true
         cvvLabel.centerYAnchor.constraint(equalTo: titleLabel.centerYAnchor).isActive = true
         
-        
-        
         titleLabel.leadingAnchor.constraint(equalTo: cardImageView.leadingAnchor, constant: 16).isActive = true
         titleLabel.centerXAnchor.constraint(equalTo: cardImageView.centerXAnchor).isActive = true
         titleLabel.bottomAnchor.constraint(equalTo: cardImageView.bottomAnchor, constant: -16).isActive = true
@@ -153,8 +162,12 @@ class CardCell: UITableViewCell {
         bankTypeImageView.widthAnchor.constraint(equalToConstant: 70).isActive = true
         bankTypeImageView.heightAnchor.constraint(equalToConstant: 50).isActive = true
         
+        logoImageView.trailingAnchor.constraint(equalTo: trailingAnchor, constant: -32).isActive = true
+        logoImageView.centerYAnchor.constraint(equalTo: centerYAnchor).isActive = true
+        logoImageView.widthAnchor.constraint(equalToConstant: 120).isActive = true
+        logoImageView.heightAnchor.constraint(equalToConstant: 120).isActive = true
+        
     }
-    
     
     private func addCornerRadius() {
         cardImageView.layer.cornerRadius = 8

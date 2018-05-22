@@ -62,7 +62,7 @@
                         <autoresizingMask key="autoresizingMask" widthSizable="YES" heightSizable="YES"/>
                         <subviews>
                             <stackView opaque="NO" contentMode="scaleToFill" axis="vertical" distribution="fillProportionally" spacing="20" translatesAutoresizingMaskIntoConstraints="NO" id="8aP-4M-rUo">
-                                <rect key="frame" x="30" y="120" width="315" height="400"/>
+                                <rect key="frame" x="30" y="44" width="315" height="515"/>
                                 <subviews>
                                     <segmentedControl opaque="NO" contentMode="scaleToFill" contentHorizontalAlignment="left" contentVerticalAlignment="top" segmentControlStyle="plain" selectedSegmentIndex="0" translatesAutoresizingMaskIntoConstraints="NO" id="SHl-hZ-eWQ">
                                         <rect key="frame" x="0.0" y="0.0" width="315" height="51"/>
@@ -73,13 +73,26 @@
                                             <segment title="Bank"/>
                                             <segment title="Store"/>
                                         </segments>
+                                        <color key="tintColor" name="C4"/>
                                         <connections>
                                             <action selector="handleSegmentChanged:" destination="FnP-qL-Yqi" eventType="valueChanged" id="z9d-84-kqy"/>
                                         </connections>
                                     </segmentedControl>
+                                    <segmentedControl opaque="NO" contentMode="scaleToFill" contentHorizontalAlignment="left" contentVerticalAlignment="top" segmentControlStyle="plain" selectedSegmentIndex="0" translatesAutoresizingMaskIntoConstraints="NO" id="yYO-pT-LuA">
+                                        <rect key="frame" x="0.0" y="70" width="315" height="26"/>
+                                        <constraints>
+                                            <constraint firstAttribute="height" constant="25" id="LAt-ia-Rhp"/>
+                                        </constraints>
+                                        <segments>
+                                            <segment title="Visa"/>
+                                            <segment title="MasterCard"/>
+                                        </segments>
+                                        <color key="tintColor" name="C4"/>
+                                    </segmentedControl>
                                     <textField opaque="NO" contentMode="scaleToFill" contentHorizontalAlignment="left" contentVerticalAlignment="center" placeholder="Card Number" textAlignment="natural" minimumFontSize="17" translatesAutoresizingMaskIntoConstraints="NO" id="KWc-09-FRQ">
-                                        <rect key="frame" x="0.0" y="70" width="315" height="50"/>
+                                        <rect key="frame" x="0.0" y="115" width="315" height="50"/>
                                         <color key="backgroundColor" white="1" alpha="0.15194242294520549" colorSpace="custom" customColorSpace="genericGamma22GrayColorSpace"/>
+                                        <color key="tintColor" name="C4"/>
                                         <constraints>
                                             <constraint firstAttribute="height" constant="50" id="epO-gd-Bfm"/>
                                         </constraints>
@@ -88,8 +101,9 @@
                                         <textInputTraits key="textInputTraits" autocorrectionType="no" keyboardType="decimalPad"/>
                                     </textField>
                                     <textField opaque="NO" contentMode="scaleToFill" contentHorizontalAlignment="left" contentVerticalAlignment="center" placeholder="Name on card" textAlignment="natural" minimumFontSize="17" translatesAutoresizingMaskIntoConstraints="NO" id="EGA-Ro-Ydi">
-                                        <rect key="frame" x="0.0" y="140" width="315" height="50"/>
+                                        <rect key="frame" x="0.0" y="185" width="315" height="50"/>
                                         <color key="backgroundColor" white="1" alpha="0.15194242294520549" colorSpace="custom" customColorSpace="genericGamma22GrayColorSpace"/>
+                                        <color key="tintColor" name="C4"/>
                                         <constraints>
                                             <constraint firstAttribute="height" constant="50" id="zl3-UQ-qw4"/>
                                         </constraints>
@@ -97,9 +111,17 @@
                                         <fontDescription key="fontDescription" type="system" pointSize="14"/>
                                         <textInputTraits key="textInputTraits" autocorrectionType="no"/>
                                     </textField>
+                                    <imageView userInteractionEnabled="NO" contentMode="scaleAspectFit" horizontalHuggingPriority="251" verticalHuggingPriority="251" image="UploadLogo" translatesAutoresizingMaskIntoConstraints="NO" id="eBI-ry-mhL">
+                                        <rect key="frame" x="0.0" y="255" width="315" height="50"/>
+                                        <color key="tintColor" name="C4"/>
+                                        <constraints>
+                                            <constraint firstAttribute="height" constant="50" id="thq-67-73w"/>
+                                        </constraints>
+                                    </imageView>
                                     <textField opaque="NO" contentMode="scaleToFill" contentHorizontalAlignment="left" contentVerticalAlignment="center" placeholder="Expiry Date" textAlignment="natural" minimumFontSize="17" translatesAutoresizingMaskIntoConstraints="NO" id="Zvf-c6-CEx">
-                                        <rect key="frame" x="0.0" y="210" width="315" height="50"/>
+                                        <rect key="frame" x="0.0" y="325" width="315" height="50"/>
                                         <color key="backgroundColor" white="1" alpha="0.15194242294520549" colorSpace="custom" customColorSpace="genericGamma22GrayColorSpace"/>
+                                        <color key="tintColor" name="C4"/>
                                         <constraints>
                                             <constraint firstAttribute="height" constant="50" id="4ta-Mz-6NJ"/>
                                         </constraints>
@@ -108,8 +130,9 @@
                                         <textInputTraits key="textInputTraits" autocorrectionType="no" keyboardType="numbersAndPunctuation"/>
                                     </textField>
                                     <textField opaque="NO" contentMode="scaleToFill" contentHorizontalAlignment="left" contentVerticalAlignment="center" placeholder="CVC" textAlignment="natural" minimumFontSize="17" translatesAutoresizingMaskIntoConstraints="NO" id="apW-aB-ryi">
-                                        <rect key="frame" x="0.0" y="280" width="315" height="50"/>
+                                        <rect key="frame" x="0.0" y="395" width="315" height="50"/>
                                         <color key="backgroundColor" white="1" alpha="0.15194242294520549" colorSpace="custom" customColorSpace="genericGamma22GrayColorSpace"/>
+                                        <color key="tintColor" name="C4"/>
                                         <constraints>
                                             <constraint firstAttribute="height" constant="50" id="MVJ-fm-1ts"/>
                                         </constraints>
@@ -118,7 +141,7 @@
                                         <textInputTraits key="textInputTraits" autocorrectionType="no" keyboardType="numberPad"/>
                                     </textField>
                                     <button opaque="NO" contentMode="scaleToFill" contentHorizontalAlignment="center" contentVerticalAlignment="center" buttonType="roundedRect" lineBreakMode="middleTruncation" translatesAutoresizingMaskIntoConstraints="NO" id="skP-0u-pIE">
-                                        <rect key="frame" x="0.0" y="350" width="315" height="50"/>
+                                        <rect key="frame" x="0.0" y="465" width="315" height="50"/>
                                         <color key="backgroundColor" red="0.16862745098039217" green="0.49019607843137253" blue="0.96470588235294119" alpha="1" colorSpace="custom" customColorSpace="sRGB"/>
                                         <constraints>
                                             <constraint firstAttribute="height" constant="50" id="Evk-Y6-G69"/>
@@ -133,22 +156,12 @@
                                     </button>
                                 </subviews>
                             </stackView>
-                            <segmentedControl opaque="NO" contentMode="scaleToFill" contentHorizontalAlignment="left" contentVerticalAlignment="top" segmentControlStyle="plain" selectedSegmentIndex="0" translatesAutoresizingMaskIntoConstraints="NO" id="yYO-pT-LuA">
-                                <rect key="frame" x="40" y="58" width="295" height="29"/>
-                                <segments>
-                                    <segment title="Visa"/>
-                                    <segment title="MasterCard"/>
-                                </segments>
-                            </segmentedControl>
                         </subviews>
                         <color key="backgroundColor" white="0.0" alpha="1" colorSpace="custom" customColorSpace="genericGamma22GrayColorSpace"/>
                         <constraints>
                             <constraint firstItem="8aP-4M-rUo" firstAttribute="leading" secondItem="9pL-B8-bdy" secondAttribute="leading" constant="30" id="0DE-TE-ZIl"/>
-                            <constraint firstItem="yYO-pT-LuA" firstAttribute="centerX" secondItem="twj-FM-5Dx" secondAttribute="centerX" id="0ut-nu-CKM"/>
                             <constraint firstItem="8aP-4M-rUo" firstAttribute="centerX" secondItem="twj-FM-5Dx" secondAttribute="centerX" id="Fqf-7X-gPD"/>
-                            <constraint firstItem="yYO-pT-LuA" firstAttribute="top" secondItem="9pL-B8-bdy" secondAttribute="top" constant="38" id="OKf-u9-64t"/>
-                            <constraint firstItem="8aP-4M-rUo" firstAttribute="top" secondItem="9pL-B8-bdy" secondAttribute="top" constant="100" id="mQh-lb-Hgi"/>
-                            <constraint firstItem="yYO-pT-LuA" firstAttribute="leading" secondItem="9pL-B8-bdy" secondAttribute="leading" constant="40" id="oXK-Sd-hia"/>
+                            <constraint firstItem="8aP-4M-rUo" firstAttribute="top" secondItem="9pL-B8-bdy" secondAttribute="top" constant="24" id="mQh-lb-Hgi"/>
                         </constraints>
                         <viewLayoutGuide key="safeArea" id="9pL-B8-bdy"/>
                     </view>
@@ -157,6 +170,7 @@
                         <outlet property="cardNumberTextField" destination="KWc-09-FRQ" id="0NY-nr-c4l"/>
                         <outlet property="cvcTextField" destination="apW-aB-ryi" id="leq-zY-N09"/>
                         <outlet property="expiryDateTextField" destination="Zvf-c6-CEx" id="JGd-sR-NwE"/>
+                        <outlet property="logoImageView" destination="eBI-ry-mhL" id="Vbm-gd-CrW"/>
                         <outlet property="nameTextField" destination="EGA-Ro-Ydi" id="htE-aH-bY6"/>
                         <outlet property="segmentControl" destination="SHl-hZ-eWQ" id="Ph3-97-VY4"/>
                         <outlet property="stackView" destination="8aP-4M-rUo" id="xTB-EI-okn"/>
@@ -399,7 +413,11 @@
         </scene>
     </scenes>
     <resources>
+        <image name="UploadLogo" width="296" height="418"/>
         <image name="dot" width="140" height="140"/>
+        <namedColor name="C4">
+            <color red="0.93699997663497925" green="0.93699997663497925" blue="0.93699997663497925" alpha="1" colorSpace="custom" customColorSpace="sRGB"/>
+        </namedColor>
         <namedColor name="C4">
             <color red="0.93699997663497925" green="0.93699997663497925" blue="0.93699997663497925" alpha="1" colorSpace="custom" customColorSpace="sRGB"/>
         </namedColor>
