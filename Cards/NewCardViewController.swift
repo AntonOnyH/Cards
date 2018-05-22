@@ -90,12 +90,17 @@ class NewCardViewController: UIViewController {
     }
     
     @IBAction func handleSaveButtonTapped(_ sender: UIButton) {
-        
-        let c = Card(name: nameTextField.text!, cardNumber: cardNumberTextField.text!, expiry: expiryDateTextField.text!, cvv: cvcTextField.text!, bankType: bankType(), cardTheme: .alpha, cardType: .bank)
+        let c = Card(name: nameTextField.text!, cardNumber: cardNumberTextField.text!, expiry: expiryDateTextField.text!, cvv: cvcTextField.text!, bankType: bankType(), cardTheme: .alpha, cardType: cardType())
         cardManager?.addCard(c, completion: {
             dismiss(animated: true)
             
         })
+    }
+    
+    private func cardType() -> Card.CardType {
+        let selectedItem = segmentControl.selectedSegmentIndex
+        let types: [Card.CardType] = [.bank, .store]
+        return types[selectedItem]
     }
     
     private func bankType() -> BankType {
@@ -110,10 +115,12 @@ class NewCardViewController: UIViewController {
             nameTextField.isHidden = false
             expiryDateTextField.isHidden = false
             cvcTextField.isHidden = false
+            bankTypeSegment.isHidden = false
         case .store:
-            nameTextField.isHidden = true
+            nameTextField.isHidden = false
             expiryDateTextField.isHidden = true
             cvcTextField.isHidden = true
+            bankTypeSegment.isHidden = true
         }
     }
 }

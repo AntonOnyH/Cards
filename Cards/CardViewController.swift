@@ -102,13 +102,7 @@ extension CardViewController: UITableViewDelegate, UITableViewDataSource {
     func tableView(_ tableView: UITableView, cellForRowAt indexPath: IndexPath) -> UITableViewCell {
         let cell = tableView.dequeueReusableCell(withIdentifier: "Cell", for: indexPath) as! CardCell
         let item = cardManager.cardAtIndex(indexPath.row)
-//        cell.cardImageView.backgroundColor = item.cardTheme.color
-        cell.mode = .light
-        cell.bankTypeImageView.image = item.bankType.image
-        cell.expiryLabel.text = item.expiry
-        cell.numberLabel.text = item.cardNumber
-        cell.titleLabel.text = item.name
-        cell.cvvLabel.text = "CVV: \(item.cvv)"
+        cell.configure(with: item)
         return cell
     }
     

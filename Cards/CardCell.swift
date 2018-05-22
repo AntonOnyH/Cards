@@ -86,6 +86,33 @@ class CardCell: UITableViewCell {
         setup()
     }
     
+    func configure(with card: Card) {
+        setViewsVisibelity(for: card.cardType)
+        mode = .light
+        numberLabel.text = card.cardNumber
+        titleLabel.text = card.name
+        if case .bank = card.cardType {
+            bankTypeImageView.image = card.bankType.image
+            expiryLabel.text = card.expiry
+            cvvLabel.text = "CVV: \(card.cvv)"
+        }
+    }
+    
+    private func setViewsVisibelity(for type: Card.CardType) {
+        switch type {
+        case .bank:
+            cvvLabel.isHidden = false
+            bankTypeImageView.isHidden = false
+            expiryLabel.isHidden = false
+            cardImageView.backgroundColor = UIColor(named: "C4") ?? .white
+        case .store:
+            cvvLabel.isHidden = true
+            bankTypeImageView.isHidden = true
+            expiryLabel.isHidden = true
+            cardImageView.backgroundColor = UIColor(named: "C5") ?? .white
+        }
+    }
+    
     private func setup() {
         backgroundColor = .clear
         addConstraints()
@@ -104,7 +131,6 @@ class CardCell: UITableViewCell {
         cardImageView.topAnchor.constraint(equalTo: topAnchor, constant: 8).isActive = true
         cardImageView.centerYAnchor.constraint(equalTo: centerYAnchor).isActive = true
         cardImageView.centerXAnchor.constraint(equalTo: centerXAnchor).isActive = true
-        cardImageView.backgroundColor = UIColor(named: "CardC3") ?? .white
         
         numberLabel.leadingAnchor.constraint(equalTo: cardImageView.leadingAnchor, constant: 16).isActive = true
         numberLabel.centerXAnchor.constraint(equalTo: cardImageView.centerXAnchor).isActive = true
