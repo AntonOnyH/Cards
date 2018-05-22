@@ -87,6 +87,10 @@ class NewCardViewController: UIViewController {
         cvcTextField.delegate = self
         
         showFields(for: .bank)
+        
+        let tap = UITapGestureRecognizer(target: self, action: #selector(handleLogoImageViewTapped))
+        logoImageView.isUserInteractionEnabled = true
+        logoImageView.addGestureRecognizer(tap)
     }
 
     @IBAction func handleSegmentChanged(_ sender: UISegmentedControl) {
@@ -95,10 +99,13 @@ class NewCardViewController: UIViewController {
     }
     
     @IBAction func handleSaveButtonTapped(_ sender: UIButton) {
-        let c = Card(name: nameTextField.text!, cardNumber: cardNumberTextField.text!, expiry: expiryDateTextField.text!, cvv: cvcTextField.text!, bankType: bankType(), cardTheme: .alpha, cardType: cardType())
+        var logo: String? = nil
+        if case .store = cardType() {
+            logo = logoImageView.image!.asString()
+        }
+        let c = Card(name: nameTextField.text!, cardNumber: cardNumberTextField.text!, expiry: expiryDateTextField.text!, cvv: cvcTextField.text!, bankType: bankType(), cardTheme: .alpha, logo: logo ?? "", cardType: cardType())
         cardManager?.addCard(c, completion: {
             dismiss(animated: true)
-            
         })
     }
     
@@ -123,12 +130,36 @@ class NewCardViewController: UIViewController {
             cvcTextField.isHidden = false
             bankTypeSegment.isHidden = false
         case .store:
-            logoImageView.isHidden = false
+            logoImageView.isHidden = true
             nameTextField.isHidden = false
             expiryDateTextField.isHidden = true
             cvcTextField.isHidden = true
             bankTypeSegment.isHidden = true
         }
+    }
+    
+    @objc func handleLogoImageViewTapped() {
+        presentImagePicker()
+    }
+    
+    private func presentImagePicker() {
+        if UIImagePickerController.isSourceTypeAvailable(UIImagePickerControllerSourceType.photoLibrary){
+            let imagePicker = UIImagePickerController()
+            imagePicker.delegate = self
+            imagePicker.allowsEditing = true
+            imagePicker.sourceType = UIImagePickerControllerSourceType.photoLibrary
+            self.present(imagePicker, animated: true, completion: nil)
+        }
+    }
+}
+
+extension NewCardViewController: UIImagePickerControllerDelegate, UINavigationControllerDelegate {
+    
+    func imagePickerController(_ picker: UIImagePickerController, didFinishPickingMediaWithInfo info: [String : Any]) {
+        if let pickedImage = info[UIImagePickerControllerOriginalImage] as? UIImage {
+            logoImageView.image = pickedImage
+        }
+        picker.dismiss(animated: true, completion: nil)
     }
 }
 
@@ -136,5 +167,21 @@ extension NewCardViewController: UITextFieldDelegate {
     func textFieldShouldReturn(_ textField: UITextField) -> Bool {
         textField.resignFirstResponder()
         return true
+    }
+}
+
+extension UIImage {
+    func asString() -> String? {
+        if let imageData = UIImagePNGRepresentation(self) {
+            return imageData.base64EncodedString(options: Data.Base64EncodingOptions.lineLength64Characters)
+        }
+        return nil
+    }
+    
+     class func asImage(from string: String) -> UIImage? {
+        if let imageData = Data(base64Encoded: string, options: Data.Base64DecodingOptions.ignoreUnknownCharacters) {
+            return UIImage(data: imageData)
+        }
+        return nil
     }
 }

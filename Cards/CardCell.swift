@@ -32,7 +32,6 @@ class CardCell: UITableViewCell {
         let i = UIImageView()
         i.translatesAutoresizingMaskIntoConstraints = false
         i.contentMode = .scaleAspectFit
-        i.backgroundColor = .gray
         return i
     }()
     
@@ -103,6 +102,8 @@ class CardCell: UITableViewCell {
             bankTypeImageView.image = card.bankType.image
             expiryLabel.text = card.expiry
             cvvLabel.text = "CVV: \(card.cvv)"
+        } else {
+            logoImageView.image = UIImage.asImage(from: card.logo)
         }
     }
     
@@ -164,9 +165,8 @@ class CardCell: UITableViewCell {
         
         logoImageView.trailingAnchor.constraint(equalTo: trailingAnchor, constant: -32).isActive = true
         logoImageView.centerYAnchor.constraint(equalTo: centerYAnchor).isActive = true
-        logoImageView.widthAnchor.constraint(equalToConstant: 120).isActive = true
-        logoImageView.heightAnchor.constraint(equalToConstant: 120).isActive = true
-        
+        logoImageView.widthAnchor.constraint(equalToConstant: 70).isActive = true
+        logoImageView.heightAnchor.constraint(equalToConstant: 70).isActive = true
     }
     
     private func addCornerRadius() {

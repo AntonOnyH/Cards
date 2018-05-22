@@ -30,13 +30,14 @@ struct Card: Codable {
     let cvv: String
     let bankType: BankType
     let cardTheme: CardTheme
-    
+    let logo: String
     let cardType: CardType
     
     enum CardType: Int, Codable {
         case bank, store
     }
 }
+
 
 class CardManager: CardService {
     
