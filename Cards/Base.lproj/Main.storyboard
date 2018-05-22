@@ -212,7 +212,7 @@
                                                     <color key="titleColor" name="C4"/>
                                                 </state>
                                                 <connections>
-                                                    <action selector="handleNumberOneButtonTapped:" destination="VlT-jp-dJw" eventType="touchUpInside" id="we1-W9-Osl"/>
+                                                    <action selector="handleNumberButtonTapped:" destination="VlT-jp-dJw" eventType="touchUpInside" id="tkY-Oc-NEO"/>
                                                 </connections>
                                             </button>
                                             <button opaque="NO" contentMode="scaleToFill" contentHorizontalAlignment="center" contentVerticalAlignment="center" buttonType="roundedRect" lineBreakMode="middleTruncation" translatesAutoresizingMaskIntoConstraints="NO" id="etT-AC-uho">
@@ -222,7 +222,7 @@
                                                     <color key="titleColor" name="C4"/>
                                                 </state>
                                                 <connections>
-                                                    <action selector="handleNumberTwoButtonTapped:" destination="VlT-jp-dJw" eventType="touchUpInside" id="u4S-gR-QAe"/>
+                                                    <action selector="handleNumberButtonTapped:" destination="VlT-jp-dJw" eventType="touchUpInside" id="uwP-Lb-1hr"/>
                                                 </connections>
                                             </button>
                                             <button opaque="NO" contentMode="scaleToFill" contentHorizontalAlignment="center" contentVerticalAlignment="center" buttonType="roundedRect" lineBreakMode="middleTruncation" translatesAutoresizingMaskIntoConstraints="NO" id="Y35-rh-0YN">
@@ -232,7 +232,7 @@
                                                     <color key="titleColor" name="C4"/>
                                                 </state>
                                                 <connections>
-                                                    <action selector="handleNumberThreeButtonTapped:" destination="VlT-jp-dJw" eventType="touchUpInside" id="fRH-VG-On4"/>
+                                                    <action selector="handleNumberButtonTapped:" destination="VlT-jp-dJw" eventType="touchUpInside" id="Oea-L5-MCc"/>
                                                 </connections>
                                             </button>
                                         </subviews>
@@ -247,7 +247,7 @@
                                                     <color key="titleColor" name="C4"/>
                                                 </state>
                                                 <connections>
-                                                    <action selector="handleNumberFourButtonTapped:" destination="VlT-jp-dJw" eventType="touchUpInside" id="xnA-40-Mvw"/>
+                                                    <action selector="handleNumberButtonTapped:" destination="VlT-jp-dJw" eventType="touchUpInside" id="SKR-Pm-vHW"/>
                                                 </connections>
                                             </button>
                                             <button opaque="NO" contentMode="scaleToFill" contentHorizontalAlignment="center" contentVerticalAlignment="center" buttonType="roundedRect" lineBreakMode="middleTruncation" translatesAutoresizingMaskIntoConstraints="NO" id="64b-hf-w4F">
@@ -257,7 +257,7 @@
                                                     <color key="titleColor" name="C4"/>
                                                 </state>
                                                 <connections>
-                                                    <action selector="handleNumberFiveButtonTapped:" destination="VlT-jp-dJw" eventType="touchUpInside" id="E9m-2a-h67"/>
+                                                    <action selector="handleNumberButtonTapped:" destination="VlT-jp-dJw" eventType="touchUpInside" id="hV7-0I-kFx"/>
                                                 </connections>
                                             </button>
                                             <button opaque="NO" contentMode="scaleToFill" contentHorizontalAlignment="center" contentVerticalAlignment="center" buttonType="roundedRect" lineBreakMode="middleTruncation" translatesAutoresizingMaskIntoConstraints="NO" id="WZD-s6-lrM">
@@ -267,7 +267,7 @@
                                                     <color key="titleColor" name="C4"/>
                                                 </state>
                                                 <connections>
-                                                    <action selector="handleNumberSixButtonTapped:" destination="VlT-jp-dJw" eventType="touchUpInside" id="UAR-yj-Zbk"/>
+                                                    <action selector="handleNumberButtonTapped:" destination="VlT-jp-dJw" eventType="touchUpInside" id="XWX-hx-RT3"/>
                                                 </connections>
                                             </button>
                                         </subviews>
@@ -282,7 +282,7 @@
                                                     <color key="titleColor" name="C4"/>
                                                 </state>
                                                 <connections>
-                                                    <action selector="handleNumberSevenButtonTapped:" destination="VlT-jp-dJw" eventType="touchUpInside" id="bAh-Of-DaQ"/>
+                                                    <action selector="handleNumberButtonTapped:" destination="VlT-jp-dJw" eventType="touchUpInside" id="Mkz-WJ-8uU"/>
                                                 </connections>
                                             </button>
                                             <button opaque="NO" contentMode="scaleToFill" contentHorizontalAlignment="center" contentVerticalAlignment="center" buttonType="roundedRect" lineBreakMode="middleTruncation" translatesAutoresizingMaskIntoConstraints="NO" id="CtC-ef-4Fg">
@@ -292,7 +292,7 @@
                                                     <color key="titleColor" name="C4"/>
                                                 </state>
                                                 <connections>
-                                                    <action selector="handleNumberEightButtonTapped:" destination="VlT-jp-dJw" eventType="touchUpInside" id="DhV-hw-kaz"/>
+                                                    <action selector="handleNumberButtonTapped:" destination="VlT-jp-dJw" eventType="touchUpInside" id="Tm4-12-pI3"/>
                                                 </connections>
                                             </button>
                                             <button opaque="NO" contentMode="scaleToFill" contentHorizontalAlignment="center" contentVerticalAlignment="center" buttonType="roundedRect" lineBreakMode="middleTruncation" translatesAutoresizingMaskIntoConstraints="NO" id="XSU-q8-C7V">
@@ -302,7 +302,7 @@
                                                     <color key="titleColor" name="C4"/>
                                                 </state>
                                                 <connections>
-                                                    <action selector="handleNumberNineButtonTapped:" destination="VlT-jp-dJw" eventType="touchUpInside" id="VdN-Ht-TNc"/>
+                                                    <action selector="handleNumberButtonTapped:" destination="VlT-jp-dJw" eventType="touchUpInside" id="fwt-KG-NCp"/>
                                                 </connections>
                                             </button>
                                         </subviews>
@@ -321,7 +321,7 @@
                                                     <color key="titleColor" name="C4"/>
                                                 </state>
                                                 <connections>
-                                                    <action selector="handleNumberZeroButtonTapped:" destination="VlT-jp-dJw" eventType="touchUpInside" id="e9M-1C-10G"/>
+                                                    <action selector="handleNumberButtonTapped:" destination="VlT-jp-dJw" eventType="touchUpInside" id="BC4-bw-Vbo"/>
                                                 </connections>
                                             </button>
                                             <button opaque="NO" contentMode="scaleToFill" contentHorizontalAlignment="center" contentVerticalAlignment="center" lineBreakMode="middleTruncation" translatesAutoresizingMaskIntoConstraints="NO" id="VU8-HX-xP4">

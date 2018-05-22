@@ -7,18 +7,66 @@
 //
 
 import UIKit
+import SwiftKeychainWrapper
 import LocalAuthentication
+import Mixpanel
 
 class LoginViewController: UIViewController {
     
-    private var passCode: [Int] = [] {
+    private enum Session {
+        case newUser
+        case existingUser
+    }
+    
+    private var passcode: String = "" {
         didSet {
-            if passCode.count < 5 {
-                dots[passCode.count - 1].alpha = 1
+            if passcode.count < 5 {
+                dots[passcode.count - 1].alpha = 1
+            }
+            if passcode.count == 4 && isRegistered {
+                auth()
             }
         }
     }
     
+    private func auth() {
+        if isRegistered {
+            currentSession = .existingUser
+            handleID()
+            if passcode == currentUserInfo() {
+                showCardsViewController()
+            } else {
+                // Wrong password
+            }
+        } else {
+            currentSession = .newUser
+        }
+    }
+    
+    private var isRegistered: Bool {
+        return currentUserInfo() != nil
+    }
+    
+    private var currentSession: Session = .newUser {
+        didSet {
+            style()
+        }
+    }
+    
+    private func currentUserInfo() -> String? {
+        return KeychainWrapper.standard.string(forKey: "userInfoCardPrivate")
+    }
+    
+    private func setUserInfo() {
+        let savedUserInfo = KeychainWrapper.standard.set(passcode, forKey: "userInfoCardPrivate")
+        if savedUserInfo {
+            showCardsViewController()
+        } else {
+            print("Failed to register user")
+            Mixpanel.sharedInstance()?.track("Failed to register user")
+            //present failure screen
+        }
+    }
 
     @IBOutlet weak var dotOne: UIImageView!
     @IBOutlet weak var dotTwo: UIImageView!
@@ -40,14 +88,17 @@ class LoginViewController: UIViewController {
     @IBOutlet weak var zeroButton: UIButton!
     
     
+    
     override func viewDidLoad() {
         super.viewDidLoad()
         setBackgroundColor()
-        title = NSLocalizedString("Cards", comment: "")
         navigationController?.navigationBar.prefersLargeTitles = true
-        
         dots = [dotOne, dotTwo, dotThree, dotFour]
-        handleID()
+    }
+    
+    override func viewWillAppear(_ animated: Bool) {
+        super.viewWillAppear(animated)
+        auth()
     }
     
 
@@ -85,61 +136,29 @@ class LoginViewController: UIViewController {
         }
     }
     
-    private func add(_ number: Int) {
-        passCode.append(number)
+    private func style() {
+        switch currentSession {
+        case .existingUser:
+            title = NSLocalizedString("Login", comment: "")
+        case .newUser:
+            title = NSLocalizedString("Register", comment: "")
+        }
     }
     
+    private func add(_ number: String?) {
+        guard let num = number else {
+            return
+        }
+        passcode = passcode + num
+    }
     
-    
+    @IBAction func handleNumberButtonTapped(_ sender: UIButton) {
+        add(sender.titleLabel?.text)
+    }
+
 }
 
 extension LoginViewController {
     
-    @IBAction func handleNumberOneButtonTapped(_ sender: UIButton) {
-        add(1)
-    }
-    
-    @IBAction func handleNumberTwoButtonTapped(_ sender: UIButton) {
-        add(2)
-    }
-    
-    @IBAction func handleNumberThreeButtonTapped(_ sender: UIButton) {
-        add(3)
-
-    }
-    
-    @IBAction func handleNumberFourButtonTapped(_ sender: UIButton) {
-        add(4)
-
-    }
-    
-    @IBAction func handleNumberFiveButtonTapped(_ sender: UIButton) {
-        add(5)
-
-    }
-    
-    @IBAction func handleNumberSixButtonTapped(_ sender: UIButton) {
-        add(6)
-
-    }
-    
-    @IBAction func handleNumberSevenButtonTapped(_ sender: UIButton) {
-        add(7)
-
-    }
-    
-    @IBAction func handleNumberEightButtonTapped(_ sender: UIButton) {
-        add(8)
-
-    }
-    
-    @IBAction func handleNumberNineButtonTapped(_ sender: UIButton) {
-        add(9)
-
-    }
-    
-    @IBAction func handleNumberZeroButtonTapped(_ sender: UIButton) {
-        add(0)
-    }
     
 }
