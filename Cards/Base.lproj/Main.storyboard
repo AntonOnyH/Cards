@@ -38,7 +38,7 @@
                         <color key="backgroundColor" white="0.0" alpha="1" colorSpace="custom" customColorSpace="genericGamma22GrayColorSpace"/>
                         <constraints>
                             <constraint firstItem="nbz-h1-vaK" firstAttribute="top" secondItem="6Tk-OE-BBY" secondAttribute="top" id="1kW-1R-XiD"/>
-                            <constraint firstItem="6Tk-OE-BBY" firstAttribute="bottom" secondItem="nbz-h1-vaK" secondAttribute="bottom" id="S7n-YE-c68"/>
+                            <constraint firstAttribute="bottom" secondItem="nbz-h1-vaK" secondAttribute="bottom" id="S7n-YE-c68"/>
                             <constraint firstItem="6Tk-OE-BBY" firstAttribute="trailing" secondItem="nbz-h1-vaK" secondAttribute="trailing" id="fXz-P4-fbG"/>
                             <constraint firstItem="nbz-h1-vaK" firstAttribute="leading" secondItem="6Tk-OE-BBY" secondAttribute="leading" id="nKJ-nn-URV"/>
                         </constraints>
@@ -53,7 +53,7 @@
             </objects>
             <point key="canvasLocation" x="1441" y="33"/>
         </scene>
-        <!--New Card View Controller-->
+        <!--Title-->
         <scene sceneID="4yU-tM-N8B">
             <objects>
                 <viewController storyboardIdentifier="NewCardController" useStoryboardIdentifierAsRestorationIdentifier="YES" id="FnP-qL-Yqi" customClass="NewCardViewController" customModule="Cards" customModuleProvider="target" sceneMemberID="viewController">
@@ -89,26 +89,8 @@
                                         <fontDescription key="fontDescription" type="system" pointSize="14"/>
                                         <textInputTraits key="textInputTraits" autocorrectionType="no" keyboardType="decimalPad"/>
                                     </textField>
-                                    <textField opaque="NO" contentMode="scaleToFill" contentHorizontalAlignment="left" contentVerticalAlignment="center" placeholder="Name on card" textAlignment="natural" minimumFontSize="17" translatesAutoresizingMaskIntoConstraints="NO" id="EGA-Ro-Ydi">
-                                        <rect key="frame" x="0.0" y="140" width="315" height="50"/>
-                                        <color key="backgroundColor" white="1" alpha="0.15194242294520549" colorSpace="custom" customColorSpace="genericGamma22GrayColorSpace"/>
-                                        <color key="tintColor" name="C4"/>
-                                        <constraints>
-                                            <constraint firstAttribute="height" constant="50" id="zl3-UQ-qw4"/>
-                                        </constraints>
-                                        <color key="textColor" white="1" alpha="1" colorSpace="custom" customColorSpace="genericGamma22GrayColorSpace"/>
-                                        <fontDescription key="fontDescription" type="system" pointSize="14"/>
-                                        <textInputTraits key="textInputTraits" autocorrectionType="no"/>
-                                    </textField>
-                                    <imageView userInteractionEnabled="NO" contentMode="scaleAspectFit" horizontalHuggingPriority="251" verticalHuggingPriority="251" image="UploadLogo" translatesAutoresizingMaskIntoConstraints="NO" id="eBI-ry-mhL">
-                                        <rect key="frame" x="0.0" y="210" width="315" height="50"/>
-                                        <color key="tintColor" name="C4"/>
-                                        <constraints>
-                                            <constraint firstAttribute="height" constant="50" id="thq-67-73w"/>
-                                        </constraints>
-                                    </imageView>
                                     <textField opaque="NO" contentMode="scaleToFill" contentHorizontalAlignment="left" contentVerticalAlignment="center" placeholder="Expiry Date" textAlignment="natural" minimumFontSize="17" translatesAutoresizingMaskIntoConstraints="NO" id="Zvf-c6-CEx">
-                                        <rect key="frame" x="0.0" y="280" width="315" height="50"/>
+                                        <rect key="frame" x="0.0" y="140" width="315" height="50"/>
                                         <color key="backgroundColor" white="1" alpha="0.15194242294520549" colorSpace="custom" customColorSpace="genericGamma22GrayColorSpace"/>
                                         <color key="tintColor" name="C4"/>
                                         <constraints>
@@ -119,7 +101,7 @@
                                         <textInputTraits key="textInputTraits" autocorrectionType="no" keyboardType="numbersAndPunctuation"/>
                                     </textField>
                                     <textField opaque="NO" contentMode="scaleToFill" contentHorizontalAlignment="left" contentVerticalAlignment="center" placeholder="CVC" textAlignment="natural" minimumFontSize="17" translatesAutoresizingMaskIntoConstraints="NO" id="apW-aB-ryi">
-                                        <rect key="frame" x="0.0" y="350" width="315" height="50"/>
+                                        <rect key="frame" x="0.0" y="210" width="315" height="50"/>
                                         <color key="backgroundColor" white="1" alpha="0.15194242294520549" colorSpace="custom" customColorSpace="genericGamma22GrayColorSpace"/>
                                         <color key="tintColor" name="C4"/>
                                         <constraints>
@@ -129,6 +111,24 @@
                                         <fontDescription key="fontDescription" type="system" pointSize="14"/>
                                         <textInputTraits key="textInputTraits" autocorrectionType="no" keyboardType="numberPad"/>
                                     </textField>
+                                    <textField opaque="NO" contentMode="scaleToFill" contentHorizontalAlignment="left" contentVerticalAlignment="center" placeholder="Name on card" textAlignment="natural" minimumFontSize="17" translatesAutoresizingMaskIntoConstraints="NO" id="EGA-Ro-Ydi">
+                                        <rect key="frame" x="0.0" y="280" width="315" height="50"/>
+                                        <color key="backgroundColor" white="1" alpha="0.15194242294520549" colorSpace="custom" customColorSpace="genericGamma22GrayColorSpace"/>
+                                        <color key="tintColor" name="C4"/>
+                                        <constraints>
+                                            <constraint firstAttribute="height" constant="50" id="zl3-UQ-qw4"/>
+                                        </constraints>
+                                        <color key="textColor" white="1" alpha="1" colorSpace="custom" customColorSpace="genericGamma22GrayColorSpace"/>
+                                        <fontDescription key="fontDescription" type="system" pointSize="14"/>
+                                        <textInputTraits key="textInputTraits" autocorrectionType="no"/>
+                                    </textField>
+                                    <imageView userInteractionEnabled="NO" contentMode="scaleAspectFit" horizontalHuggingPriority="251" verticalHuggingPriority="251" image="UploadLogo" translatesAutoresizingMaskIntoConstraints="NO" id="eBI-ry-mhL">
+                                        <rect key="frame" x="0.0" y="350" width="315" height="50"/>
+                                        <color key="tintColor" name="C4"/>
+                                        <constraints>
+                                            <constraint firstAttribute="height" constant="50" id="thq-67-73w"/>
+                                        </constraints>
+                                    </imageView>
                                     <button opaque="NO" contentMode="scaleToFill" contentHorizontalAlignment="center" contentVerticalAlignment="center" buttonType="roundedRect" lineBreakMode="middleTruncation" translatesAutoresizingMaskIntoConstraints="NO" id="skP-0u-pIE">
                                         <rect key="frame" x="0.0" y="420" width="315" height="50"/>
                                         <color key="backgroundColor" red="0.16862745098039217" green="0.49019607843137253" blue="0.96470588235294119" alpha="1" colorSpace="custom" customColorSpace="sRGB"/>
@@ -154,19 +154,21 @@
                         </constraints>
                         <viewLayoutGuide key="safeArea" id="9pL-B8-bdy"/>
                     </view>
+                    <navigationItem key="navigationItem" title="Title" id="U6y-p7-gvw"/>
                     <connections>
                         <outlet property="cardNumberTextField" destination="KWc-09-FRQ" id="0NY-nr-c4l"/>
                         <outlet property="cvcTextField" destination="apW-aB-ryi" id="leq-zY-N09"/>
                         <outlet property="expiryDateTextField" destination="Zvf-c6-CEx" id="JGd-sR-NwE"/>
                         <outlet property="logoImageView" destination="eBI-ry-mhL" id="Vbm-gd-CrW"/>
                         <outlet property="nameTextField" destination="EGA-Ro-Ydi" id="htE-aH-bY6"/>
+                        <outlet property="saveButton" destination="skP-0u-pIE" id="E83-kp-et5"/>
                         <outlet property="segmentControl" destination="SHl-hZ-eWQ" id="Ph3-97-VY4"/>
                         <outlet property="stackView" destination="8aP-4M-rUo" id="xTB-EI-okn"/>
                     </connections>
                 </viewController>
                 <placeholder placeholderIdentifier="IBFirstResponder" id="oCA-yd-BCG" userLabel="First Responder" sceneMemberID="firstResponder"/>
             </objects>
-            <point key="canvasLocation" x="2479.1999999999998" y="45.42728635682159"/>
+            <point key="canvasLocation" x="4357.6000000000004" y="45.42728635682159"/>
         </scene>
         <!--Login View Controller-->
         <scene sceneID="J9b-o0-XRt">

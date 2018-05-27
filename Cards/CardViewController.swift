@@ -52,13 +52,19 @@ class CardViewController: UIViewController {
     @objc private func handleAddButtonTapped() {
         if let vc = storyboard?.instantiateViewController(withIdentifier: "NewCardController") as? NewCardViewController {
             vc.cardManager = self.cardManager
-            navigationController?.present(vc, animated: true)
+            let nav = UINavigationController(rootViewController: vc)
+            navigationController?.present(nav, animated: true)
         }
     }
 
     
     @objc private func handleSettingsButtonTapped() {
+        let alert = UIAlertController(title: "Coming Soon", message: "Settings will launch soon", preferredStyle: .alert)
+        alert.addAction(UIAlertAction(title: "Dismiss", style: .default, handler: { (_) in
+            alert.dismiss(animated: true, completion: nil)
+        }))
         
+        present(alert, animated: true)
     }
     
     @objc func handleLongPress(_ gestureRecognizer: UILongPressGestureRecognizer) {

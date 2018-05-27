@@ -68,6 +68,7 @@ enum CardTheme: Int, Codable {
 
 class NewCardViewController: UIViewController {
     
+    @IBOutlet weak var saveButton: UIButton!
     @IBOutlet weak var logoImageView: UIImageView!
     @IBOutlet weak var segmentControl: UISegmentedControl!
     @IBOutlet weak var cardNumberTextField: UITextField!
@@ -93,7 +94,37 @@ class NewCardViewController: UIViewController {
         let tap = UITapGestureRecognizer(target: self, action: #selector(handleLogoImageViewTapped))
         logoImageView.isUserInteractionEnabled = true
         logoImageView.addGestureRecognizer(tap)
+        
+        configureNavigationBar()
+        style()
     }
+    
+    private func configureNavigationBar() {
+        title = NSLocalizedString("New card", comment: "")
+        navigationController?.navigationBar.tintColor = .white
+        navigationController?.navigationBar.barStyle = .black
+        navigationController?.navigationBar.barTintColor = UIColor(named: "SegmentBackgroundColor") ?? .green
+        
+        let button = UIButton()
+        button.tintColor = .gray
+        button.setImage(#imageLiteral(resourceName: "closeIcon"), for: .normal)
+        button.imageView?.contentMode = .scaleAspectFit
+        button.addTarget(self, action: #selector(handleDismissButtonTapperd), for: .touchUpInside)
+        let barItem = UIBarButtonItem(customView: button)
+        barItem.customView?.widthAnchor.constraint(equalToConstant: 22).isActive = true
+        barItem.customView?.heightAnchor.constraint(equalToConstant: 22).isActive = true
+        
+        navigationItem.leftBarButtonItem = barItem
+    }
+    
+    private func style() {
+        saveButton.layer.cornerRadius = 8
+    }
+    
+    @objc private func handleDismissButtonTapperd() {
+        navigationController?.dismiss(animated: true)
+    }
+
 
     @IBAction func handleSegmentChanged(_ sender: UISegmentedControl) {
         let type: CardType = sender.selectedSegmentIndex == 0 ? .bank : .store
@@ -170,6 +201,9 @@ extension NewCardViewController: UIImagePickerControllerDelegate, UINavigationCo
 
 extension NewCardViewController: UITextFieldDelegate {
     func textFieldShouldReturn(_ textField: UITextField) -> Bool {
+        if textField == expiryDateTextField {
+           return cvcTextField.becomeFirstResponder()
+        }
         textField.resignFirstResponder()
         return true
     }
