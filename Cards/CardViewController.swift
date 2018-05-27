@@ -15,6 +15,9 @@ class CardViewController: UIViewController {
     @IBOutlet weak var tableView: UITableView!
     
     private let cardManager = CardManager()
+    
+    private let segmentView = CardTypeSegmentView()
+
         
     override func viewDidLoad() {
         super.viewDidLoad()
@@ -23,13 +26,13 @@ class CardViewController: UIViewController {
         tableView.dataSource = self
         tableView.delegate = self
         tableView.register(CardCell.self, forCellReuseIdentifier: "Cell")
-
+        tableView.separatorInset = UIEdgeInsets(top: 0, left: 0, bottom: 0, right: 0)
+        
         cardManager.fetch()
         configureNavigationBar()
         
         let longPress = UILongPressGestureRecognizer(target: self, action: #selector(handleLongPress(_:)))
         tableView.addGestureRecognizer(longPress)
-
     }
     
     override func viewWillAppear(_ animated: Bool) {
@@ -52,6 +55,7 @@ class CardViewController: UIViewController {
             navigationController?.present(vc, animated: true)
         }
     }
+
     
     @objc private func handleSettingsButtonTapped() {
         
@@ -112,6 +116,18 @@ extension CardViewController: UITableViewDelegate, UITableViewDataSource {
     
     func tableView(_ tableView: UITableView, heightForRowAt indexPath: IndexPath) -> CGFloat {
         return 230
+    }
+    
+    func tableView(_ tableView: UITableView, viewForHeaderInSection section: Int) -> UIView? {
+        segmentView.delegate = self
+        return segmentView
+    }
+}
+
+extension CardViewController: CardTypeSegmentViewDelegate {
+    func cardTypeSegmentView(_ cardTypeSegmentView: CardTypeSegmentView, didChangeCardType type: Card.CardType) {
+        cardManager.type = type
+        tableView.reloadData()
     }
 }
 

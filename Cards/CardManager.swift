@@ -43,6 +43,8 @@ class CardManager: CardService {
     
     private var cards: [Card] = []
     
+    var type: Card.CardType = .bank
+    
     func fetch() {
         guard let newCardsData = KeychainWrapper.standard.data(forKey: "Cards") else { return }
         
@@ -59,11 +61,13 @@ class CardManager: CardService {
     }
     
     func numberOfCards() -> Int {
-        return cards.count
+        let c = cards.filter({ $0.cardType == type })
+        return c.count
     }
     
     func cardAtIndex(_ index: Int) -> Card {
-        return cards[index]
+        let c = cards.filter({ $0.cardType == type })
+        return c[index]
     }
     
     func addCard(_ card: Card, completion: () -> Void) {
@@ -105,34 +109,3 @@ class CardManager: CardService {
     }
     
 }
-
-
-
-//struct CardManager {
-//    var cards: [Card] = []
-//
-//
-//    func addCard(_ card: Card) {
-//        let encoder = JSONEncoder()
-//        encoder.outputFormatting = .prettyPrinted
-//        let jsonData = try! encoder.encode(card)
-//        let saveSuccessful: Bool = KeychainWrapper.standard.set(jsonData, forKey: "Card")
-//
-//        if saveSuccessful {
-//            print("Success")
-//        }
-//
-//    }
-//
-//}
-
-
-//let c = [Card(name: "foo", cardNumber: "123", cardType: .bank), Card(name: "Fred", cardNumber: "123345", cardType: .store)]
-//
-//let encoder = JSONEncoder()
-//encoder.outputFormatting = .prettyPrinted
-//let jsonData = try! encoder.encode(c)
-//let s = String(data: jsonData, encoding: .utf8)
-//
-//let cards:[Card] = try! JSONDecoder().decode([Card].self, from: s!.data(using: .utf8)!)
-//cards.count
