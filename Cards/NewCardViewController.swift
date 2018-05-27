@@ -16,6 +16,7 @@ enum Mode {
 enum BankType: Int, Codable {
     case visa
     case masterCard
+    case unknown
     
     var image: UIImage {
         switch self {
@@ -23,6 +24,8 @@ enum BankType: Int, Codable {
             return #imageLiteral(resourceName: "visa logo")
         case .masterCard:
             return #imageLiteral(resourceName: "masterCard logo")
+        case .unknown:
+            return UIImage()
         }
     }
 }
@@ -66,7 +69,6 @@ enum CardTheme: Int, Codable {
 class NewCardViewController: UIViewController {
     
     @IBOutlet weak var logoImageView: UIImageView!
-    @IBOutlet weak var bankTypeSegment: UISegmentedControl!
     @IBOutlet weak var segmentControl: UISegmentedControl!
     @IBOutlet weak var cardNumberTextField: UITextField!
     @IBOutlet weak var nameTextField: UITextField!
@@ -116,9 +118,14 @@ class NewCardViewController: UIViewController {
     }
     
     private func bankType() -> BankType {
-        let selectedItem = bankTypeSegment.selectedSegmentIndex
-        let types: [BankType] = [.visa, .masterCard]
-        return types[selectedItem]
+        let firstChar = Array(cardNumberTextField.text ?? "")[0]
+        if firstChar == "5" {
+            return .masterCard
+        }
+        if firstChar == "4" {
+            return .visa
+        }
+        return .unknown
     }
     
     private func showFields(for type: CardType) {
@@ -128,13 +135,11 @@ class NewCardViewController: UIViewController {
             nameTextField.isHidden = false
             expiryDateTextField.isHidden = false
             cvcTextField.isHidden = false
-            bankTypeSegment.isHidden = false
         case .store:
             logoImageView.isHidden = true
             nameTextField.isHidden = false
             expiryDateTextField.isHidden = true
             cvcTextField.isHidden = true
-            bankTypeSegment.isHidden = true
         }
     }
     
@@ -167,6 +172,15 @@ extension NewCardViewController: UITextFieldDelegate {
     func textFieldShouldReturn(_ textField: UITextField) -> Bool {
         textField.resignFirstResponder()
         return true
+    }
+}
+
+extension String {
+    subscript (i: Int) -> Character {
+        return self[index(startIndex, offsetBy: i)]
+    }
+    subscript (i: Int) -> String {
+        return String(self[i] as Character)
     }
 }
 

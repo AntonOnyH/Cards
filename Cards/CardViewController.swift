@@ -15,7 +15,7 @@ class CardViewController: UIViewController {
     @IBOutlet weak var tableView: UITableView!
     
     private let cardManager = CardManager()
-    
+        
     override func viewDidLoad() {
         super.viewDidLoad()
         setBackgroundColor()
