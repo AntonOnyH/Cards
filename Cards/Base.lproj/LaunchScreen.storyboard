@@ -18,7 +18,7 @@
                     <view key="view" contentMode="scaleToFill" id="Ze5-6b-2t3">
                         <rect key="frame" x="0.0" y="0.0" width="375" height="667"/>
                         <autoresizingMask key="autoresizingMask" widthSizable="YES" heightSizable="YES"/>
-                        <color key="backgroundColor" name="BackgroundC1"/>
+                        <color key="backgroundColor" name="SegmentBackgroundColor"/>
                         <viewLayoutGuide key="safeArea" id="6Tk-OE-BBY"/>
                     </view>
                 </viewController>
@@ -28,8 +28,8 @@
         </scene>
     </scenes>
     <resources>
-        <namedColor name="BackgroundC1">
-            <color red="0.32499998807907104" green="0.32899999618530273" blue="0.3919999897480011" alpha="1" colorSpace="custom" customColorSpace="sRGB"/>
+        <namedColor name="SegmentBackgroundColor">
+            <color red="0.12200000137090683" green="0.12200000137090683" blue="0.14100000262260437" alpha="1" colorSpace="custom" customColorSpace="sRGB"/>
         </namedColor>
     </resources>
 </document>

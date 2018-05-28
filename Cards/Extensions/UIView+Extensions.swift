@@ -55,3 +55,46 @@ extension UIView {
         setGradientBackground(colorOne: color1, colorTwo: color2)
     }
 }
+
+extension String {
+    subscript (i: Int) -> Character {
+        return self[index(startIndex, offsetBy: i)]
+    }
+    subscript (i: Int) -> String {
+        return String(self[i] as Character)
+    }
+}
+
+extension UIImage {
+    func asString() -> String? {
+        if let imageData = UIImagePNGRepresentation(self) {
+            return imageData.base64EncodedString(options: Data.Base64EncodingOptions.lineLength64Characters)
+        }
+        return nil
+    }
+    
+    class func asImage(from string: String) -> UIImage? {
+        if let imageData = Data(base64Encoded: string, options: Data.Base64DecodingOptions.ignoreUnknownCharacters) {
+            return UIImage(data: imageData)
+        }
+        return nil
+    }
+}
+
+@IBDesignable class TextField: UITextField {
+    
+    let padding = UIEdgeInsets(top: 0, left: 5, bottom: 0, right: 5);
+    
+    override open func textRect(forBounds bounds: CGRect) -> CGRect {
+        return UIEdgeInsetsInsetRect(bounds, padding)
+    }
+    
+    override open func placeholderRect(forBounds bounds: CGRect) -> CGRect {
+        return UIEdgeInsetsInsetRect(bounds, padding)
+    }
+    
+    override open func editingRect(forBounds bounds: CGRect) -> CGRect {
+        return UIEdgeInsetsInsetRect(bounds, padding)
+    }
+}
+

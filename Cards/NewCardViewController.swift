@@ -103,7 +103,6 @@ class NewCardViewController: UIViewController {
         title = NSLocalizedString("New card", comment: "")
         navigationController?.navigationBar.tintColor = .white
         navigationController?.navigationBar.barStyle = .black
-        navigationController?.navigationBar.barTintColor = UIColor(named: "SegmentBackgroundColor") ?? .green
         
         let button = UIButton()
         button.tintColor = .gray
@@ -209,27 +208,4 @@ extension NewCardViewController: UITextFieldDelegate {
     }
 }
 
-extension String {
-    subscript (i: Int) -> Character {
-        return self[index(startIndex, offsetBy: i)]
-    }
-    subscript (i: Int) -> String {
-        return String(self[i] as Character)
-    }
-}
 
-extension UIImage {
-    func asString() -> String? {
-        if let imageData = UIImagePNGRepresentation(self) {
-            return imageData.base64EncodedString(options: Data.Base64EncodingOptions.lineLength64Characters)
-        }
-        return nil
-    }
-    
-     class func asImage(from string: String) -> UIImage? {
-        if let imageData = Data(base64Encoded: string, options: Data.Base64DecodingOptions.ignoreUnknownCharacters) {
-            return UIImage(data: imageData)
-        }
-        return nil
-    }
-}

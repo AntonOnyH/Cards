@@ -120,7 +120,7 @@ class CardCell: UITableViewCell {
             bankTypeImageView.isHidden = true
             expiryLabel.isHidden = true
             logoImageView.isHidden = false
-            cardImageView.backgroundColor = UIColor(named: "C5") ?? .white
+            cardImageView.backgroundColor = UIColor(named: "C3") ?? .white
         }
     }
     

@@ -75,12 +75,13 @@ class CardManager: CardService {
         saveCardsToKeychain {
             completion()
         }
-
     }
     
      func deleteCardAtIndex(_ index: Int, completion: () -> Void) {
-        cards.remove(at: index)
-        deleteCard {
+        var c = cards.filter({ $0.cardType == type })
+        c.remove(at: index)
+        deleteCards {
+            cards = c
             saveCardsToKeychain(completion: {
                 completion()
             })
@@ -101,7 +102,7 @@ class CardManager: CardService {
         }
     }
     
-    private func deleteCard(completion: () -> Void) {
+    private func deleteCards(completion: () -> Void) {
         let removedSuccess = KeychainWrapper.standard.removeObject(forKey: "Cards")
         if removedSuccess {
             completion()
