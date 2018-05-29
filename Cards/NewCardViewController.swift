@@ -21,9 +21,9 @@ enum BankType: Int, Codable {
     var image: UIImage {
         switch self {
         case .visa:
-            return #imageLiteral(resourceName: "visa logo")
+            return #imageLiteral(resourceName: "visa logo 1.1")
         case .masterCard:
-            return #imageLiteral(resourceName: "masterCard logo")
+            return #imageLiteral(resourceName: "masterCard logo 1.1")
         case .unknown:
             return UIImage()
         }

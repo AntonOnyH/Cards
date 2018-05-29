@@ -120,7 +120,7 @@
                                         </constraints>
                                         <color key="textColor" white="1" alpha="1" colorSpace="custom" customColorSpace="genericGamma22GrayColorSpace"/>
                                         <fontDescription key="fontDescription" type="system" pointSize="14"/>
-                                        <textInputTraits key="textInputTraits" autocorrectionType="no"/>
+                                        <textInputTraits key="textInputTraits" autocapitalizationType="words" autocorrectionType="no"/>
                                     </textField>
                                     <imageView userInteractionEnabled="NO" contentMode="scaleAspectFit" horizontalHuggingPriority="251" verticalHuggingPriority="251" image="UploadLogo" translatesAutoresizingMaskIntoConstraints="NO" id="eBI-ry-mhL">
                                         <rect key="frame" x="0.0" y="340" width="315" height="50"/>
@@ -167,7 +167,7 @@
                 </viewController>
                 <placeholder placeholderIdentifier="IBFirstResponder" id="oCA-yd-BCG" userLabel="First Responder" sceneMemberID="firstResponder"/>
             </objects>
-            <point key="canvasLocation" x="4357.6000000000004" y="45.42728635682159"/>
+            <point key="canvasLocation" x="2271" y="33"/>
         </scene>
         <!--Login View Controller-->
         <scene sceneID="J9b-o0-XRt">
@@ -329,7 +329,7 @@
                                             </button>
                                             <button opaque="NO" contentMode="scaleToFill" contentHorizontalAlignment="center" contentVerticalAlignment="center" lineBreakMode="middleTruncation" translatesAutoresizingMaskIntoConstraints="NO" id="VU8-HX-xP4">
                                                 <rect key="frame" x="218" y="22" width="109" height="34"/>
-                                                <state key="normal" title="FaceID">
+                                                <state key="normal" title="Smart Auth">
                                                     <color key="titleColor" red="0.21176470589999999" green="0.46274509800000002" blue="0.96470588239999999" alpha="1" colorSpace="custom" customColorSpace="sRGB"/>
                                                 </state>
                                                 <connections>
@@ -362,6 +362,7 @@
                     </view>
                     <navigationItem key="navigationItem" id="pnt-vo-Xj6"/>
                     <connections>
+                        <outlet property="biometricButton" destination="VU8-HX-xP4" id="KJF-PB-VH2"/>
                         <outlet property="dotFour" destination="Lce-yK-xaT" id="56L-8q-ByD"/>
                         <outlet property="dotOne" destination="Vzy-jx-K8z" id="Vv7-VF-jGQ"/>
                         <outlet property="dotThree" destination="pFq-or-OHP" id="kK9-Lz-DBm"/>

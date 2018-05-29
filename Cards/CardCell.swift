@@ -14,12 +14,12 @@ class CardCell: UITableViewCell {
     var mode: Mode = .light {
         didSet {
             switch mode {
-            case .dark:
-                numberLabel.textColor = .white
-                titleLabel.textColor = .white
-                expiryLabel.textColor = .white
-                cvvLabel.textColor = .white
             case .light:
+                numberLabel.textColor = UIColor(named: "C4") ?? .white
+                titleLabel.textColor = UIColor(named: "C4") ?? .white
+                expiryLabel.textColor = UIColor(named: "C4")?.withAlphaComponent(0.5) ?? .white
+                cvvLabel.textColor = UIColor(named: "C4")?.withAlphaComponent(0.5) ?? .white
+            case .dark:
                 cvvLabel.textColor = .darkGray
                 expiryLabel.textColor = .darkGray
                 numberLabel.textColor = .darkGray
@@ -32,13 +32,16 @@ class CardCell: UITableViewCell {
         let i = UIImageView()
         i.translatesAutoresizingMaskIntoConstraints = false
         i.contentMode = .scaleAspectFit
+        i.tintColor = UIColor(named: "C4")
         return i
     }()
     
-    let cardImageView: UIImageView = {
-        let i = UIImageView()
+    let cardView: UIView = {
+        let i = UIView()
         i.translatesAutoresizingMaskIntoConstraints = false
         i.contentMode = .scaleAspectFit
+        i.layer.cornerRadius = 8
+        i.clipsToBounds = true
         return i
     }()
     
@@ -46,14 +49,17 @@ class CardCell: UITableViewCell {
         let i = UIImageView()
         i.translatesAutoresizingMaskIntoConstraints = false
         i.contentMode = .scaleAspectFit
+        i.tintColor = UIColor(named: "C4")
         return i
     }()
+    
+    let gradientView = GradientView()
     
     let expiryLabel: UILabel = {
         let l = UILabel()
         l.font = UIFont.systemFont(ofSize: 16, weight: .regular)
         l.translatesAutoresizingMaskIntoConstraints = false
-        l.textColor = UIColor.white.withAlphaComponent(0.5)
+        l.textColor = UIColor(named: "C4")?.withAlphaComponent(0.2)
         return l
     }()
     
@@ -61,7 +67,7 @@ class CardCell: UITableViewCell {
         let l = UILabel()
         l.font = UIFont.systemFont(ofSize: 12, weight: .regular)
         l.translatesAutoresizingMaskIntoConstraints = false
-        l.textColor = UIColor.white.withAlphaComponent(0.5)
+        l.textColor = UIColor(named: "C4")?.withAlphaComponent(0.2)
         return l
     }()
     
@@ -96,14 +102,15 @@ class CardCell: UITableViewCell {
     func configure(with card: Card) {
         setViewsVisibelity(for: card.cardType)
         mode = .light
-        numberLabel.text = card.cardNumber
         titleLabel.text = card.name
         if case .bank = card.cardType {
             bankTypeImageView.image = card.bankType.image
             expiryLabel.text = card.expiry
+            numberLabel.text = card.cardNumber.inserting(separator: " ", every: 4)
             cvvLabel.text = "CVV: \(card.cvv)"
         } else {
-            logoImageView.image = UIImage.asImage(from: card.logo)
+            logoImageView.image = #imageLiteral(resourceName: "ShopCart")
+            numberLabel.text = card.cardNumber
         }
     }
     
@@ -114,13 +121,16 @@ class CardCell: UITableViewCell {
             bankTypeImageView.isHidden = false
             expiryLabel.isHidden = false
             logoImageView.isHidden = true
-            cardImageView.backgroundColor = UIColor(named: "C4") ?? .white
+            gradientView.topColor = UIColor(named: "CardC1") ?? .white
+            gradientView.bottomColor = UIColor(named: "CardC2") ?? .white
+
         case .store:
             cvvLabel.isHidden = true
             bankTypeImageView.isHidden = true
             expiryLabel.isHidden = true
             logoImageView.isHidden = false
-            cardImageView.backgroundColor = UIColor(named: "C3") ?? .white
+            gradientView.topColor = UIColor(named: "ShopCardC1") ?? .white
+            gradientView.bottomColor = UIColor(named: "ShopCardC2") ?? .white
         }
     }
     
@@ -131,32 +141,33 @@ class CardCell: UITableViewCell {
     }
     
     private func addConstraints() {
-        contentView.addSubview(cardImageView)
-        cardImageView.addSubview(numberLabel)
-        cardImageView.addSubview(titleLabel)
-        cardImageView.addSubview(bankTypeImageView)
-        cardImageView.addSubview(expiryLabel)
-        cardImageView.addSubview(cvvLabel)
-        cardImageView.addSubview(logoImageView)
+        contentView.addSubview(cardView)
+        addGradient()
+        cardView.addSubview(numberLabel)
+        cardView.addSubview(titleLabel)
+        cardView.addSubview(bankTypeImageView)
+        cardView.addSubview(expiryLabel)
+        cardView.addSubview(cvvLabel)
+        cardView.addSubview(logoImageView)
         
-        cardImageView.leadingAnchor.constraint(equalTo: leadingAnchor, constant: 16).isActive = true
-        cardImageView.topAnchor.constraint(equalTo: topAnchor, constant: 8).isActive = true
-        cardImageView.centerYAnchor.constraint(equalTo: centerYAnchor).isActive = true
-        cardImageView.centerXAnchor.constraint(equalTo: centerXAnchor).isActive = true
+        cardView.leadingAnchor.constraint(equalTo: leadingAnchor, constant: 16).isActive = true
+        cardView.topAnchor.constraint(equalTo: topAnchor, constant: 8).isActive = true
+        cardView.centerYAnchor.constraint(equalTo: centerYAnchor).isActive = true
+        cardView.centerXAnchor.constraint(equalTo: centerXAnchor).isActive = true
         
-        numberLabel.leadingAnchor.constraint(equalTo: cardImageView.leadingAnchor, constant: 16).isActive = true
-        numberLabel.centerXAnchor.constraint(equalTo: cardImageView.centerXAnchor).isActive = true
-        numberLabel.centerYAnchor.constraint(equalTo: cardImageView.centerYAnchor, constant: -10).isActive = true
+        numberLabel.leadingAnchor.constraint(equalTo: cardView.leadingAnchor, constant: 16).isActive = true
+        numberLabel.centerXAnchor.constraint(equalTo: cardView.centerXAnchor).isActive = true
+        numberLabel.centerYAnchor.constraint(equalTo: cardView.centerYAnchor, constant: -10).isActive = true
         
         expiryLabel.leadingAnchor.constraint(equalTo: numberLabel.leadingAnchor).isActive = true
-        expiryLabel.topAnchor.constraint(equalTo: numberLabel.bottomAnchor, constant: 16).isActive = true
+        expiryLabel.topAnchor.constraint(equalTo: numberLabel.bottomAnchor, constant: 8).isActive = true
         
-        cvvLabel.trailingAnchor.constraint(equalTo: cardImageView.trailingAnchor, constant: -16).isActive = true
+        cvvLabel.trailingAnchor.constraint(equalTo: cardView.trailingAnchor, constant: -16).isActive = true
         cvvLabel.centerYAnchor.constraint(equalTo: titleLabel.centerYAnchor).isActive = true
         
-        titleLabel.leadingAnchor.constraint(equalTo: cardImageView.leadingAnchor, constant: 16).isActive = true
-        titleLabel.centerXAnchor.constraint(equalTo: cardImageView.centerXAnchor).isActive = true
-        titleLabel.bottomAnchor.constraint(equalTo: cardImageView.bottomAnchor, constant: -16).isActive = true
+        titleLabel.leadingAnchor.constraint(equalTo: cardView.leadingAnchor, constant: 16).isActive = true
+        titleLabel.centerXAnchor.constraint(equalTo: cardView.centerXAnchor).isActive = true
+        titleLabel.bottomAnchor.constraint(equalTo: cardView.bottomAnchor, constant: -16).isActive = true
         
         bankTypeImageView.trailingAnchor.constraint(equalTo: trailingAnchor, constant: -32).isActive = true
         bankTypeImageView.topAnchor.constraint(equalTo: topAnchor, constant: 24).isActive = true
@@ -167,11 +178,19 @@ class CardCell: UITableViewCell {
         logoImageView.centerYAnchor.constraint(equalTo: centerYAnchor).isActive = true
         logoImageView.widthAnchor.constraint(equalToConstant: 70).isActive = true
         logoImageView.heightAnchor.constraint(equalToConstant: 70).isActive = true
+        
     }
     
     private func addCornerRadius() {
-        cardImageView.layer.cornerRadius = 8
-        cardImageView.clipsToBounds = true
+        cardView.layer.cornerRadius = 8
+        cardView.clipsToBounds = true
     }
 }
 
+extension CardCell {
+    private func addGradient() {
+        gradientView.translatesAutoresizingMaskIntoConstraints = false
+        cardView.insertSubview(gradientView, aboveSubview: cardView)
+        gradientView.fillSuperview()
+    }
+}

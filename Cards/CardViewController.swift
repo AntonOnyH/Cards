@@ -80,10 +80,12 @@ class CardViewController: UIViewController {
     fileprivate func presentMoreOptions(index: Int, fromView: UIView?) {
         
         let alert = UIAlertController(title: nil, message: nil, preferredStyle: .actionSheet)
-        let action = UIAlertAction(title: NSLocalizedString("Delete", comment: "removing file"), style: .destructive) { _ in
-            self.cardManager.deleteCardAtIndex(index, completion: {
-                self.tableView.reloadData()
-            })
+        let action = UIAlertAction(title: NSLocalizedString("Delete", comment: "removing file"), style: .destructive) { [weak self] _ in
+            if let card = self?.cardManager.cardAtIndex(index) {
+                self?.cardManager.delete(card, completion: {
+                    self?.tableView.reloadData()
+                })
+            }
         }
         alert.addAction(action)
         

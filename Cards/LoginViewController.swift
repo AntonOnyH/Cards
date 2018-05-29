@@ -110,12 +110,14 @@ class LoginViewController: UIViewController {
     @IBOutlet weak var eightButton: UIButton!
     @IBOutlet weak var nineButton: UIButton!
     @IBOutlet weak var zeroButton: UIButton!
+    @IBOutlet weak var biometricButton: UIButton!
     
     
     
     override func viewDidLoad() {
         super.viewDidLoad()
         setBackgroundColor()
+    
         navigationController?.navigationBar.prefersLargeTitles = true
         dots = [dotOne, dotTwo, dotThree, dotFour]
     }
@@ -140,7 +142,6 @@ class LoginViewController: UIViewController {
     func handleID() {
         let context = LAContext()
         var error: NSError?
-        
         if context.canEvaluatePolicy(.deviceOwnerAuthenticationWithBiometrics, error: &error) {
             let reason = "Identify yourself!"
             

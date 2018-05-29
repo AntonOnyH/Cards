@@ -19,7 +19,8 @@ protocol CardService {
     func numberOfCards() -> Int
     func cardAtIndex(_ index: Int) -> Card
     func addCard(_ card: Card, completion: () -> Void)
-    func deleteCardAtIndex(_ index: Int, completion: () -> Void)
+    func delete(_ card: Card, completion: () -> Void)
+    
 }
 
 
@@ -77,15 +78,21 @@ class CardManager: CardService {
         }
     }
     
-     func deleteCardAtIndex(_ index: Int, completion: () -> Void) {
-        var c = cards.filter({ $0.cardType == type })
-        c.remove(at: index)
-        deleteCards {
-            cards = c
+     func delete(_ card: Card, completion: () -> Void) {
+        
+        while let index = cards.index(where: {$0.cardNumber == card.cardNumber}) {
+            
+            cards.remove(at: index)
+        }
+        
+        
+
+//        deleteCards {
+//            cards = c
             saveCardsToKeychain(completion: {
                 completion()
             })
-        }
+//        }
     }
     
     private func saveCardsToKeychain(completion: () -> Void) {
