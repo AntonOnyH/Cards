@@ -130,6 +130,10 @@ extension CardViewController: UITableViewDelegate, UITableViewDataSource {
         segmentView.delegate = self
         return segmentView
     }
+    
+    func tableView(_ tableView: UITableView, heightForHeaderInSection section: Int) -> CGFloat {
+        return 30
+    }
 }
 
 extension CardViewController: CardTypeSegmentViewDelegate {
