@@ -27,6 +27,14 @@ class CardCell: UITableViewCell {
             }
         }
     }
+        
+    var showPattern: Bool? {
+        didSet {
+            guard let show = showPattern else { return }
+            let a: CGFloat = show ? 0.1 : 0
+            patternImageView.alpha = a
+        }
+    }
     
     private let logoImageView: UIImageView = {
         let i = UIImageView()
@@ -35,6 +43,16 @@ class CardCell: UITableViewCell {
         i.tintColor = UIColor(named: "C4")
         return i
     }()
+    
+    private let patternImageView: UIImageView = {
+        let i = UIImageView()
+        i.translatesAutoresizingMaskIntoConstraints = false
+        i.contentMode = .scaleAspectFill
+        i.tintColor = .black
+        i.alpha = 0.2
+        return i
+    }()
+
     
     let cardView: UIView = {
         let i = UIView()
@@ -139,17 +157,23 @@ class CardCell: UITableViewCell {
         backgroundColor = .clear
         addConstraints()
         addCornerRadius()
+        
+        patternImageView.image = #imageLiteral(resourceName: "Pattern1")
     }
     
     private func addConstraints() {
         contentView.addSubview(cardView)
         addGradient()
+        cardView.addSubview(patternImageView)
         cardView.addSubview(numberLabel)
         cardView.addSubview(titleLabel)
         cardView.addSubview(bankTypeImageView)
         cardView.addSubview(expiryLabel)
         cardView.addSubview(cvvLabel)
         cardView.addSubview(logoImageView)
+        
+        patternImageView.fillSuperview()
+        
         
         cardView.leadingAnchor.constraint(equalTo: leadingAnchor, constant: 16).isActive = true
         cardView.topAnchor.constraint(equalTo: topAnchor, constant: 8).isActive = true
@@ -195,3 +219,12 @@ extension CardCell {
         gradientView.fillSuperview()
     }
 }
+
+private extension Array {
+    func randomItem() -> Element? {
+        if isEmpty { return nil }
+        let index = Int(arc4random_uniform(UInt32(self.count)))
+        return self[index]
+    }
+}
+

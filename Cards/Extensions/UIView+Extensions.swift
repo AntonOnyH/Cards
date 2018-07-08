@@ -30,6 +30,14 @@ extension UIViewController {
 }
 
 extension UIView {
+    func setBackgroundColor() {
+        let color1: UIColor = UIColor(named: "BackgroundC1") ?? .white
+        let color2: UIColor = UIColor(named: "BackgroundC2") ?? .white
+        setGradientBackground(colorOne: color1, colorTwo: color2)
+    }
+}
+
+extension UIView {
     func addGradientToView(view: UIView)
     {
         //gradient layer

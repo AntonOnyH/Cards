@@ -103,6 +103,8 @@ class NewCardViewController: UIViewController {
         title = NSLocalizedString("New card", comment: "")
         navigationController?.navigationBar.tintColor = .white
         navigationController?.navigationBar.barStyle = .black
+        navigationController?.navigationBar.barTintColor = UIColor(named: "SegmentBackgroundColor")
+        navigationController?.navigationBar.isTranslucent = false
         
         let button = UIButton()
         button.tintColor = .gray
@@ -115,7 +117,7 @@ class NewCardViewController: UIViewController {
         
         navigationItem.leftBarButtonItem = barItem
     }
-    
+
     private func style() {
         saveButton.layer.cornerRadius = 8
     }
