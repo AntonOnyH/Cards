@@ -204,7 +204,27 @@ extension NewCardViewController {
     }
     
     func userDidProvide(_ cardInfo: CardIOCreditCardInfo!, in paymentViewController: CardIOPaymentViewController!) {
-        print(cardInfo.cardholderName)
+        let name: String = cardInfo.cardholderName
+        let number: String = cardInfo.cardNumber
+        let cvv: String = cardInfo.cvv
+        let expiryMonth: String = String(cardInfo.expiryMonth)
+        let expiryYear: String = String(cardInfo.expiryYear)
+        
+        func type() -> BankType {
+            switch cardInfo.cardType {
+            case .mastercard:
+                return .masterCard
+            case .visa:
+                return .visa
+            default:
+                return .unknown
+            }
+        }
+        
+        let c = Card(name: name, cardNumber: number, expiry: expiryMonth + expiryYear, cvv: cvv, bankType: type(), cardTheme: .alpha, logo: "", cardType: .bank)
+        cardManager?.addCard(c, completion: {
+            dismiss(animated: true)
+        })
     }
 
 }
