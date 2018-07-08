@@ -15,9 +15,11 @@ class CardViewController: UIViewController {
     @IBOutlet weak var tableView: UITableView!
     
     private let cardManager = CardManager()
-    
     private let segmentView = CardTypeSegmentView()
-
+    
+    private var shouldNotShowPattern: Bool {
+        return UserDefaults.standard.bool(forKey: "shouldNotShowPattern")
+    }
         
     override func viewDidLoad() {
         super.viewDidLoad()
@@ -28,7 +30,6 @@ class CardViewController: UIViewController {
         tableView.register(CardCell.self, forCellReuseIdentifier: "Cell")
         tableView.separatorInset = UIEdgeInsets(top: 0, left: 0, bottom: 0, right: 0)
         
-        cardManager.fetch()
         configureNavigationBar()
         
         let longPress = UILongPressGestureRecognizer(target: self, action: #selector(handleLongPress(_:)))
@@ -37,9 +38,9 @@ class CardViewController: UIViewController {
     
     override func viewWillAppear(_ animated: Bool) {
         super.viewWillAppear(animated)
+        cardManager.fetch()
         tableView.reloadData()
     }
-    
     
     private func configureNavigationBar() {
         title = NSLocalizedString("Cards", comment: "")
@@ -59,12 +60,10 @@ class CardViewController: UIViewController {
 
     
     @objc private func handleSettingsButtonTapped() {
-        let alert = UIAlertController(title: "Coming Soon", message: "Settings will launch soon", preferredStyle: .alert)
-        alert.addAction(UIAlertAction(title: "Dismiss", style: .default, handler: { (_) in
-            alert.dismiss(animated: true, completion: nil)
-        }))
-        
-        present(alert, animated: true)
+        if let vc = storyboard?.instantiateViewController(withIdentifier: "SettingsViewController") as? SettingsViewController {
+            let nav = UINavigationController(rootViewController: vc)
+            navigationController?.present(nav, animated: true)
+        }
     }
     
     @objc func handleLongPress(_ gestureRecognizer: UILongPressGestureRecognizer) {
@@ -116,6 +115,12 @@ extension CardViewController: UITableViewDelegate, UITableViewDataSource {
         let item = cardManager.cardAtIndex(indexPath.row)
         cell.configure(with: item)
         return cell
+    }
+    
+    func tableView(_ tableView: UITableView, willDisplay cell: UITableViewCell, forRowAt indexPath: IndexPath) {
+        if let cell = cell as? CardCell {
+            cell.showPattern = shouldNotShowPattern
+        }
     }
     
     func tableView(_ tableView: UITableView, didSelectRowAt indexPath: IndexPath) {
