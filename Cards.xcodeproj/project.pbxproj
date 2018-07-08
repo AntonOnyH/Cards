@@ -70,6 +70,7 @@
 		6E96217720A5A78D00003557 /* CardManager.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = CardManager.swift; sourceTree = "<group>"; };
 		6EB22C4820A73B71008AB682 /* CardCell.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = CardCell.swift; sourceTree = "<group>"; };
 		6EBCCA4720BD974A006325FB /* GradientView.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = GradientView.swift; sourceTree = "<group>"; };
+		6EF3DE4020F25A97007B3E2F /* NewCardViewController-Bridging-Header.h */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.c.h; path = "NewCardViewController-Bridging-Header.h"; sourceTree = "<group>"; };
 		8705BDFE43079324F7D7B1E4 /* Pods-Cards.debug.xcconfig */ = {isa = PBXFileReference; includeInIndex = 1; lastKnownFileType = text.xcconfig; name = "Pods-Cards.debug.xcconfig"; path = "Pods/Target Support Files/Pods-Cards/Pods-Cards.debug.xcconfig"; sourceTree = "<group>"; };
 		9C13E3FFDCF09F0377ABE418 /* Pods-Cards.release.xcconfig */ = {isa = PBXFileReference; includeInIndex = 1; lastKnownFileType = text.xcconfig; name = "Pods-Cards.release.xcconfig"; path = "Pods/Target Support Files/Pods-Cards/Pods-Cards.release.xcconfig"; sourceTree = "<group>"; };
 		E13A180B02C5C8D097D4CB27 /* Pods_Cards.framework */ = {isa = PBXFileReference; explicitFileType = wrapper.framework; includeInIndex = 0; path = Pods_Cards.framework; sourceTree = BUILT_PRODUCTS_DIR; };
@@ -138,6 +139,7 @@
 				6E5372C820BAAF640029E104 /* CardTypeSegmentView.swift */,
 				6E7331C220AD914700FFF986 /* Extensions */,
 				6E3E266720A2C2370049B187 /* NewCardViewController.swift */,
+				6EF3DE4020F25A97007B3E2F /* NewCardViewController-Bridging-Header.h */,
 				6E96217720A5A78D00003557 /* CardManager.swift */,
 				6E1D5034208CFA4B00CAFFF2 /* Main.storyboard */,
 				6E1D5037208CFA4D00CAFFF2 /* Assets.xcassets */,
@@ -601,6 +603,7 @@
 				);
 				PRODUCT_BUNDLE_IDENTIFIER = com.hugoprinsloo.cards;
 				PRODUCT_NAME = "$(TARGET_NAME)";
+				SWIFT_OBJC_BRIDGING_HEADER = "/Users/hugoprinsloo/Documents/Cards/Cards/NewCardViewController-Bridging-Header.h";
 				SWIFT_VERSION = 4.0;
 				TARGETED_DEVICE_FAMILY = 1;
 			};
@@ -620,6 +623,7 @@
 				);
 				PRODUCT_BUNDLE_IDENTIFIER = com.hugoprinsloo.cards;
 				PRODUCT_NAME = "$(TARGET_NAME)";
+				SWIFT_OBJC_BRIDGING_HEADER = "/Users/hugoprinsloo/Documents/Cards/Cards/NewCardViewController-Bridging-Header.h";
 				SWIFT_VERSION = 4.0;
 				TARGETED_DEVICE_FAMILY = 1;
 			};

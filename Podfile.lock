@@ -1,20 +1,24 @@
 PODS:
-  - Mixpanel (3.2.9)
+  - CardIO (5.4.1)
+  - Mixpanel (3.3.3)
   - SwiftKeychainWrapper (3.0.1)
 
 DEPENDENCIES:
+  - CardIO
   - Mixpanel
   - SwiftKeychainWrapper
 
 SPEC REPOS:
   https://github.com/CocoaPods/Specs.git:
+    - CardIO
     - Mixpanel
     - SwiftKeychainWrapper
 
 SPEC CHECKSUMS:
-  Mixpanel: 85cd02171dc84a8b0295bbe3db65604e2934b920
+  CardIO: 56983b39b62f495fc6dae9ad7cf875143df06443
+  Mixpanel: 3c3925c27f7a321d5978319a72f53f8f0885afc5
   SwiftKeychainWrapper: 38952a3636320ae61bad3513cadd870929de7a4a
 
-PODFILE CHECKSUM: 10828f2bc3516b62a08aecf6a47448c0c20d7b7b
+PODFILE CHECKSUM: 984d24e532d74b9dec1b91281225c20ff0de52df
 
 COCOAPODS: 1.5.0

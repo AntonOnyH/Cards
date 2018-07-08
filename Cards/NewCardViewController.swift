@@ -66,7 +66,8 @@ enum CardTheme: Int, Codable {
 }
 
 
-class NewCardViewController: UIViewController {
+class NewCardViewController: UIViewController, CardIOPaymentViewControllerDelegate {
+    
     
     @IBOutlet weak var saveButton: UIButton!
     @IBOutlet weak var logoImageView: UIImageView!
@@ -82,7 +83,8 @@ class NewCardViewController: UIViewController {
     override func viewDidLoad() {
         super.viewDidLoad()
         setBackgroundColor()
-        
+        CardIOUtilities.preload()
+
         nameTextField.delegate = self
         cardNumberTextField.delegate = self
         expiryDateTextField.delegate = self
@@ -188,6 +190,23 @@ class NewCardViewController: UIViewController {
             self.present(imagePicker, animated: true, completion: nil)
         }
     }
+    @IBAction func handleScanTapped(_ sender: UIButton) {
+        if let cardIOVC = CardIOPaymentViewController(paymentDelegate: self) {
+            present(cardIOVC, animated: true)
+        }
+        print("scanner")
+    }
+}
+
+extension NewCardViewController {
+    func userDidCancel(_ paymentViewController: CardIOPaymentViewController!) {
+        paymentViewController.dismiss(animated: true)
+    }
+    
+    func userDidProvide(_ cardInfo: CardIOCreditCardInfo!, in paymentViewController: CardIOPaymentViewController!) {
+        print(cardInfo.cardholderName)
+    }
+
 }
 
 extension NewCardViewController: UIImagePickerControllerDelegate, UINavigationControllerDelegate {
