@@ -57,15 +57,16 @@ class CardCell: UITableViewCell {
     
     let expiryLabel: UILabel = {
         let l = UILabel()
-        l.font = UIFont.systemFont(ofSize: 16, weight: .regular)
+        l.font = UIFont.systemFont(ofSize: 14, weight: .medium)
         l.translatesAutoresizingMaskIntoConstraints = false
         l.textColor = UIColor(named: "C4")?.withAlphaComponent(0.2)
+        l.textAlignment = .right
         return l
     }()
     
     let cvvLabel: UILabel = {
         let l = UILabel()
-        l.font = UIFont.systemFont(ofSize: 12, weight: .regular)
+        l.font = UIFont.systemFont(ofSize: 14, weight: .medium)
         l.translatesAutoresizingMaskIntoConstraints = false
         l.textColor = UIColor(named: "C4")?.withAlphaComponent(0.2)
         return l
@@ -105,9 +106,9 @@ class CardCell: UITableViewCell {
         titleLabel.text = card.name
         if case .bank = card.cardType {
             bankTypeImageView.image = card.bankType.image
-            expiryLabel.text = card.expiry
+            expiryLabel.text = "Valid Thru: \(card.expiry)"
             numberLabel.text = card.cardNumber.inserting(separator: " ", every: 4)
-            cvvLabel.text = "CVV: \(card.cvv)"
+            cvvLabel.text = "\(card.cvv)"
         } else {
             logoImageView.image = #imageLiteral(resourceName: "ShopCart")
             numberLabel.text = card.cardNumber
@@ -156,23 +157,23 @@ class CardCell: UITableViewCell {
         cardView.centerXAnchor.constraint(equalTo: centerXAnchor).isActive = true
         
         numberLabel.leadingAnchor.constraint(equalTo: cardView.leadingAnchor, constant: 16).isActive = true
-        numberLabel.centerXAnchor.constraint(equalTo: cardView.centerXAnchor).isActive = true
+        numberLabel.trailingAnchor.constraint(lessThanOrEqualTo: cardView.trailingAnchor, constant: -8).isActive = true
         numberLabel.centerYAnchor.constraint(equalTo: cardView.centerYAnchor, constant: -10).isActive = true
         
-        expiryLabel.leadingAnchor.constraint(equalTo: numberLabel.leadingAnchor).isActive = true
-        expiryLabel.topAnchor.constraint(equalTo: numberLabel.bottomAnchor, constant: 8).isActive = true
+        cvvLabel.leadingAnchor.constraint(equalTo: numberLabel.leadingAnchor).isActive = true
+        cvvLabel.topAnchor.constraint(equalTo: numberLabel.bottomAnchor, constant: 8).isActive = true
         
-        cvvLabel.trailingAnchor.constraint(equalTo: cardView.trailingAnchor, constant: -16).isActive = true
-        cvvLabel.centerYAnchor.constraint(equalTo: titleLabel.centerYAnchor).isActive = true
+        expiryLabel.trailingAnchor.constraint(equalTo: numberLabel.trailingAnchor).isActive = true
+        expiryLabel.centerYAnchor.constraint(equalTo: cvvLabel.centerYAnchor).isActive = true
         
         titleLabel.leadingAnchor.constraint(equalTo: cardView.leadingAnchor, constant: 16).isActive = true
         titleLabel.centerXAnchor.constraint(equalTo: cardView.centerXAnchor).isActive = true
         titleLabel.bottomAnchor.constraint(equalTo: cardView.bottomAnchor, constant: -16).isActive = true
         
-        bankTypeImageView.trailingAnchor.constraint(equalTo: trailingAnchor, constant: -32).isActive = true
-        bankTypeImageView.topAnchor.constraint(equalTo: topAnchor, constant: 24).isActive = true
+        bankTypeImageView.trailingAnchor.constraint(equalTo: cardView.trailingAnchor, constant: -12).isActive = true
+        bankTypeImageView.bottomAnchor.constraint(equalTo: cardView.bottomAnchor, constant: -12).isActive = true
         bankTypeImageView.widthAnchor.constraint(equalToConstant: 70).isActive = true
-        bankTypeImageView.heightAnchor.constraint(equalToConstant: 50).isActive = true
+        bankTypeImageView.heightAnchor.constraint(equalToConstant: 30).isActive = true
         
         logoImageView.trailingAnchor.constraint(equalTo: trailingAnchor, constant: -32).isActive = true
         logoImageView.centerYAnchor.constraint(equalTo: centerYAnchor).isActive = true
