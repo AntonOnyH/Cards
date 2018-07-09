@@ -30,6 +30,10 @@ class LoginViewController: UIViewController {
         }
     }
     
+    
+    
+    
+    
     private var registerKey: String?
     
     private func auth() {
