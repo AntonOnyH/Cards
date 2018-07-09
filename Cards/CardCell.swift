@@ -105,6 +105,7 @@ class CardCell: UITableViewCell {
         l.translatesAutoresizingMaskIntoConstraints = false
         l.textColor = .white
         l.font = UIFont.boldSystemFont(ofSize: 21)
+        l.numberOfLines = 3
         return l
     }()
     
@@ -193,6 +194,7 @@ class CardCell: UITableViewCell {
         titleLabel.leadingAnchor.constraint(equalTo: cardView.leadingAnchor, constant: 16).isActive = true
         titleLabel.centerXAnchor.constraint(equalTo: cardView.centerXAnchor).isActive = true
         titleLabel.bottomAnchor.constraint(equalTo: cardView.bottomAnchor, constant: -16).isActive = true
+        titleLabel.trailingAnchor.constraint(equalTo: cardView.trailingAnchor, constant: -100).isActive = true
         
         bankTypeImageView.trailingAnchor.constraint(equalTo: cardView.trailingAnchor, constant: -12).isActive = true
         bankTypeImageView.bottomAnchor.constraint(equalTo: cardView.bottomAnchor, constant: -12).isActive = true
