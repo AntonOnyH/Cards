@@ -43,7 +43,7 @@ class SettingsViewController: UITableViewController {
         button.tintColor = .gray
         button.setImage(#imageLiteral(resourceName: "closeIcon"), for: .normal)
         button.imageView?.contentMode = .scaleAspectFit
-        button.addTarget(self, action: #selector(handleDismissButtonTapperd), for: .touchUpInside)
+        button.addTarget(self, action: #selector(handleDismissButtonTapped), for: .touchUpInside)
         let barItem = UIBarButtonItem(customView: button)
         barItem.customView?.widthAnchor.constraint(equalToConstant: 22).isActive = true
         barItem.customView?.heightAnchor.constraint(equalToConstant: 22).isActive = true
@@ -51,7 +51,7 @@ class SettingsViewController: UITableViewController {
         navigationItem.leftBarButtonItem = barItem
     }
     
-    @objc private func handleDismissButtonTapperd() {
+    @objc private func handleDismissButtonTapped() {
         navigationController?.dismiss(animated: true)
     }
 }
