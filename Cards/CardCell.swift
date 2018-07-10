@@ -192,9 +192,8 @@ class CardCell: UITableViewCell {
         expiryLabel.centerYAnchor.constraint(equalTo: cvvLabel.centerYAnchor).isActive = true
         
         titleLabel.leadingAnchor.constraint(equalTo: cardView.leadingAnchor, constant: 16).isActive = true
-        titleLabel.centerXAnchor.constraint(equalTo: cardView.centerXAnchor).isActive = true
         titleLabel.bottomAnchor.constraint(equalTo: cardView.bottomAnchor, constant: -16).isActive = true
-        titleLabel.trailingAnchor.constraint(equalTo: cardView.trailingAnchor, constant: -100).isActive = true
+        titleLabel.trailingAnchor.constraint(equalTo: logoImageView.leadingAnchor).isActive = true
         
         bankTypeImageView.trailingAnchor.constraint(equalTo: cardView.trailingAnchor, constant: -12).isActive = true
         bankTypeImageView.bottomAnchor.constraint(equalTo: cardView.bottomAnchor, constant: -12).isActive = true
