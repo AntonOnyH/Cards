@@ -18,7 +18,7 @@ class SettingsViewController: UITableViewController {
     
     override func viewDidLoad() {
         super.viewDidLoad()
-        tableView.backgroundColor = UIColor(named: "BackgroundC1")
+        tableView.backgroundColor = UIColor.BackgroundColor.mid
         configureNavigationBar()
         patternSwitch.setOn(shouldShowPattern, animated: true)
     }
@@ -36,7 +36,7 @@ class SettingsViewController: UITableViewController {
         title = NSLocalizedString("Settings", comment: "")
         navigationController?.navigationBar.tintColor = .white
         navigationController?.navigationBar.barStyle = .black
-        navigationController?.navigationBar.barTintColor = UIColor(named: "SegmentBackgroundColor")
+        navigationController?.navigationBar.barTintColor = UIColor.BackgroundColor.extraDark
         navigationController?.navigationBar.isTranslucent = false
         
         let button = UIButton()

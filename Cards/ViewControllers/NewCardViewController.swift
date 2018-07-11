@@ -47,17 +47,17 @@ enum CardTheme: Int, Codable {
     var color: UIColor {
         switch self {
         case .black:
-            return UIColor(named: "C1") ?? .gray
+            return UIColor.CardColor.black
         case .gray:
-            return UIColor(named: "C2") ?? .gray
+            return UIColor.CardColor.darkGray
         case .criene:
-            return UIColor(named: "C3") ?? .gray
+            return UIColor.CardColor.criene
         case .pearl:
-            return UIColor(named: "C4") ?? .gray
+            return UIColor.CardColor.pearlWhite
         case .yolo:
-            return UIColor(named: "C5") ?? .gray
+            return UIColor.CardColor.yoloYellow
         case .alpha:
-            return UIColor(named: "CardC1") ?? .white
+            return UIColor.CardColor.black
         }
     }
     
@@ -110,7 +110,7 @@ class NewCardViewController: UIViewController {
         title = NSLocalizedString("New card", comment: "")
         navigationController?.navigationBar.tintColor = .white
         navigationController?.navigationBar.barStyle = .black
-        navigationController?.navigationBar.barTintColor = UIColor(named: "SegmentBackgroundColor")
+        navigationController?.navigationBar.barTintColor = UIColor.BackgroundColor.extraDark
         navigationController?.navigationBar.isTranslucent = false
         
         let button = UIButton()
