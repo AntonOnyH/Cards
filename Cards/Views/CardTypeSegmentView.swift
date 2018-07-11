@@ -20,6 +20,19 @@ class CardTypeSegmentView: UIView {
         return s
     }()
     
+    var currentSegment: Card.CardType = .bank {
+        didSet {
+            switch currentSegment {
+            case .bank:
+                segment.selectedSegmentIndex = 0
+                delegate?.cardTypeSegmentView(self, didChangeCardType: .bank)
+            case .store:
+                segment.selectedSegmentIndex = 1
+                delegate?.cardTypeSegmentView(self, didChangeCardType: .store)
+            }
+        }
+    }
+    
     weak var delegate: CardTypeSegmentViewDelegate?
     
     override init(frame: CGRect) {
@@ -50,7 +63,6 @@ class CardTypeSegmentView: UIView {
     }
     
     @objc private func handleSegmentChanged(_ sender: UISegmentedControl) {
-
         let value: Card.CardType = sender.selectedSegmentIndex == 0 ? .bank : .store
         delegate?.cardTypeSegmentView(self, didChangeCardType: value)
     }
