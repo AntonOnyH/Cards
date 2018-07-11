@@ -8,6 +8,12 @@
 
 import UIKit
 
+ protocol NewCardDelegate{
+    
+    func didAddCard(type: Card.CardType)
+    
+}
+
 enum Mode {
     case light
     case dark
@@ -78,6 +84,7 @@ class NewCardViewController: UIViewController {
     @IBOutlet weak var stackView: UIStackView!
     
     var cardManager: CardManager?
+    var newCardDelegate: NewCardDelegate?
 
     override func viewDidLoad() {
         super.viewDidLoad()
@@ -139,6 +146,7 @@ class NewCardViewController: UIViewController {
         }
         let c = Card(name: nameTextField.text!, cardNumber: cardNumberTextField.text!, expiry: expiryDateTextField.text!, cvv: cvcTextField.text!, bankType: bankType(), cardTheme: .alpha, logo: logo ?? "", cardType: cardType())
         cardManager?.addCard(c, completion: {
+            newCardDelegate?.didAddCard(type: cardType())
             dismiss(animated: true)
         })
     }
