@@ -69,14 +69,14 @@ class CardViewController: UIViewController {
     @objc func handleLongPress(_ gestureRecognizer: UILongPressGestureRecognizer) {
         guard gestureRecognizer.state == .began else { return }
         let location = gestureRecognizer.location(in: tableView)
-        guard let indexPath = tableView.indexPathForRow(at: location), let cell = tableView.cellForRow(at: indexPath) else {
+        guard let indexPath = tableView.indexPathForRow(at: location), let cell = tableView.cellForRow(at: indexPath) as? CardCell else {
             return
         }
         
         presentMoreOptions(index: indexPath.row, fromView: cell)
     }
     
-    fileprivate func presentMoreOptions(index: Int, fromView: UIView?) {
+    fileprivate func presentMoreOptions(index: Int, fromView: CardCell?) {
         
         let alert = UIAlertController(title: nil, message: nil, preferredStyle: .actionSheet)
         let action = UIAlertAction(title: NSLocalizedString("Delete", comment: "removing file"), style: .destructive) { [weak self] _ in
@@ -90,6 +90,16 @@ class CardViewController: UIViewController {
         
         let cancelAction = UIAlertAction(title: NSLocalizedString("Cancel", comment: ""), style: .cancel, handler: nil)
         alert.addAction(cancelAction)
+        
+        let copyAction = UIAlertAction(title: "Copy", style: .default) { (Action) in
+            let cardNumber = fromView?.numberLabel.text
+        }
+        let pasteboard = UIPasteboard.general
+        pasteboard.string = fromView?.numberLabel.text
+        
+        alert.addAction(copyAction)
+        
+        
         
         if let v = fromView {
             alert.popoverPresentationController?.sourceView = v
