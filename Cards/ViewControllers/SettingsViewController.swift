@@ -31,10 +31,12 @@ class SettingsViewController: UITableViewController {
     private func setupSwitches() {
         patternSwitch.setOn(shouldShowPattern, animated: true)
         smartAuthSwitch.setOn(smartAuthManager.smartAuthIsActive, animated: true)
+        
+        patternSwitch.onTintColor = UIColor.cardsTintColor
+        smartAuthSwitch.onTintColor = UIColor.cardsTintColor
     }
     
     @IBAction func switchDidChangeValue(_ sender: UISwitch) {
-        print(sender.isOn)
         UserDefaults.standard.set(sender.isOn, forKey: "shouldNotShowPattern")
     }
     

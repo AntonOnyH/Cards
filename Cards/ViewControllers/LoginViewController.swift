@@ -164,6 +164,7 @@ class LoginViewController: UIViewController {
     }
     
     private func style() {
+        biometricButton.tintColor = UIColor.cardsTintColor
         switch currentSession {
         case .existingUser:
             title = NSLocalizedString("Login", comment: "")
