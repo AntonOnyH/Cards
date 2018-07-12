@@ -8,12 +8,6 @@
 
 import UIKit
 
- protocol NewCardDelegate{
-    
-    func didAddCard(type: Card.CardType)
-    
-}
-
 enum Mode {
     case light
     case dark
@@ -71,7 +65,11 @@ enum CardTheme: Int, Codable {
     }
 }
 
-class NewCardViewController: UIViewController, CardIOPaymentViewControllerDelegate {
+protocol NewCardViewConstrollerDelegate: class {
+    func newCardViewController(newCardViewController: NewCardViewController, didAddCard type: Card.CardType)
+}
+
+class NewCardViewController: UIViewController {
     
     @IBOutlet weak var saveButton: UIButton!
     @IBOutlet weak var logoImageView: UIImageView!
@@ -83,7 +81,7 @@ class NewCardViewController: UIViewController, CardIOPaymentViewControllerDelega
     @IBOutlet weak var stackView: UIStackView!
     
     var cardManager: CardManager?
-    var newCardDelegate: NewCardDelegate?
+    weak var newCardDelegate: NewCardViewConstrollerDelegate?
 
     override func viewDidLoad() {
         super.viewDidLoad()
@@ -146,8 +144,7 @@ class NewCardViewController: UIViewController, CardIOPaymentViewControllerDelega
         }
         let c = Card(name: nameTextField.text!, cardNumber: cardNumberTextField.text!, expiry: expiryDateTextField.text!, cvv: cvcTextField.text!, bankType: bankType(), cardTheme: .alpha, logo: logo ?? "", cardType: cardType())
         cardManager?.addCard(c, completion: {
-            newCardDelegate?.didAddCard(type: cardType())
-            dismiss(animated: true)
+            newCardDelegate?.newCardViewController(newCardViewController: self, didAddCard: cardType())
         })
     }
     
@@ -171,12 +168,10 @@ class NewCardViewController: UIViewController, CardIOPaymentViewControllerDelega
     private func showFields(for type: CardType) {
         switch type {
         case .bank:
-            logoImageView.isHidden = true
             nameTextField.isHidden = false
             expiryDateTextField.isHidden = false
             cvcTextField.isHidden = false
         case .store:
-            logoImageView.isHidden = true
             nameTextField.isHidden = false
             expiryDateTextField.isHidden = true
             cvcTextField.isHidden = true
@@ -215,7 +210,7 @@ class NewCardViewController: UIViewController, CardIOPaymentViewControllerDelega
     }
 }
 
-extension NewCardViewController {
+extension NewCardViewController: CardIOPaymentViewControllerDelegate{
     func userDidCancel(_ paymentViewController: CardIOPaymentViewController!) {
         paymentViewController.dismiss(animated: true)
     }
@@ -234,6 +229,7 @@ extension NewCardViewController {
         expiryYear.remove(at: expiryYear.startIndex)
         expiryYear.remove(at: expiryYear.startIndex)
 
+        let expiryText = "\(expiryMonth)" + "/" + "\(expiryYear)"
 
         
         func type() -> BankType {
@@ -249,11 +245,15 @@ extension NewCardViewController {
         
         cardNumberTextField.text = number
         cvcTextField.text = cvv
-        expiryDateTextField.text = "\(expiryMonth)" + "/" + "\(expiryYear)"
+        expiryDateTextField.text = expiryText
         
-        let c = Card(name: name, cardNumber: number, expiry: expiryMonth + expiryYear, cvv: cvv, bankType: type(), cardTheme: .alpha, logo: "", cardType: .bank)
+        let c = Card(name: name, cardNumber: number, expiry: expiryText, cvv: cvv, bankType: type(), cardTheme: .alpha, logo: "", cardType: .bank)
         cardManager?.addCard(c, completion: { [weak self] in
-            navigationController?.dismiss(animated: true)
+            guard let strongSelf = self else { return }
+            newCardDelegate?.newCardViewController(newCardViewController: strongSelf, didAddCard: .bank)
+            DispatchQueue.main.async {
+                strongSelf.dismiss(animated: true)
+            }
         })
     }
 
