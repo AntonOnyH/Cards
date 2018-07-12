@@ -29,43 +29,8 @@ class LoginViewController: UIViewController {
             }
         }
     }
-    
+    private let smartAuthManager = SmartAuthManager()
     private var registerKey: String?
-    
-    private func auth() {
-        if isRegistered {
-            currentSession = .existingUser
-            handleID()
-            if passcode == currentUserInfo() {
-                showCardsViewController()
-            } else {
-                // Wrong password
-            }
-        } else {
-            currentSession = .newUser
-            registerAttempt()
-        }
-    }
-    
-    private func registerAttempt() {
-        guard !passcode.isEmpty else { return }
-        if registerKey == nil {
-            registerKey = passcode
-            title = NSLocalizedString("Repeat", comment: "")
-            resetPassItems()
-        } else {
-            if registerKey == passcode {
-                setUserInfo()
-            }
-        }
-    }
-    
-    private func resetPassItems() {
-        for dot in dots {
-            dot.alpha = 0.4
-        }
-        passcode = ""
-    }
     
     private var isRegistered: Bool {
         return currentUserInfo() != nil
@@ -77,21 +42,6 @@ class LoginViewController: UIViewController {
         }
     }
     
-    private func currentUserInfo() -> String? {
-        return KeychainWrapper.standard.string(forKey: "userInfoCardPrivate")
-    }
-    
-    private func setUserInfo() {
-        let savedUserInfo = KeychainWrapper.standard.set(passcode, forKey: "userInfoCardPrivate")
-        if savedUserInfo {
-            showCardsViewController()
-        } else {
-            print("Failed to register user")
-            Mixpanel.sharedInstance()?.track("Failed to register user")
-            //present failure screen
-        }
-    }
-
     @IBOutlet weak var dotOne: UIImageView!
     @IBOutlet weak var dotTwo: UIImageView!
     @IBOutlet weak var dotThree: UIImageView!
@@ -129,7 +79,7 @@ class LoginViewController: UIViewController {
     
 
     @IBAction func handleLoginButtonTapped(_ sender: UIButton) {
-        handleID()
+        promptForSmartAuth()
     }
     
     private func showCardsViewController() {
@@ -137,27 +87,69 @@ class LoginViewController: UIViewController {
         navigationController?.pushViewController(vc, animated: true)
     }
     
-    
-    
-    func handleID() {
-        let context = LAContext()
-        var error: NSError?
-        if context.canEvaluatePolicy(.deviceOwnerAuthenticationWithBiometrics, error: &error) {
-            let reason = "Identify yourself!"
-            
-            context.evaluatePolicy(.deviceOwnerAuthenticationWithBiometrics, localizedReason: reason) {
-                [unowned self] (success, authenticationError) in
-                
-                DispatchQueue.main.async {
-                    if success {
-                        self.showCardsViewController()
-                    } else {
-                        // error
-                    }
-                }
+    private func auth() {
+        if isRegistered {
+            currentSession = .existingUser
+            promptForSmartAuth()
+            if passcode == currentUserInfo() {
+                showCardsViewController()
+            } else {
+                // Wrong password
             }
         } else {
-            // no biometry
+            currentSession = .newUser
+            registerAttempt()
+        }
+    }
+    
+    private func registerAttempt() {
+        guard !passcode.isEmpty else { return }
+        if registerKey == nil {
+            registerKey = passcode
+            title = NSLocalizedString("Repeat", comment: "")
+            resetPassItems()
+        } else {
+            if registerKey == passcode {
+                setUserInfo()
+            }
+        }
+    }
+    
+    private func currentUserInfo() -> String? {
+        return KeychainWrapper.standard.string(forKey: "userInfoCardPrivate")
+    }
+    
+    private func setUserInfo() {
+        let savedUserInfo = KeychainWrapper.standard.set(passcode, forKey: "userInfoCardPrivate")
+        if savedUserInfo {
+            showCardsViewController()
+        } else {
+            print("Failed to register user")
+            Mixpanel.sharedInstance()?.track("Failed to register user")
+            //present failure screen
+        }
+    }
+    
+    
+    private func resetPassItems() {
+        for dot in dots {
+            dot.alpha = 0.4
+        }
+        passcode = ""
+    }
+    
+    func promptForSmartAuth() {
+        smartAuthManager.requestSmartAuth { [weak self] state in
+            switch state {
+            case .success:
+                DispatchQueue.main.async {
+                    self?.showCardsViewController()
+                }
+            case .failed:
+                break
+            case .unavailable:
+                break
+            }
         }
     }
     
@@ -167,7 +159,17 @@ class LoginViewController: UIViewController {
             title = NSLocalizedString("Login", comment: "")
         case .newUser:
             title = NSLocalizedString("Register", comment: "")
+            hideSmartAuthButton()
         }
+        
+        if !smartAuthManager.shouldUseSmartAuth {
+            hideSmartAuthButton()
+        }
+    }
+    
+    private func hideSmartAuthButton() {
+        biometricButton.isEnabled = false
+        biometricButton.alpha = 0
     }
     
     private func add(_ number: String?) {
