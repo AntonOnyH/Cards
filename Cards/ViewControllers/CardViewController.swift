@@ -110,7 +110,6 @@ class CardViewController: UIViewController {
         
         present(alert, animated: true, completion: nil)
     }
-
 }
 
 extension CardViewController: UITableViewDelegate, UITableViewDataSource {
