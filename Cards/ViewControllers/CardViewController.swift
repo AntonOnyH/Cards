@@ -32,6 +32,7 @@ class CardViewController: UIViewController {
         
         configureNavigationBar()
         
+        
         let longPress = UILongPressGestureRecognizer(target: self, action: #selector(handleLongPress(_:)))
         tableView.addGestureRecognizer(longPress)
     }
@@ -53,6 +54,7 @@ class CardViewController: UIViewController {
     @objc private func handleAddButtonTapped() {
         if let vc = storyboard?.instantiateViewController(withIdentifier: "NewCardController") as? NewCardViewController {
             vc.cardManager = self.cardManager
+            vc.newCardDelegate = self
             let nav = UINavigationController(rootViewController: vc)
             navigationController?.present(nav, animated: true)
         }
@@ -154,6 +156,12 @@ extension CardViewController: CardTypeSegmentViewDelegate {
     func cardTypeSegmentView(_ cardTypeSegmentView: CardTypeSegmentView, didChangeCardType type: Card.CardType) {
         cardManager.type = type
         tableView.reloadData()
+    }
+}
+
+extension CardViewController:NewCardDelegate{
+    func didAddCard(type: Card.CardType) {
+        segmentView.currentSegment = type
     }
 }
 
