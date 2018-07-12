@@ -29,21 +29,86 @@ class LoginViewController: UIViewController {
             }
         }
     }
-    
+    private let smartAuthManager = SmartAuthManager()
     private var registerKey: String?
+    
+    private var isRegistered: Bool {
+        return currentUserInfo() != nil
+    }
+    
+    private var currentSession: Session = .newUser {
+        didSet {
+            style()
+        }
+    }
+    
+    @IBOutlet weak var dotOne: UIImageView!
+    @IBOutlet weak var dotTwo: UIImageView!
+    @IBOutlet weak var dotThree: UIImageView!
+    @IBOutlet weak var dotFour: UIImageView!
+    @IBOutlet weak var oneButton: UIButton!
+    @IBOutlet weak var twoButton: UIButton!
+    @IBOutlet weak var threeButton: UIButton!
+    @IBOutlet weak var fourButton: UIButton!
+    @IBOutlet weak var fiveButton: UIButton!
+    @IBOutlet weak var sixButton: UIButton!
+    @IBOutlet weak var sevenButton: UIButton!
+    @IBOutlet weak var eightButton: UIButton!
+    @IBOutlet weak var nineButton: UIButton!
+    @IBOutlet weak var zeroButton: UIButton!
+    @IBOutlet weak var biometricButton: UIButton!
+    @IBOutlet weak var resetButton: UIButton!
+    private var dots: [UIImageView] = []
+    
+    override func viewDidLoad() {
+        super.viewDidLoad()
+        setBackgroundColor()
+    
+        navigationController?.navigationBar.prefersLargeTitles = true
+        dots = [dotOne, dotTwo, dotThree, dotFour]
+    }
+    
+    override func viewWillAppear(_ animated: Bool) {
+        super.viewWillAppear(animated)
+        auth()
+    }
+    
+
+    @IBAction func handleLoginButtonTapped(_ sender: UIButton) {
+        promptForSmartAuth()
+    }
+    
+    private func showCardsViewController() {
+        guard let vc = storyboard?.instantiateViewController(withIdentifier: "CardViewController") else { return }
+        navigationController?.pushViewController(vc, animated: true)
+    }
     
     private func auth() {
         if isRegistered {
             currentSession = .existingUser
-            handleID()
-            if passcode == currentUserInfo() {
-                showCardsViewController()
-            } else {
-                // Wrong password
-            }
+            validatePasscode()
+            
         } else {
             currentSession = .newUser
             registerAttempt()
+        }
+    }
+    
+    private func validatePasscode() {
+        if passcode.isEmpty {
+            promptForSmartAuth()
+            return
+        }
+        if passcode == currentUserInfo() {
+            showCardsViewController()
+        } else {
+            let alert = UIAlertController(title: NSLocalizedString("Incorrect password", comment: ""), message: "", preferredStyle: .alert)
+            alert.addAction(UIAlertAction(title: NSLocalizedString("Try again", comment: ""), style: .default, handler: { [weak self] _ in
+                self?.resetPassItems()
+                alert.dismiss(animated: true)
+            }))
+            
+            present(alert, animated: true)
         }
     }
     
@@ -57,23 +122,6 @@ class LoginViewController: UIViewController {
             if registerKey == passcode {
                 setUserInfo()
             }
-        }
-    }
-    
-    private func resetPassItems() {
-        for dot in dots {
-            dot.alpha = 0.4
-        }
-        passcode = ""
-    }
-    
-    private var isRegistered: Bool {
-        return currentUserInfo() != nil
-    }
-    
-    private var currentSession: Session = .newUser {
-        didSet {
-            style()
         }
     }
     
@@ -91,83 +139,48 @@ class LoginViewController: UIViewController {
             //present failure screen
         }
     }
-
-    @IBOutlet weak var dotOne: UIImageView!
-    @IBOutlet weak var dotTwo: UIImageView!
-    @IBOutlet weak var dotThree: UIImageView!
-    @IBOutlet weak var dotFour: UIImageView!
-    
-    private var dots: [UIImageView] = []
-
-    
-    @IBOutlet weak var oneButton: UIButton!
-    @IBOutlet weak var twoButton: UIButton!
-    @IBOutlet weak var threeButton: UIButton!
-    @IBOutlet weak var fourButton: UIButton!
-    @IBOutlet weak var fiveButton: UIButton!
-    @IBOutlet weak var sixButton: UIButton!
-    @IBOutlet weak var sevenButton: UIButton!
-    @IBOutlet weak var eightButton: UIButton!
-    @IBOutlet weak var nineButton: UIButton!
-    @IBOutlet weak var zeroButton: UIButton!
-    @IBOutlet weak var biometricButton: UIButton!
     
     
-    
-    override func viewDidLoad() {
-        super.viewDidLoad()
-        setBackgroundColor()
-    
-        navigationController?.navigationBar.prefersLargeTitles = true
-        dots = [dotOne, dotTwo, dotThree, dotFour]
+    private func resetPassItems() {
+        for dot in dots {
+            dot.alpha = 0.4
+        }
+        passcode = ""
     }
     
-    override func viewWillAppear(_ animated: Bool) {
-        super.viewWillAppear(animated)
-        auth()
-    }
-    
-
-    @IBAction func handleLoginButtonTapped(_ sender: UIButton) {
-        handleID()
-    }
-    
-    private func showCardsViewController() {
-        guard let vc = storyboard?.instantiateViewController(withIdentifier: "CardViewController") else { return }
-        navigationController?.pushViewController(vc, animated: true)
-    }
-    
-    
-    
-    func handleID() {
-        let context = LAContext()
-        var error: NSError?
-        if context.canEvaluatePolicy(.deviceOwnerAuthenticationWithBiometrics, error: &error) {
-            let reason = "Identify yourself!"
-            
-            context.evaluatePolicy(.deviceOwnerAuthenticationWithBiometrics, localizedReason: reason) {
-                [unowned self] (success, authenticationError) in
-                
+    func promptForSmartAuth() {
+        smartAuthManager.requestSmartAuth { [weak self] state in
+            switch state {
+            case .success:
                 DispatchQueue.main.async {
-                    if success {
-                        self.showCardsViewController()
-                    } else {
-                        // error
-                    }
+                    self?.showCardsViewController()
                 }
+            case .failed:
+                break
+            case .unavailable:
+                break
             }
-        } else {
-            // no biometry
         }
     }
     
     private func style() {
+        biometricButton.tintColor = UIColor.cardsTintColor
         switch currentSession {
         case .existingUser:
             title = NSLocalizedString("Login", comment: "")
         case .newUser:
             title = NSLocalizedString("Register", comment: "")
+            hideSmartAuthButton()
         }
+        resetButton.alpha = 0
+        if !smartAuthManager.smartAuthIsActive {
+            hideSmartAuthButton()
+        }
+    }
+    
+    private func hideSmartAuthButton() {
+        biometricButton.isEnabled = false
+        biometricButton.alpha = 0
     }
     
     private func add(_ number: String?) {

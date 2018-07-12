@@ -10,6 +10,8 @@ import UIKit
 
 extension UIColor {
     
+    static let cardsTintColor: UIColor = UIColor(named: "TintColor")!
+    
     struct CardColor {
         static let black: UIColor = UIColor(named: "C1")!
         static let darkGray: UIColor = UIColor(named: "C2")!
