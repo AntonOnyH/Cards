@@ -220,6 +220,36 @@
                                             </constraints>
                                         </tableViewCellContentView>
                                     </tableViewCell>
+                                    <tableViewCell clipsSubviews="YES" contentMode="scaleToFill" preservesSuperviewLayoutMargins="YES" selectionStyle="default" indentationWidth="10" id="0me-Mo-gZG">
+                                        <rect key="frame" x="0.0" y="44" width="375" height="44"/>
+                                        <autoresizingMask key="autoresizingMask"/>
+                                        <tableViewCellContentView key="contentView" opaque="NO" clipsSubviews="YES" multipleTouchEnabled="YES" contentMode="center" preservesSuperviewLayoutMargins="YES" insetsLayoutMarginsFromSafeArea="NO" tableViewCell="0me-Mo-gZG" id="oCo-he-Nhi">
+                                            <rect key="frame" x="0.0" y="0.0" width="375" height="44"/>
+                                            <autoresizingMask key="autoresizingMask"/>
+                                            <subviews>
+                                                <switch opaque="NO" contentMode="scaleToFill" horizontalHuggingPriority="750" verticalHuggingPriority="750" contentHorizontalAlignment="center" contentVerticalAlignment="center" on="YES" translatesAutoresizingMaskIntoConstraints="NO" id="B0R-67-YA8">
+                                                    <rect key="frame" x="310" y="6" width="51" height="31"/>
+                                                    <color key="onTintColor" red="0.0" green="0.47843137250000001" blue="1" alpha="1" colorSpace="custom" customColorSpace="sRGB"/>
+                                                    <connections>
+                                                        <action selector="handleSmartAuthSwitchValueChange:" destination="Imf-Es-Bbd" eventType="valueChanged" id="emu-hV-vVn"/>
+                                                    </connections>
+                                                </switch>
+                                                <label opaque="NO" userInteractionEnabled="NO" contentMode="left" horizontalHuggingPriority="251" verticalHuggingPriority="251" text="Use Smart Auth" textAlignment="natural" lineBreakMode="tailTruncation" baselineAdjustment="alignBaselines" adjustsFontSizeToFit="NO" translatesAutoresizingMaskIntoConstraints="NO" id="w6J-Q9-akQ">
+                                                    <rect key="frame" x="16" y="12.5" width="286" height="20"/>
+                                                    <fontDescription key="fontDescription" type="system" pointSize="17"/>
+                                                    <color key="textColor" white="1" alpha="1" colorSpace="custom" customColorSpace="genericGamma22GrayColorSpace"/>
+                                                    <nil key="highlightedColor"/>
+                                                </label>
+                                            </subviews>
+                                            <constraints>
+                                                <constraint firstAttribute="trailing" secondItem="B0R-67-YA8" secondAttribute="trailing" constant="16" id="Gse-Xg-swx"/>
+                                                <constraint firstItem="w6J-Q9-akQ" firstAttribute="leading" secondItem="oCo-he-Nhi" secondAttribute="leadingMargin" id="X45-P2-hvu"/>
+                                                <constraint firstItem="w6J-Q9-akQ" firstAttribute="centerY" secondItem="oCo-he-Nhi" secondAttribute="centerY" id="XEq-LC-SzO"/>
+                                                <constraint firstItem="B0R-67-YA8" firstAttribute="leading" secondItem="w6J-Q9-akQ" secondAttribute="trailing" constant="8" id="kxL-8O-1Dt"/>
+                                                <constraint firstItem="B0R-67-YA8" firstAttribute="centerY" secondItem="oCo-he-Nhi" secondAttribute="centerY" id="nmV-Ux-1aC"/>
+                                            </constraints>
+                                        </tableViewCellContentView>
+                                    </tableViewCell>
                                 </cells>
                             </tableViewSection>
                         </sections>
@@ -230,12 +260,15 @@
                     </tableView>
                     <navigationItem key="navigationItem" id="49X-PS-ora"/>
                     <connections>
+                        <outlet property="patternLabel" destination="BuY-pM-3TX" id="xM6-cH-ezH"/>
                         <outlet property="patternSwitch" destination="MV3-Pa-BzD" id="vAf-Uv-emB"/>
+                        <outlet property="smartAuthLabel" destination="w6J-Q9-akQ" id="EJA-o3-mLS"/>
+                        <outlet property="smartAuthSwitch" destination="B0R-67-YA8" id="WZk-ba-bXV"/>
                     </connections>
                 </tableViewController>
                 <placeholder placeholderIdentifier="IBFirstResponder" id="Obs-KY-TTx" userLabel="First Responder" sceneMemberID="firstResponder"/>
             </objects>
-            <point key="canvasLocation" x="580" y="778"/>
+            <point key="canvasLocation" x="1441" y="800"/>
         </scene>
         <!--Login View Controller-->
         <scene sceneID="J9b-o0-XRt">
@@ -398,7 +431,7 @@
                                             <button opaque="NO" contentMode="scaleToFill" contentHorizontalAlignment="center" contentVerticalAlignment="center" lineBreakMode="middleTruncation" translatesAutoresizingMaskIntoConstraints="NO" id="VU8-HX-xP4">
                                                 <rect key="frame" x="218" y="22" width="109" height="34"/>
                                                 <state key="normal" title="Smart Auth">
-                                                    <color key="titleColor" red="0.21176470589999999" green="0.46274509800000002" blue="0.96470588239999999" alpha="1" colorSpace="custom" customColorSpace="sRGB"/>
+                                                    <color key="titleColor" name="TintColor"/>
                                                 </state>
                                                 <connections>
                                                     <action selector="handleLoginButtonTapped:" destination="VlT-jp-dJw" eventType="touchUpInside" id="tJV-6f-rla"/>
@@ -440,6 +473,7 @@
                         <outlet property="fourButton" destination="obf-AA-Qcn" id="u8D-Dq-hBl"/>
                         <outlet property="nineButton" destination="XSU-q8-C7V" id="x73-sS-Mra"/>
                         <outlet property="oneButton" destination="jYE-fJ-O79" id="WAE-wN-OAf"/>
+                        <outlet property="resetButton" destination="e13-OF-jLK" id="mES-lL-6rY"/>
                         <outlet property="sevenButton" destination="3Zc-wU-j5Z" id="wwb-Gk-1Y4"/>
                         <outlet property="sixButton" destination="WZD-s6-lrM" id="4fI-6T-Mt0"/>
                         <outlet property="threeButton" destination="Y35-rh-0YN" id="9Ob-9Y-oCy"/>
@@ -479,6 +513,9 @@
         </namedColor>
         <namedColor name="SegmentBackgroundColor">
             <color red="0.12200000137090683" green="0.12200000137090683" blue="0.14100000262260437" alpha="1" colorSpace="custom" customColorSpace="sRGB"/>
+        </namedColor>
+        <namedColor name="TintColor">
+            <color red="0.95300000905990601" green="0.62000000476837158" blue="0.6119999885559082" alpha="1" colorSpace="custom" customColorSpace="sRGB"/>
         </namedColor>
     </resources>
 </document>

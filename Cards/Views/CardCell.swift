@@ -15,10 +15,10 @@ class CardCell: UITableViewCell {
         didSet {
             switch mode {
             case .light:
-                numberLabel.textColor = UIColor(named: "C4") ?? .white
-                titleLabel.textColor = UIColor(named: "C4") ?? .white
-                expiryLabel.textColor = UIColor(named: "C4")?.withAlphaComponent(0.5) ?? .white
-                cvvLabel.textColor = UIColor(named: "C4")?.withAlphaComponent(0.5) ?? .white
+                numberLabel.textColor = UIColor.CardColor.pearlWhite
+                titleLabel.textColor = UIColor.CardColor.pearlWhite
+                expiryLabel.textColor = UIColor.CardColor.pearlWhite.withAlphaComponent(0.5)
+                cvvLabel.textColor = UIColor.CardColor.pearlWhite.withAlphaComponent(0.5)
             case .dark:
                 cvvLabel.textColor = .darkGray
                 expiryLabel.textColor = .darkGray
@@ -40,7 +40,7 @@ class CardCell: UITableViewCell {
         let i = UIImageView()
         i.translatesAutoresizingMaskIntoConstraints = false
         i.contentMode = .scaleAspectFit
-        i.tintColor = UIColor(named: "C4")
+        i.tintColor = UIColor.CardColor.pearlWhite
         return i
     }()
     
@@ -67,7 +67,7 @@ class CardCell: UITableViewCell {
         let i = UIImageView()
         i.translatesAutoresizingMaskIntoConstraints = false
         i.contentMode = .scaleAspectFit
-        i.tintColor = UIColor(named: "C4")
+        i.tintColor = UIColor.CardColor.pearlWhite
         return i
     }()
     
@@ -77,7 +77,7 @@ class CardCell: UITableViewCell {
         let l = UILabel()
         l.font = UIFont.systemFont(ofSize: 14, weight: .medium)
         l.translatesAutoresizingMaskIntoConstraints = false
-        l.textColor = UIColor(named: "C4")?.withAlphaComponent(0.2)
+        l.textColor = UIColor.CardColor.pearlWhite.withAlphaComponent(0.2)
         l.textAlignment = .right
         return l
     }()
@@ -86,7 +86,7 @@ class CardCell: UITableViewCell {
         let l = UILabel()
         l.font = UIFont.systemFont(ofSize: 14, weight: .medium)
         l.translatesAutoresizingMaskIntoConstraints = false
-        l.textColor = UIColor(named: "C4")?.withAlphaComponent(0.2)
+        l.textColor = UIColor.CardColor.pearlWhite.withAlphaComponent(0.2)
         return l
     }()
     
@@ -105,6 +105,7 @@ class CardCell: UITableViewCell {
         l.translatesAutoresizingMaskIntoConstraints = false
         l.textColor = .white
         l.font = UIFont.boldSystemFont(ofSize: 21)
+        l.numberOfLines = 3
         return l
     }()
     
@@ -140,16 +141,16 @@ class CardCell: UITableViewCell {
             bankTypeImageView.isHidden = false
             expiryLabel.isHidden = false
             logoImageView.isHidden = true
-            gradientView.topColor = UIColor(named: "CardC1") ?? .white
-            gradientView.bottomColor = UIColor(named: "CardC2") ?? .white
+            gradientView.topColor = UIColor.GradiantColor.gradLight
+            gradientView.bottomColor = UIColor.GradiantColor.gradDark
 
         case .store:
             cvvLabel.isHidden = true
             bankTypeImageView.isHidden = true
             expiryLabel.isHidden = true
             logoImageView.isHidden = false
-            gradientView.topColor = UIColor(named: "ShopCardC1") ?? .white
-            gradientView.bottomColor = UIColor(named: "ShopCardC2") ?? .white
+            gradientView.topColor = UIColor.CardColor.blue
+            gradientView.bottomColor = UIColor.CardColor.navy
         }
     }
     
@@ -191,8 +192,8 @@ class CardCell: UITableViewCell {
         expiryLabel.centerYAnchor.constraint(equalTo: cvvLabel.centerYAnchor).isActive = true
         
         titleLabel.leadingAnchor.constraint(equalTo: cardView.leadingAnchor, constant: 16).isActive = true
-        titleLabel.centerXAnchor.constraint(equalTo: cardView.centerXAnchor).isActive = true
         titleLabel.bottomAnchor.constraint(equalTo: cardView.bottomAnchor, constant: -16).isActive = true
+        titleLabel.trailingAnchor.constraint(equalTo: logoImageView.leadingAnchor).isActive = true
         
         bankTypeImageView.trailingAnchor.constraint(equalTo: cardView.trailingAnchor, constant: -12).isActive = true
         bankTypeImageView.bottomAnchor.constraint(equalTo: cardView.bottomAnchor, constant: -12).isActive = true

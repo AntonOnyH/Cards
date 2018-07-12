@@ -8,20 +8,22 @@
 
 /* Begin PBXBuildFile section */
 		6E00230020A0D25C001106CD /* LoginViewController.swift in Sources */ = {isa = PBXBuildFile; fileRef = 6E0022FF20A0D25C001106CD /* LoginViewController.swift */; };
+		6E17510320F66E7200C8FC98 /* SmartAuthManager.swift in Sources */ = {isa = PBXBuildFile; fileRef = 6E17510220F66E7200C8FC98 /* SmartAuthManager.swift */; };
 		6E1D5031208CFA4B00CAFFF2 /* AppDelegate.swift in Sources */ = {isa = PBXBuildFile; fileRef = 6E1D5030208CFA4B00CAFFF2 /* AppDelegate.swift */; };
 		6E1D5036208CFA4B00CAFFF2 /* Main.storyboard in Resources */ = {isa = PBXBuildFile; fileRef = 6E1D5034208CFA4B00CAFFF2 /* Main.storyboard */; };
 		6E1D5038208CFA4D00CAFFF2 /* Assets.xcassets in Resources */ = {isa = PBXBuildFile; fileRef = 6E1D5037208CFA4D00CAFFF2 /* Assets.xcassets */; };
 		6E1D503B208CFA4D00CAFFF2 /* LaunchScreen.storyboard in Resources */ = {isa = PBXBuildFile; fileRef = 6E1D5039208CFA4D00CAFFF2 /* LaunchScreen.storyboard */; };
 		6E1D5046208CFA4D00CAFFF2 /* CardsTests.swift in Sources */ = {isa = PBXBuildFile; fileRef = 6E1D5045208CFA4D00CAFFF2 /* CardsTests.swift */; };
 		6E1D5051208CFA4D00CAFFF2 /* CardsUITests.swift in Sources */ = {isa = PBXBuildFile; fileRef = 6E1D5050208CFA4D00CAFFF2 /* CardsUITests.swift */; };
-		6E3E266820A2C2370049B187 /* NewCardViewController.swift in Sources */ = {isa = PBXBuildFile; fileRef = 6E3E266720A2C2370049B187 /* NewCardViewController.swift */; };
 		6E5372C920BAAF640029E104 /* CardTypeSegmentView.swift in Sources */ = {isa = PBXBuildFile; fileRef = 6E5372C820BAAF640029E104 /* CardTypeSegmentView.swift */; };
 		6E7331C120AD914200FFF986 /* UIView+Extensions.swift in Sources */ = {isa = PBXBuildFile; fileRef = 6E7331C020AD914200FFF986 /* UIView+Extensions.swift */; };
 		6E803B952095C1D20072EB47 /* CardViewController.swift in Sources */ = {isa = PBXBuildFile; fileRef = 6E803B942095C1D20072EB47 /* CardViewController.swift */; };
 		6E88290620F2367F00163E34 /* SettingsViewController.swift in Sources */ = {isa = PBXBuildFile; fileRef = 6E88290520F2367F00163E34 /* SettingsViewController.swift */; };
 		6E96217820A5A78D00003557 /* CardManager.swift in Sources */ = {isa = PBXBuildFile; fileRef = 6E96217720A5A78D00003557 /* CardManager.swift */; };
+		6EAE809B20F7B7050084B2B4 /* NewCardViewController.swift in Sources */ = {isa = PBXBuildFile; fileRef = 6EAE809A20F7B7050084B2B4 /* NewCardViewController.swift */; };
 		6EB22C4920A73B71008AB682 /* CardCell.swift in Sources */ = {isa = PBXBuildFile; fileRef = 6EB22C4820A73B71008AB682 /* CardCell.swift */; };
 		6EBCCA4820BD974A006325FB /* GradientView.swift in Sources */ = {isa = PBXBuildFile; fileRef = 6EBCCA4720BD974A006325FB /* GradientView.swift */; };
+		6ECCDBC620F268E500FF9555 /* Colors+Extension.swift in Sources */ = {isa = PBXBuildFile; fileRef = 6ECCDBC520F268E500FF9555 /* Colors+Extension.swift */; };
 		A75D0D49D282E07666575540 /* Pods_CardsUITests.framework in Frameworks */ = {isa = PBXBuildFile; fileRef = EFF9A1266F24E1E1DA3106FE /* Pods_CardsUITests.framework */; };
 		B690F373F8D313DF386763CD /* Pods_CardsTests.framework in Frameworks */ = {isa = PBXBuildFile; fileRef = EF11EE90BFB77B768101823F /* Pods_CardsTests.framework */; };
 		C3A12C2E72A646F2DC199921 /* Pods_Cards.framework in Frameworks */ = {isa = PBXBuildFile; fileRef = E13A180B02C5C8D097D4CB27 /* Pods_Cards.framework */; };
@@ -50,6 +52,7 @@
 		53054F0A964F437A43430D27 /* Pods-CardsTests.release.xcconfig */ = {isa = PBXFileReference; includeInIndex = 1; lastKnownFileType = text.xcconfig; name = "Pods-CardsTests.release.xcconfig"; path = "Pods/Target Support Files/Pods-CardsTests/Pods-CardsTests.release.xcconfig"; sourceTree = "<group>"; };
 		6AEC748AF0EFDFBE43963BA0 /* Pods-CardsUITests.debug.xcconfig */ = {isa = PBXFileReference; includeInIndex = 1; lastKnownFileType = text.xcconfig; name = "Pods-CardsUITests.debug.xcconfig"; path = "Pods/Target Support Files/Pods-CardsUITests/Pods-CardsUITests.debug.xcconfig"; sourceTree = "<group>"; };
 		6E0022FF20A0D25C001106CD /* LoginViewController.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = LoginViewController.swift; sourceTree = "<group>"; };
+		6E17510220F66E7200C8FC98 /* SmartAuthManager.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = SmartAuthManager.swift; sourceTree = "<group>"; };
 		6E1D502D208CFA4B00CAFFF2 /* Cards.app */ = {isa = PBXFileReference; explicitFileType = wrapper.application; includeInIndex = 0; path = Cards.app; sourceTree = BUILT_PRODUCTS_DIR; };
 		6E1D5030208CFA4B00CAFFF2 /* AppDelegate.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = AppDelegate.swift; sourceTree = "<group>"; };
 		6E1D5035208CFA4B00CAFFF2 /* Base */ = {isa = PBXFileReference; lastKnownFileType = file.storyboard; name = Base; path = Base.lproj/Main.storyboard; sourceTree = "<group>"; };
@@ -62,14 +65,15 @@
 		6E1D504C208CFA4D00CAFFF2 /* CardsUITests.xctest */ = {isa = PBXFileReference; explicitFileType = wrapper.cfbundle; includeInIndex = 0; path = CardsUITests.xctest; sourceTree = BUILT_PRODUCTS_DIR; };
 		6E1D5050208CFA4D00CAFFF2 /* CardsUITests.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = CardsUITests.swift; sourceTree = "<group>"; };
 		6E1D5052208CFA4D00CAFFF2 /* Info.plist */ = {isa = PBXFileReference; lastKnownFileType = text.plist.xml; path = Info.plist; sourceTree = "<group>"; };
-		6E3E266720A2C2370049B187 /* NewCardViewController.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = NewCardViewController.swift; sourceTree = "<group>"; };
 		6E5372C820BAAF640029E104 /* CardTypeSegmentView.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = CardTypeSegmentView.swift; sourceTree = "<group>"; };
 		6E7331C020AD914200FFF986 /* UIView+Extensions.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = "UIView+Extensions.swift"; sourceTree = "<group>"; };
 		6E803B942095C1D20072EB47 /* CardViewController.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = CardViewController.swift; sourceTree = "<group>"; };
 		6E88290520F2367F00163E34 /* SettingsViewController.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = SettingsViewController.swift; sourceTree = "<group>"; };
 		6E96217720A5A78D00003557 /* CardManager.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = CardManager.swift; sourceTree = "<group>"; };
+		6EAE809A20F7B7050084B2B4 /* NewCardViewController.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = NewCardViewController.swift; sourceTree = "<group>"; };
 		6EB22C4820A73B71008AB682 /* CardCell.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = CardCell.swift; sourceTree = "<group>"; };
 		6EBCCA4720BD974A006325FB /* GradientView.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = GradientView.swift; sourceTree = "<group>"; };
+		6ECCDBC520F268E500FF9555 /* Colors+Extension.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = "Colors+Extension.swift"; sourceTree = "<group>"; };
 		6EF3DE4020F25A97007B3E2F /* NewCardViewController-Bridging-Header.h */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.c.h; path = "NewCardViewController-Bridging-Header.h"; sourceTree = "<group>"; };
 		8705BDFE43079324F7D7B1E4 /* Pods-Cards.debug.xcconfig */ = {isa = PBXFileReference; includeInIndex = 1; lastKnownFileType = text.xcconfig; name = "Pods-Cards.debug.xcconfig"; path = "Pods/Target Support Files/Pods-Cards/Pods-Cards.debug.xcconfig"; sourceTree = "<group>"; };
 		9C13E3FFDCF09F0377ABE418 /* Pods-Cards.release.xcconfig */ = {isa = PBXFileReference; includeInIndex = 1; lastKnownFileType = text.xcconfig; name = "Pods-Cards.release.xcconfig"; path = "Pods/Target Support Files/Pods-Cards/Pods-Cards.release.xcconfig"; sourceTree = "<group>"; };
@@ -132,13 +136,10 @@
 			isa = PBXGroup;
 			children = (
 				6E1D5030208CFA4B00CAFFF2 /* AppDelegate.swift */,
-				6E0022FF20A0D25C001106CD /* LoginViewController.swift */,
-				6E803B942095C1D20072EB47 /* CardViewController.swift */,
-				6E88290520F2367F00163E34 /* SettingsViewController.swift */,
-				6EB22C4820A73B71008AB682 /* CardCell.swift */,
-				6E5372C820BAAF640029E104 /* CardTypeSegmentView.swift */,
+				6E17510220F66E7200C8FC98 /* SmartAuthManager.swift */,
+				6ECCDBC320F2689F00FF9555 /* ViewControllers */,
+				6ECCDBC420F268BA00FF9555 /* Views */,
 				6E7331C220AD914700FFF986 /* Extensions */,
-				6E3E266720A2C2370049B187 /* NewCardViewController.swift */,
 				6EF3DE4020F25A97007B3E2F /* NewCardViewController-Bridging-Header.h */,
 				6E96217720A5A78D00003557 /* CardManager.swift */,
 				6E1D5034208CFA4B00CAFFF2 /* Main.storyboard */,
@@ -172,8 +173,29 @@
 			children = (
 				6E7331C020AD914200FFF986 /* UIView+Extensions.swift */,
 				6EBCCA4720BD974A006325FB /* GradientView.swift */,
+				6ECCDBC520F268E500FF9555 /* Colors+Extension.swift */,
 			);
 			path = Extensions;
+			sourceTree = "<group>";
+		};
+		6ECCDBC320F2689F00FF9555 /* ViewControllers */ = {
+			isa = PBXGroup;
+			children = (
+				6E0022FF20A0D25C001106CD /* LoginViewController.swift */,
+				6EAE809A20F7B7050084B2B4 /* NewCardViewController.swift */,
+				6E803B942095C1D20072EB47 /* CardViewController.swift */,
+				6E88290520F2367F00163E34 /* SettingsViewController.swift */,
+			);
+			path = ViewControllers;
+			sourceTree = "<group>";
+		};
+		6ECCDBC420F268BA00FF9555 /* Views */ = {
+			isa = PBXGroup;
+			children = (
+				6EB22C4820A73B71008AB682 /* CardCell.swift */,
+				6E5372C820BAAF640029E104 /* CardTypeSegmentView.swift */,
+			);
+			path = Views;
 			sourceTree = "<group>";
 		};
 		70D78551BB1F40B5157BF1F1 /* Pods */ = {
@@ -412,11 +434,13 @@
 			buildActionMask = 2147483647;
 			files = (
 				6E00230020A0D25C001106CD /* LoginViewController.swift in Sources */,
-				6E3E266820A2C2370049B187 /* NewCardViewController.swift in Sources */,
+				6E17510320F66E7200C8FC98 /* SmartAuthManager.swift in Sources */,
 				6E803B952095C1D20072EB47 /* CardViewController.swift in Sources */,
 				6E88290620F2367F00163E34 /* SettingsViewController.swift in Sources */,
 				6E7331C120AD914200FFF986 /* UIView+Extensions.swift in Sources */,
+				6EAE809B20F7B7050084B2B4 /* NewCardViewController.swift in Sources */,
 				6E96217820A5A78D00003557 /* CardManager.swift in Sources */,
+				6ECCDBC620F268E500FF9555 /* Colors+Extension.swift in Sources */,
 				6E1D5031208CFA4B00CAFFF2 /* AppDelegate.swift in Sources */,
 				6E5372C920BAAF640029E104 /* CardTypeSegmentView.swift in Sources */,
 				6EB22C4920A73B71008AB682 /* CardCell.swift in Sources */,

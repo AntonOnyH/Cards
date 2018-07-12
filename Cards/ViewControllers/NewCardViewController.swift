@@ -8,6 +8,12 @@
 
 import UIKit
 
+ protocol NewCardDelegate{
+    
+    func didAddCard(type: Card.CardType)
+    
+}
+
 enum Mode {
     case light
     case dark
@@ -41,17 +47,17 @@ enum CardTheme: Int, Codable {
     var color: UIColor {
         switch self {
         case .black:
-            return UIColor(named: "C1") ?? .gray
+            return UIColor.CardColor.black
         case .gray:
-            return UIColor(named: "C2") ?? .gray
+            return UIColor.CardColor.darkGray
         case .criene:
-            return UIColor(named: "C3") ?? .gray
+            return UIColor.CardColor.criene
         case .pearl:
-            return UIColor(named: "C4") ?? .gray
+            return UIColor.CardColor.pearlWhite
         case .yolo:
-            return UIColor(named: "C5") ?? .gray
+            return UIColor.CardColor.yoloYellow
         case .alpha:
-            return UIColor(named: "CardC1") ?? .white
+            return UIColor.CardColor.black
         }
     }
     
@@ -65,9 +71,7 @@ enum CardTheme: Int, Codable {
     }
 }
 
-
 class NewCardViewController: UIViewController, CardIOPaymentViewControllerDelegate {
-    
     
     @IBOutlet weak var saveButton: UIButton!
     @IBOutlet weak var logoImageView: UIImageView!
@@ -79,6 +83,7 @@ class NewCardViewController: UIViewController, CardIOPaymentViewControllerDelega
     @IBOutlet weak var stackView: UIStackView!
     
     var cardManager: CardManager?
+    var newCardDelegate: NewCardDelegate?
 
     override func viewDidLoad() {
         super.viewDidLoad()
@@ -105,7 +110,7 @@ class NewCardViewController: UIViewController, CardIOPaymentViewControllerDelega
         title = NSLocalizedString("New card", comment: "")
         navigationController?.navigationBar.tintColor = .white
         navigationController?.navigationBar.barStyle = .black
-        navigationController?.navigationBar.barTintColor = UIColor(named: "SegmentBackgroundColor")
+        navigationController?.navigationBar.barTintColor = UIColor.BackgroundColor.extraDark
         navigationController?.navigationBar.isTranslucent = false
         
         let button = UIButton()
@@ -141,6 +146,7 @@ class NewCardViewController: UIViewController, CardIOPaymentViewControllerDelega
         }
         let c = Card(name: nameTextField.text!, cardNumber: cardNumberTextField.text!, expiry: expiryDateTextField.text!, cvv: cvcTextField.text!, bankType: bankType(), cardTheme: .alpha, logo: logo ?? "", cardType: cardType())
         cardManager?.addCard(c, completion: {
+            newCardDelegate?.didAddCard(type: cardType())
             dismiss(animated: true)
         })
     }
@@ -192,6 +198,17 @@ class NewCardViewController: UIViewController, CardIOPaymentViewControllerDelega
     }
     @IBAction func handleScanTapped(_ sender: UIButton) {
         if let cardIOVC = CardIOPaymentViewController(paymentDelegate: self) {
+            cardIOVC.collectCardholderName = true
+            cardIOVC.guideColor = UIColor.cardsTintColor
+            cardIOVC.hideCardIOLogo = true
+            cardIOVC.detectionMode = .cardImageAndNumber
+            cardIOVC.keepStatusBarStyleForCardIO = true
+            cardIOVC.maskManualEntryDigits = true
+            cardIOVC.navigationBarStyleForCardIO = .black
+            cardIOVC.navigationBarTintColor = navigationController?.navigationBar.barTintColor
+            
+            
+            
             present(cardIOVC, animated: true)
         }
         print("scanner")
@@ -204,11 +221,20 @@ extension NewCardViewController {
     }
     
     func userDidProvide(_ cardInfo: CardIOCreditCardInfo!, in paymentViewController: CardIOPaymentViewController!) {
-        let name: String = cardInfo.cardholderName
-        let number: String = cardInfo.cardNumber
-        let cvv: String = cardInfo.cvv
-        let expiryMonth: String = String(cardInfo.expiryMonth)
-        let expiryYear: String = String(cardInfo.expiryYear)
+        guard let name = cardInfo.cardholderName, let number = cardInfo.cardNumber, let cvv = cardInfo.cvv else {
+            //Show error
+            return
+        }
+        
+        var expiryMonth = String(cardInfo.expiryMonth)
+        if expiryMonth.count == 1 {
+            expiryMonth.insert("0", at: expiryMonth.startIndex)
+        }
+        var expiryYear = String(cardInfo.expiryYear)
+        expiryYear.remove(at: expiryYear.startIndex)
+        expiryYear.remove(at: expiryYear.startIndex)
+
+
         
         func type() -> BankType {
             switch cardInfo.cardType {
@@ -221,9 +247,13 @@ extension NewCardViewController {
             }
         }
         
+        cardNumberTextField.text = number
+        cvcTextField.text = cvv
+        expiryDateTextField.text = "\(expiryMonth)" + "/" + "\(expiryYear)"
+        
         let c = Card(name: name, cardNumber: number, expiry: expiryMonth + expiryYear, cvv: cvv, bankType: type(), cardTheme: .alpha, logo: "", cardType: .bank)
-        cardManager?.addCard(c, completion: {
-            dismiss(animated: true)
+        cardManager?.addCard(c, completion: { [weak self] in
+            navigationController?.dismiss(animated: true)
         })
     }
 

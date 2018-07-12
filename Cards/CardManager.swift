@@ -79,9 +79,7 @@ class CardManager: CardService {
     }
     
      func delete(_ card: Card, completion: () -> Void) {
-        
         while let index = cards.index(where: {$0.cardNumber == card.cardNumber}) {
-            
             cards.remove(at: index)
         }
         
