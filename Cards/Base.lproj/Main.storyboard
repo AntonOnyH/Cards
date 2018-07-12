@@ -465,6 +465,7 @@
                         <outlet property="fourButton" destination="obf-AA-Qcn" id="u8D-Dq-hBl"/>
                         <outlet property="nineButton" destination="XSU-q8-C7V" id="x73-sS-Mra"/>
                         <outlet property="oneButton" destination="jYE-fJ-O79" id="WAE-wN-OAf"/>
+                        <outlet property="resetButton" destination="e13-OF-jLK" id="mES-lL-6rY"/>
                         <outlet property="sevenButton" destination="3Zc-wU-j5Z" id="wwb-Gk-1Y4"/>
                         <outlet property="sixButton" destination="WZD-s6-lrM" id="4fI-6T-Mt0"/>
                         <outlet property="threeButton" destination="Y35-rh-0YN" id="9Ob-9Y-oCy"/>

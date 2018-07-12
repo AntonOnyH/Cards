@@ -46,10 +46,6 @@ class LoginViewController: UIViewController {
     @IBOutlet weak var dotTwo: UIImageView!
     @IBOutlet weak var dotThree: UIImageView!
     @IBOutlet weak var dotFour: UIImageView!
-    
-    private var dots: [UIImageView] = []
-
-    
     @IBOutlet weak var oneButton: UIButton!
     @IBOutlet weak var twoButton: UIButton!
     @IBOutlet weak var threeButton: UIButton!
@@ -61,8 +57,8 @@ class LoginViewController: UIViewController {
     @IBOutlet weak var nineButton: UIButton!
     @IBOutlet weak var zeroButton: UIButton!
     @IBOutlet weak var biometricButton: UIButton!
-    
-    
+    @IBOutlet weak var resetButton: UIButton!
+    private var dots: [UIImageView] = []
     
     override func viewDidLoad() {
         super.viewDidLoad()
@@ -90,15 +86,29 @@ class LoginViewController: UIViewController {
     private func auth() {
         if isRegistered {
             currentSession = .existingUser
-            promptForSmartAuth()
-            if passcode == currentUserInfo() {
-                showCardsViewController()
-            } else {
-                // Wrong password
-            }
+            validatePasscode()
+            
         } else {
             currentSession = .newUser
             registerAttempt()
+        }
+    }
+    
+    private func validatePasscode() {
+        if passcode.isEmpty {
+            promptForSmartAuth()
+            return
+        }
+        if passcode == currentUserInfo() {
+            showCardsViewController()
+        } else {
+            let alert = UIAlertController(title: NSLocalizedString("Incorrect password", comment: ""), message: "", preferredStyle: .alert)
+            alert.addAction(UIAlertAction(title: NSLocalizedString("Try again", comment: ""), style: .default, handler: { [weak self] _ in
+                self?.resetPassItems()
+                alert.dismiss(animated: true)
+            }))
+            
+            present(alert, animated: true)
         }
     }
     
@@ -161,8 +171,8 @@ class LoginViewController: UIViewController {
             title = NSLocalizedString("Register", comment: "")
             hideSmartAuthButton()
         }
-        
-        if !smartAuthManager.shouldUseSmartAuth {
+        resetButton.alpha = 0
+        if !smartAuthManager.smartAuthIsActive {
             hideSmartAuthButton()
         }
     }

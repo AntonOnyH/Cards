@@ -17,13 +17,13 @@ class SmartAuthManager {
         case unavailable
     }
     
-    var shouldUseSmartAuth: Bool {
+    var smartAuthIsActive: Bool {
         return UserDefaults.standard.bool(forKey: "shouldUseSmartAuth")
     }
     
     func requestSmartAuth(completion: @escaping (_ state: State) -> Void) {
         UserDefaults.standard.register(defaults: ["shouldUseSmartAuth" : true])
-        guard shouldUseSmartAuth else { return }
+        guard smartAuthIsActive else { return }
         let context = LAContext()
         var error: NSError?
         if context.canEvaluatePolicy(.deviceOwnerAuthenticationWithBiometrics, error: &error) {

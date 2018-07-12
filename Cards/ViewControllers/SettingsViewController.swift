@@ -30,11 +30,7 @@ class SettingsViewController: UITableViewController {
     
     private func setupSwitches() {
         patternSwitch.setOn(shouldShowPattern, animated: true)
-    }
-    
-    private func isSmartAuthOn() -> Bool {
-
-        return true
+        smartAuthSwitch.setOn(smartAuthManager.smartAuthIsActive, animated: true)
     }
     
     @IBAction func switchDidChangeValue(_ sender: UISwitch) {
