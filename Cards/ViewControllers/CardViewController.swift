@@ -81,27 +81,27 @@ class CardViewController: UIViewController {
     fileprivate func presentMoreOptions(index: Int, fromView: CardCell?) {
         
         let alert = UIAlertController(title: nil, message: nil, preferredStyle: .actionSheet)
-        let action = UIAlertAction(title: NSLocalizedString("Delete", comment: "removing file"), style: .destructive) { [weak self] _ in
+        let deleteAction = UIAlertAction(title: NSLocalizedString("Delete", comment: ""), style: .destructive) { [weak self] _ in
             if let card = self?.cardManager.cardAtIndex(index) {
                 self?.cardManager.delete(card, completion: {
                     self?.tableView.reloadData()
                 })
             }
         }
-        alert.addAction(action)
         
         let cancelAction = UIAlertAction(title: NSLocalizedString("Cancel", comment: ""), style: .cancel, handler: nil)
-        alert.addAction(cancelAction)
         
-        let copyAction = UIAlertAction(title: "Copy", style: .default) { (Action) in
-            let cardNumber = fromView?.numberLabel.text
+        let copyAction = UIAlertAction(title: NSLocalizedString("Copy number", comment: ""), style: .default) { (Action) in
+            if let cardNumber = fromView?.numberLabel.text {
+                let numberWithNoSpacing = cardNumber.components(separatedBy: .whitespaces).joined()
+                let pasteboard = UIPasteboard.general
+                pasteboard.string = numberWithNoSpacing
+            }
         }
-        let pasteboard = UIPasteboard.general
-        pasteboard.string = fromView?.numberLabel.text
-        
+
         alert.addAction(copyAction)
-        
-        
+        alert.addAction(deleteAction)
+        alert.addAction(cancelAction)
         
         if let v = fromView {
             alert.popoverPresentationController?.sourceView = v
@@ -110,7 +110,6 @@ class CardViewController: UIViewController {
         
         present(alert, animated: true, completion: nil)
     }
-
 }
 
 extension CardViewController: UITableViewDelegate, UITableViewDataSource {
