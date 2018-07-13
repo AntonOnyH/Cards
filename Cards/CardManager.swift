@@ -23,7 +23,6 @@ protocol CardService {
     
 }
 
-
 struct Card: Codable {
     let name: String
     let cardNumber: String
@@ -78,19 +77,13 @@ class CardManager: CardService {
         }
     }
     
-     func delete(_ card: Card, completion: () -> Void) {
+    func delete(_ card: Card, completion: () -> Void) {
         while let index = cards.index(where: {$0.cardNumber == card.cardNumber}) {
             cards.remove(at: index)
         }
-        
-        
-
-//        deleteCards {
-//            cards = c
-            saveCardsToKeychain(completion: {
-                completion()
-            })
-//        }
+        saveCardsToKeychain(completion: {
+            completion()
+        })
     }
     
     private func saveCardsToKeychain(completion: () -> Void) {

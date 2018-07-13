@@ -246,15 +246,19 @@ extension NewCardViewController: CardIOPaymentViewControllerDelegate{
         cardNumberTextField.text = number
         cvcTextField.text = cvv
         expiryDateTextField.text = expiryText
+        nameTextField.text = name
         
-        let c = Card(name: name, cardNumber: number, expiry: expiryText, cvv: cvv, bankType: type(), cardTheme: .alpha, logo: "", cardType: .bank)
-        cardManager?.addCard(c, completion: { [weak self] in
+        paymentViewController.dismiss(animated: true) { [weak self] in
             guard let strongSelf = self else { return }
-            newCardDelegate?.newCardViewController(newCardViewController: strongSelf, didAddCard: .bank)
-            DispatchQueue.main.async {
-                strongSelf.dismiss(animated: true)
-            }
-        })
+            let c = Card(name: name, cardNumber: number, expiry: expiryText, cvv: cvv, bankType: type(), cardTheme: .alpha, logo: "", cardType: .bank)
+            strongSelf.cardManager?.addCard(c, completion: { 
+                strongSelf.newCardDelegate?.newCardViewController(newCardViewController: strongSelf, didAddCard: .bank)
+                DispatchQueue.main.async {
+                    strongSelf.dismiss(animated: true)
+                }
+            })
+
+        }
     }
 
 }

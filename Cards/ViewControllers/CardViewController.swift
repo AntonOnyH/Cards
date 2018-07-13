@@ -71,26 +71,36 @@ class CardViewController: UIViewController {
     @objc func handleLongPress(_ gestureRecognizer: UILongPressGestureRecognizer) {
         guard gestureRecognizer.state == .began else { return }
         let location = gestureRecognizer.location(in: tableView)
-        guard let indexPath = tableView.indexPathForRow(at: location), let cell = tableView.cellForRow(at: indexPath) else {
+        guard let indexPath = tableView.indexPathForRow(at: location), let cell = tableView.cellForRow(at: indexPath) as? CardCell else {
             return
         }
         
         presentMoreOptions(index: indexPath.row, fromView: cell)
     }
     
-    fileprivate func presentMoreOptions(index: Int, fromView: UIView?) {
+    fileprivate func presentMoreOptions(index: Int, fromView: CardCell?) {
         
         let alert = UIAlertController(title: nil, message: nil, preferredStyle: .actionSheet)
-        let action = UIAlertAction(title: NSLocalizedString("Delete", comment: "removing file"), style: .destructive) { [weak self] _ in
+        let deleteAction = UIAlertAction(title: NSLocalizedString("Delete", comment: ""), style: .destructive) { [weak self] _ in
             if let card = self?.cardManager.cardAtIndex(index) {
                 self?.cardManager.delete(card, completion: {
                     self?.tableView.reloadData()
                 })
             }
         }
-        alert.addAction(action)
         
         let cancelAction = UIAlertAction(title: NSLocalizedString("Cancel", comment: ""), style: .cancel, handler: nil)
+        
+        let copyAction = UIAlertAction(title: NSLocalizedString("Copy number", comment: ""), style: .default) { (Action) in
+            if let cardNumber = fromView?.numberLabel.text {
+                let numberWithNoSpacing = cardNumber.components(separatedBy: .whitespaces).joined()
+                let pasteboard = UIPasteboard.general
+                pasteboard.string = numberWithNoSpacing
+            }
+        }
+
+        alert.addAction(copyAction)
+        alert.addAction(deleteAction)
         alert.addAction(cancelAction)
         
         if let v = fromView {
@@ -100,7 +110,6 @@ class CardViewController: UIViewController {
         
         present(alert, animated: true, completion: nil)
     }
-
 }
 
 extension CardViewController: UITableViewDelegate, UITableViewDataSource {
