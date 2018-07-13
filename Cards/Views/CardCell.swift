@@ -109,6 +109,19 @@ class CardCell: UITableViewCell {
         return l
     }()
     
+    let cardNameLabel: CardNameLabel = {
+        let nL = CardNameLabel()
+        nL.translatesAutoresizingMaskIntoConstraints = false
+        nL.backgroundColor = UIColor(white: 155/255, alpha: 0.3)
+        nL.font = UIFont.systemFont(ofSize: 14, weight: .light)
+        nL.textColor = UIColor.CardColor.pearlWhite.withAlphaComponent(0.5)
+        nL.textAlignment = .center
+        nL.text = "CardNameLabel"
+        nL.layer.cornerRadius = 8
+        nL.clipsToBounds = true
+        return nL
+
+    }()
     override init(style: UITableViewCellStyle, reuseIdentifier: String?) {
         super.init(style: style, reuseIdentifier: reuseIdentifier)
         setup()
@@ -172,7 +185,7 @@ class CardCell: UITableViewCell {
         cardView.addSubview(expiryLabel)
         cardView.addSubview(cvvLabel)
         cardView.addSubview(logoImageView)
-        
+        cardView.addSubview(cardNameLabel)
         patternImageView.fillSuperview()
         
         
@@ -205,6 +218,8 @@ class CardCell: UITableViewCell {
         logoImageView.widthAnchor.constraint(equalToConstant: 70).isActive = true
         logoImageView.heightAnchor.constraint(equalToConstant: 70).isActive = true
         
+        cardNameLabel.trailingAnchor.constraint(equalTo: cardView.trailingAnchor, constant: -10).isActive = true
+        cardNameLabel.topAnchor.constraint(equalTo: cardView.topAnchor, constant: 10).isActive = true
     }
     
     private func addCornerRadius() {
@@ -229,3 +244,9 @@ private extension Array {
     }
 }
 
+class CardNameLabel: UILabel {
+    override func draw(_ rect: CGRect) {
+        let insets = UIEdgeInsets.init(top: 2, left: 5, bottom: 2, right: 5)
+        super.drawText(in: UIEdgeInsetsInsetRect(rect, insets))
+    }
+}
