@@ -158,8 +158,8 @@ extension CardViewController: CardTypeSegmentViewDelegate {
     }
 }
 
-extension CardViewController:NewCardDelegate{
-    func didAddCard(type: Card.CardType) {
+extension CardViewController:NewCardViewConstrollerDelegate{
+    func newCardViewController(newCardViewController: NewCardViewController, didAddCard type: Card.CardType) {
         segmentView.currentSegment = type
     }
 }

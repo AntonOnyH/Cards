@@ -3,3 +3,5 @@
 /Cards.xcodeproj/xcuserdata/hugoprinsloo1.xcuserdatad
 
 \.DS_Store
+
+*.xcbkptlist

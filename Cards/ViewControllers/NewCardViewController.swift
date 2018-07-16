@@ -8,12 +8,6 @@
 
 import UIKit
 
- protocol NewCardDelegate{
-    
-    func didAddCard(type: Card.CardType)
-    
-}
-
 enum Mode {
     case light
     case dark
@@ -71,9 +65,13 @@ enum CardTheme: Int, Codable {
     }
 }
 
+protocol NewCardViewConstrollerDelegate: class {
+    func newCardViewController(newCardViewController: NewCardViewController, didAddCard type: Card.CardType)
+}
 
 class NewCardViewController: UIViewController {
     
+    @IBOutlet weak var scanButton: UIButton!
     @IBOutlet weak var saveButton: UIButton!
     @IBOutlet weak var logoImageView: UIImageView!
     @IBOutlet weak var segmentControl: UISegmentedControl!
@@ -83,13 +81,16 @@ class NewCardViewController: UIViewController {
     @IBOutlet weak var cvcTextField: UITextField!
     @IBOutlet weak var stackView: UIStackView!
     
+    
+    
     var cardManager: CardManager?
-    var newCardDelegate: NewCardDelegate?
+    weak var newCardDelegate: NewCardViewConstrollerDelegate?
 
     override func viewDidLoad() {
         super.viewDidLoad()
         setBackgroundColor()
-        
+        CardIOUtilities.preload()
+
         nameTextField.delegate = self
         cardNumberTextField.delegate = self
         expiryDateTextField.delegate = self
@@ -104,6 +105,10 @@ class NewCardViewController: UIViewController {
         
         configureNavigationBar()
         style()
+        
+        if segmentControl.selectedSegmentIndex == 1 {
+            scanButton.isHidden = true
+        }
     }
     
     private func configureNavigationBar() {
@@ -123,6 +128,8 @@ class NewCardViewController: UIViewController {
         barItem.customView?.heightAnchor.constraint(equalToConstant: 22).isActive = true
         
         navigationItem.leftBarButtonItem = barItem
+        
+        
     }
 
     private func style() {
@@ -136,7 +143,15 @@ class NewCardViewController: UIViewController {
 
     @IBAction func handleSegmentChanged(_ sender: UISegmentedControl) {
         let type: CardType = sender.selectedSegmentIndex == 0 ? .bank : .store
+        switch type {
+        case .bank:
+            scanButton.isHidden = false
+        case .store:
+            scanButton.isHidden = true
+
+        }
         showFields(for: type)
+        
     }
     
     @IBAction func handleSaveButtonTapped(_ sender: UIButton) {
@@ -146,8 +161,7 @@ class NewCardViewController: UIViewController {
         }
         let c = Card(name: nameTextField.text!, cardNumber: cardNumberTextField.text!, expiry: expiryDateTextField.text!, cvv: cvcTextField.text!, bankType: bankType(), cardTheme: .alpha, logo: logo ?? "", cardType: cardType())
         cardManager?.addCard(c, completion: {
-            newCardDelegate?.didAddCard(type: cardType())
-            dismiss(animated: true)
+            newCardDelegate?.newCardViewController(newCardViewController: self, didAddCard: cardType())
         })
     }
     
@@ -171,12 +185,10 @@ class NewCardViewController: UIViewController {
     private func showFields(for type: CardType) {
         switch type {
         case .bank:
-            logoImageView.isHidden = true
             nameTextField.isHidden = false
             expiryDateTextField.isHidden = false
             cvcTextField.isHidden = false
         case .store:
-            logoImageView.isHidden = true
             nameTextField.isHidden = false
             expiryDateTextField.isHidden = true
             cvcTextField.isHidden = true
@@ -196,6 +208,76 @@ class NewCardViewController: UIViewController {
             self.present(imagePicker, animated: true, completion: nil)
         }
     }
+    @IBAction func handleScanTapped(_ sender: UIButton) {
+        if let cardIOVC = CardIOPaymentViewController(paymentDelegate: self) {
+            cardIOVC.collectCardholderName = true
+            cardIOVC.guideColor = UIColor.cardsTintColor
+            cardIOVC.hideCardIOLogo = true
+            cardIOVC.detectionMode = .cardImageAndNumber
+            cardIOVC.keepStatusBarStyleForCardIO = true
+            cardIOVC.maskManualEntryDigits = true
+            cardIOVC.navigationBarStyleForCardIO = .black
+            cardIOVC.navigationBarTintColor = navigationController?.navigationBar.barTintColor
+            
+            
+            
+            present(cardIOVC, animated: true)
+        }
+        print("scanner")
+    }
+}
+
+extension NewCardViewController: CardIOPaymentViewControllerDelegate{
+    func userDidCancel(_ paymentViewController: CardIOPaymentViewController!) {
+        paymentViewController.dismiss(animated: true)
+    }
+    
+    func userDidProvide(_ cardInfo: CardIOCreditCardInfo!, in paymentViewController: CardIOPaymentViewController!) {
+        guard let name = cardInfo.cardholderName, let number = cardInfo.cardNumber, let cvv = cardInfo.cvv else {
+            //Show error
+            return
+        }
+        
+        var expiryMonth = String(cardInfo.expiryMonth)
+        if expiryMonth.count == 1 {
+            expiryMonth.insert("0", at: expiryMonth.startIndex)
+        }
+        var expiryYear = String(cardInfo.expiryYear)
+        expiryYear.remove(at: expiryYear.startIndex)
+        expiryYear.remove(at: expiryYear.startIndex)
+
+        let expiryText = "\(expiryMonth)" + "/" + "\(expiryYear)"
+
+        
+        func type() -> BankType {
+            switch cardInfo.cardType {
+            case .mastercard:
+                return .masterCard
+            case .visa:
+                return .visa
+            default:
+                return .unknown
+            }
+        }
+        
+        cardNumberTextField.text = number
+        cvcTextField.text = cvv
+        expiryDateTextField.text = expiryText
+        nameTextField.text = name
+        
+        paymentViewController.dismiss(animated: true) { [weak self] in
+            guard let strongSelf = self else { return }
+            let c = Card(name: name, cardNumber: number, expiry: expiryText, cvv: cvv, bankType: type(), cardTheme: .alpha, logo: "", cardType: .bank)
+            strongSelf.cardManager?.addCard(c, completion: { 
+                strongSelf.newCardDelegate?.newCardViewController(newCardViewController: strongSelf, didAddCard: .bank)
+                DispatchQueue.main.async {
+                    strongSelf.dismiss(animated: true)
+                }
+            })
+
+        }
+    }
+
 }
 
 extension NewCardViewController: UIImagePickerControllerDelegate, UINavigationControllerDelegate {
