@@ -119,7 +119,7 @@ class CardCell: UITableViewCell {
     private let customNameLabel: CardNameLabel = {
         let nL = CardNameLabel()
         nL.translatesAutoresizingMaskIntoConstraints = false
-        nL.backgroundColor = UIColor(white: 155/255, alpha: 0.3)
+        nL.backgroundColor = UIColor(white: 155/255, alpha: 0.6)
         nL.font = UIFont.systemFont(ofSize: 12, weight: .light)
         nL.textColor = UIColor.CardColor.pearlWhite.withAlphaComponent(0.5)
         nL.textAlignment = .right

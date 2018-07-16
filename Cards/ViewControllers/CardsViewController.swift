@@ -171,13 +171,10 @@ extension CardsViewController: CardCellDelegate {
             print("Yolo")
         }
         
-        alert.addAction(UIAlertAction(title: NSLocalizedString("Save", comment: ""), style: .default, handler: { _ in
+        alert.addAction(UIAlertAction(title: NSLocalizedString("Save", comment: ""), style: .default, handler: { [weak self] _ in
             if let personalName = alert.textFields?.first?.text {
-                let newCard = Card(personalName: personalName, name: card.name, cardNumber: card.cardNumber, expiry: card.expiry, cvv: card.expiry, bankType: card.bankType, cardTheme: card.cardTheme, logo: "", cardType: card.cardType)
-                self.cardManager.delete(card, completion: {
-                    self.cardManager.addCard(newCard, completion: {
-                        self.tableView.reloadData()
-                    })
+                self?.cardManager.addPersonalName(card, personalName: personalName, completion: {
+                self?.tableView.reloadData()
                 })
             }
             

@@ -87,6 +87,24 @@ class CardManager: CardService {
         })
     }
     
+    func addPersonalName(_ card: Card, personalName: String, completion: () -> Void) {
+        var filteredCards = cards.filter({ $0.cardType == card.cardType })
+        
+        guard let index = filteredCards.index(where: { $0.cardNumber == card.cardNumber} ) else { return }
+        filteredCards.remove(at: index)
+        filteredCards.insert(Card(personalName: personalName, name: card.name, cardNumber: card.cardNumber, expiry: card.expiry, cvv: card.cvv, bankType: card.bankType, cardTheme: card.cardTheme, logo: "", cardType: card.cardType), at: index)
+        let cardsToSave = cards.filter({ $0.cardType != card.cardType }) + filteredCards
+        save(cardsToSave, completion: completion)
+    }
+    
+    private func save(_ cards: [Card], completion: () -> Void) {
+        self.cards = []
+        self.cards = cards
+        saveCardsToKeychain {
+            completion()
+        }
+    }
+    
     private func saveCardsToKeychain(completion: () -> Void) {
         let encoder = JSONEncoder()
         encoder.outputFormatting = .prettyPrinted
