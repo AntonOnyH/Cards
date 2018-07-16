@@ -109,6 +109,19 @@ class CardCell: UITableViewCell {
         return l
     }()
     
+    let cardNameLabel: CardNameLabel = {
+        let nL = CardNameLabel()
+        nL.translatesAutoresizingMaskIntoConstraints = false
+        nL.backgroundColor = UIColor(white: 155/255, alpha: 0.3)
+        nL.font = UIFont.systemFont(ofSize: 12, weight: .light)
+        nL.textColor = UIColor.CardColor.pearlWhite.withAlphaComponent(0.5)
+        nL.textAlignment = .right
+        nL.text = "CardNameLabel"
+        nL.layer.cornerRadius = 4
+        nL.clipsToBounds = true
+        return nL
+
+    }()
     override init(style: UITableViewCellStyle, reuseIdentifier: String?) {
         super.init(style: style, reuseIdentifier: reuseIdentifier)
         setup()
@@ -172,7 +185,7 @@ class CardCell: UITableViewCell {
         cardView.addSubview(expiryLabel)
         cardView.addSubview(cvvLabel)
         cardView.addSubview(logoImageView)
-        
+        cardView.addSubview(cardNameLabel)
         patternImageView.fillSuperview()
         
         
@@ -205,6 +218,8 @@ class CardCell: UITableViewCell {
         logoImageView.widthAnchor.constraint(equalToConstant: 70).isActive = true
         logoImageView.heightAnchor.constraint(equalToConstant: 70).isActive = true
         
+        cardNameLabel.trailingAnchor.constraint(equalTo: cardView.trailingAnchor, constant: -10).isActive = true
+        cardNameLabel.topAnchor.constraint(equalTo: cardView.topAnchor, constant: 10).isActive = true
     }
     
     private func addCornerRadius() {
@@ -229,3 +244,23 @@ private extension Array {
     }
 }
 
+class CardNameLabel: UILabel {
+    private var topInset: CGFloat = 2.0
+    private var bottomInset: CGFloat = 2.0
+    private var leftInset: CGFloat = 5.0
+    private var rightInset: CGFloat = 5.0
+    
+    override func drawText(in rect: CGRect) {
+        let insets = UIEdgeInsets(top: topInset, left: leftInset, bottom: bottomInset, right: rightInset)
+        super.drawText(in: UIEdgeInsetsInsetRect(rect, insets))
+    }
+    
+    override var intrinsicContentSize: CGSize {
+        get {
+            var contentSize = super.intrinsicContentSize
+            contentSize.height += topInset + bottomInset
+            contentSize.width += leftInset + rightInset
+            return contentSize
+        }
+    }
+}
