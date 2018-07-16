@@ -79,7 +79,6 @@ class CardsViewController: UIViewController {
     }
     
     fileprivate func presentMoreOptions(index: Int, fromView: CardCell?) {
-        
         let alert = UIAlertController(title: nil, message: nil, preferredStyle: .actionSheet)
         let deleteAction = UIAlertAction(title: NSLocalizedString("Delete", comment: ""), style: .destructive) { [weak self] _ in
             if let card = self?.cardManager.cardAtIndex(index) {
@@ -90,7 +89,6 @@ class CardsViewController: UIViewController {
         }
         
         let cancelAction = UIAlertAction(title: NSLocalizedString("Cancel", comment: ""), style: .cancel, handler: nil)
-        
         let copyAction = UIAlertAction(title: NSLocalizedString("Copy number", comment: ""), style: .default) { (Action) in
             if let cardNumber = fromView?.numberLabel.text {
                 let numberWithNoSpacing = cardNumber.components(separatedBy: .whitespaces).joined()
@@ -123,6 +121,7 @@ extension CardsViewController: UITableViewDelegate, UITableViewDataSource {
     
     func tableView(_ tableView: UITableView, cellForRowAt indexPath: IndexPath) -> UITableViewCell {
         let cell = tableView.dequeueReusableCell(withIdentifier: "Cell", for: indexPath) as! CardCell
+        cell.delegate = self
         let item = cardManager.cardAtIndex(indexPath.row)
         cell.configure(with: item)
         return cell
@@ -162,6 +161,39 @@ extension CardsViewController:NewCardViewConstrollerDelegate{
     func newCardViewController(newCardViewController: NewCardViewController, didAddCard type: Card.CardType) {
         segmentView.currentSegment = type
     }
+}
+
+extension CardsViewController: CardCellDelegate {
+    func cardCelldidRequestAddPersonalName(for card: Card?) {
+        guard let card = card else { return }
+        let alert = UIAlertController(title: "Personal Name", message: "", preferredStyle: .alert)
+        alert.addTextField { (textField) in
+            print("Yolo")
+        }
+        
+        alert.addAction(UIAlertAction(title: NSLocalizedString("Save", comment: ""), style: .default, handler: { _ in
+            if let personalName = alert.textFields?.first?.text {
+                let newCard = Card(personalName: personalName, name: card.name, cardNumber: card.cardNumber, expiry: card.expiry, cvv: card.expiry, bankType: card.bankType, cardTheme: card.cardTheme, logo: "", cardType: card.cardType)
+                self.cardManager.delete(card, completion: {
+                    self.cardManager.addCard(newCard, completion: {
+                        self.tableView.reloadData()
+                    })
+                })
+            }
+            
+            
+            print("Saved")
+        }))
+        
+        alert.addAction(UIAlertAction(title: NSLocalizedString("Cancel", comment: ""), style: .destructive, handler: { _ in
+            print("Cancel")
+        }))
+
+        
+        present(alert, animated: true)
+    }
+    
+    
 }
 
 

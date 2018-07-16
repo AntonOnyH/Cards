@@ -9,6 +9,10 @@
 import Foundation
 import UIKit
 
+protocol CardCellDelegate: class {
+    func cardCelldidRequestAddPersonalName(for card: Card?)
+}
+
 class CardCell: UITableViewCell {
     
     var mode: Mode = .light {
@@ -27,7 +31,9 @@ class CardCell: UITableViewCell {
             }
         }
     }
-        
+    
+    weak var delegate: CardCellDelegate?
+    
     var showPattern: Bool? {
         didSet {
             guard let show = showPattern else { return }
@@ -54,7 +60,7 @@ class CardCell: UITableViewCell {
     }()
 
     
-    let cardView: UIView = {
+    private let cardView: UIView = {
         let i = UIView()
         i.translatesAutoresizingMaskIntoConstraints = false
         i.contentMode = .scaleAspectFit
@@ -63,7 +69,7 @@ class CardCell: UITableViewCell {
         return i
     }()
     
-    let bankTypeImageView: UIImageView = {
+    private let bankTypeImageView: UIImageView = {
         let i = UIImageView()
         i.translatesAutoresizingMaskIntoConstraints = false
         i.contentMode = .scaleAspectFit
@@ -71,9 +77,9 @@ class CardCell: UITableViewCell {
         return i
     }()
     
-    let gradientView = GradientView()
+    private let gradientView = GradientView()
     
-    let expiryLabel: UILabel = {
+    private let expiryLabel: UILabel = {
         let l = UILabel()
         l.font = UIFont.systemFont(ofSize: 14, weight: .medium)
         l.translatesAutoresizingMaskIntoConstraints = false
@@ -82,7 +88,7 @@ class CardCell: UITableViewCell {
         return l
     }()
     
-    let cvvLabel: UILabel = {
+    private let cvvLabel: UILabel = {
         let l = UILabel()
         l.font = UIFont.systemFont(ofSize: 14, weight: .medium)
         l.translatesAutoresizingMaskIntoConstraints = false
@@ -91,7 +97,8 @@ class CardCell: UITableViewCell {
     }()
     
     
-    let numberLabel: UILabel = {
+    //TODO: Make provate
+     let numberLabel: UILabel = {
         let l = UILabel()
         l.font = UIFont.systemFont(ofSize: 24, weight: .medium)
         l.translatesAutoresizingMaskIntoConstraints = false
@@ -100,7 +107,7 @@ class CardCell: UITableViewCell {
     }()
     
     
-    let titleLabel: UILabel = {
+    private let titleLabel: UILabel = {
         let l = UILabel()
         l.translatesAutoresizingMaskIntoConstraints = false
         l.textColor = .white
@@ -109,7 +116,7 @@ class CardCell: UITableViewCell {
         return l
     }()
     
-    let cardNameLabel: CardNameLabel = {
+    private let customNameLabel: CardNameLabel = {
         let nL = CardNameLabel()
         nL.translatesAutoresizingMaskIntoConstraints = false
         nL.backgroundColor = UIColor(white: 155/255, alpha: 0.3)
@@ -122,17 +129,12 @@ class CardCell: UITableViewCell {
         return nL
 
     }()
-    override init(style: UITableViewCellStyle, reuseIdentifier: String?) {
-        super.init(style: style, reuseIdentifier: reuseIdentifier)
-        setup()
-    }
     
-    required init?(coder aDecoder: NSCoder) {
-        super.init(coder: aDecoder)
-        setup()
-    }
+    private var card: Card?
     
     func configure(with card: Card) {
+        self.card = card
+        setupCustomNameLabel()
         setViewsVisibelity(for: card.cardType)
         mode = .light
         titleLabel.text = card.name
@@ -147,6 +149,41 @@ class CardCell: UITableViewCell {
         }
     }
     
+    private func setupCustomNameLabel() {
+        guard let card = card, let customName = card.personalName else { return }
+        if customName.isEmpty {
+            customNameLabel.text = NSLocalizedString("Add personal name", comment: "")
+        } else {
+            customNameLabel.text = customName
+        }
+    }
+
+    override init(style: UITableViewCellStyle, reuseIdentifier: String?) {
+        super.init(style: style, reuseIdentifier: reuseIdentifier)
+        setup()
+    }
+    
+    required init?(coder aDecoder: NSCoder) {
+        super.init(coder: aDecoder)
+        setup()
+    }
+    
+    private func setup() {
+        customNameLabel.isUserInteractionEnabled = true
+        let tapGesture = UITapGestureRecognizer(target: self, action: #selector(handleCustomLabelTapped))
+        customNameLabel.addGestureRecognizer(tapGesture)
+        
+        backgroundColor = .clear
+        addConstraints()
+        addCornerRadius()
+        
+        patternImageView.image = #imageLiteral(resourceName: "Pattern1")
+    }
+    
+    @objc func handleCustomLabelTapped() {
+        delegate?.cardCelldidRequestAddPersonalName(for: self.card)
+    }
+    
     private func setViewsVisibelity(for type: Card.CardType) {
         switch type {
         case .bank:
@@ -156,7 +193,6 @@ class CardCell: UITableViewCell {
             logoImageView.isHidden = true
             gradientView.topColor = UIColor.GradiantColor.gradLight
             gradientView.bottomColor = UIColor.GradiantColor.gradDark
-
         case .store:
             cvvLabel.isHidden = true
             bankTypeImageView.isHidden = true
@@ -165,14 +201,6 @@ class CardCell: UITableViewCell {
             gradientView.topColor = UIColor.CardColor.blue
             gradientView.bottomColor = UIColor.CardColor.navy
         }
-    }
-    
-    private func setup() {
-        backgroundColor = .clear
-        addConstraints()
-        addCornerRadius()
-        
-        patternImageView.image = #imageLiteral(resourceName: "Pattern1")
     }
     
     private func addConstraints() {
@@ -185,7 +213,7 @@ class CardCell: UITableViewCell {
         cardView.addSubview(expiryLabel)
         cardView.addSubview(cvvLabel)
         cardView.addSubview(logoImageView)
-        cardView.addSubview(cardNameLabel)
+        cardView.addSubview(customNameLabel)
         patternImageView.fillSuperview()
         
         
@@ -218,8 +246,8 @@ class CardCell: UITableViewCell {
         logoImageView.widthAnchor.constraint(equalToConstant: 70).isActive = true
         logoImageView.heightAnchor.constraint(equalToConstant: 70).isActive = true
         
-        cardNameLabel.trailingAnchor.constraint(equalTo: cardView.trailingAnchor, constant: -10).isActive = true
-        cardNameLabel.topAnchor.constraint(equalTo: cardView.topAnchor, constant: 10).isActive = true
+        customNameLabel.trailingAnchor.constraint(equalTo: cardView.trailingAnchor, constant: -10).isActive = true
+        customNameLabel.topAnchor.constraint(equalTo: cardView.topAnchor, constant: 10).isActive = true
     }
     
     private func addCornerRadius() {

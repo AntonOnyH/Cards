@@ -24,6 +24,7 @@ protocol CardService {
 }
 
 struct Card: Codable {
+    let personalName: String?
     let name: String
     let cardNumber: String
     let expiry: String
