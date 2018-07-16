@@ -627,7 +627,7 @@
 				);
 				PRODUCT_BUNDLE_IDENTIFIER = com.hugoprinsloo.cards;
 				PRODUCT_NAME = "$(TARGET_NAME)";
-				SWIFT_OBJC_BRIDGING_HEADER = "/Users/hugoprinsloo/Documents/Cards/Cards/NewCardViewController-Bridging-Header.h";
+				SWIFT_OBJC_BRIDGING_HEADER = "./Cards/NewCardViewController-Bridging-Header.h";
 				SWIFT_VERSION = 4.0;
 				TARGETED_DEVICE_FAMILY = 1;
 			};
@@ -647,7 +647,7 @@
 				);
 				PRODUCT_BUNDLE_IDENTIFIER = com.hugoprinsloo.cards;
 				PRODUCT_NAME = "$(TARGET_NAME)";
-				SWIFT_OBJC_BRIDGING_HEADER = "/Users/hugoprinsloo/Documents/Cards/Cards/NewCardViewController-Bridging-Header.h";
+				SWIFT_OBJC_BRIDGING_HEADER = "./Cards/NewCardViewController-Bridging-Header.h";
 				SWIFT_VERSION = 4.0;
 				TARGETED_DEVICE_FAMILY = 1;
 			};

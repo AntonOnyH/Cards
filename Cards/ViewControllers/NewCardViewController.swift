@@ -71,6 +71,7 @@ protocol NewCardViewConstrollerDelegate: class {
 
 class NewCardViewController: UIViewController {
     
+    @IBOutlet weak var scanButton: UIButton!
     @IBOutlet weak var saveButton: UIButton!
     @IBOutlet weak var logoImageView: UIImageView!
     @IBOutlet weak var segmentControl: UISegmentedControl!
@@ -79,6 +80,8 @@ class NewCardViewController: UIViewController {
     @IBOutlet weak var expiryDateTextField: UITextField!
     @IBOutlet weak var cvcTextField: UITextField!
     @IBOutlet weak var stackView: UIStackView!
+    
+    
     
     var cardManager: CardManager?
     weak var newCardDelegate: NewCardViewConstrollerDelegate?
@@ -102,6 +105,10 @@ class NewCardViewController: UIViewController {
         
         configureNavigationBar()
         style()
+        
+        if segmentControl.selectedSegmentIndex == 1 {
+            scanButton.isHidden = true
+        }
     }
     
     private func configureNavigationBar() {
@@ -121,6 +128,8 @@ class NewCardViewController: UIViewController {
         barItem.customView?.heightAnchor.constraint(equalToConstant: 22).isActive = true
         
         navigationItem.leftBarButtonItem = barItem
+        
+        
     }
 
     private func style() {
@@ -134,7 +143,15 @@ class NewCardViewController: UIViewController {
 
     @IBAction func handleSegmentChanged(_ sender: UISegmentedControl) {
         let type: CardType = sender.selectedSegmentIndex == 0 ? .bank : .store
+        switch type {
+        case .bank:
+            scanButton.isHidden = false
+        case .store:
+            scanButton.isHidden = true
+
+        }
         showFields(for: type)
+        
     }
     
     @IBAction func handleSaveButtonTapped(_ sender: UIButton) {
