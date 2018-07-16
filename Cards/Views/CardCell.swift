@@ -123,7 +123,7 @@ class CardCell: UITableViewCell {
         nL.font = UIFont.systemFont(ofSize: 12, weight: .light)
         nL.textColor = UIColor.CardColor.pearlWhite.withAlphaComponent(0.5)
         nL.textAlignment = .right
-        nL.text = "CardNameLabel"
+        nL.text = NSLocalizedString("Add personal name", comment: "")
         nL.layer.cornerRadius = 4
         nL.clipsToBounds = true
         return nL
