@@ -159,7 +159,7 @@ class NewCardViewController: UIViewController {
         if case .store = cardType() {
             logo = logoImageView.image!.asString()
         }
-        let c = Card(name: nameTextField.text!, cardNumber: cardNumberTextField.text!, expiry: expiryDateTextField.text!, cvv: cvcTextField.text!, bankType: bankType(), cardTheme: .alpha, logo: logo ?? "", cardType: cardType())
+        let c = Card(personalName: "", name: nameTextField.text!, cardNumber: cardNumberTextField.text!, expiry: expiryDateTextField.text!, cvv: cvcTextField.text!, bankType: bankType(), cardTheme: .alpha, logo: logo ?? "", cardType: cardType())
         cardManager?.addCard(c, completion: {
             newCardDelegate?.newCardViewController(newCardViewController: self, didAddCard: cardType())
         })
@@ -267,7 +267,7 @@ extension NewCardViewController: CardIOPaymentViewControllerDelegate{
         
         paymentViewController.dismiss(animated: true) { [weak self] in
             guard let strongSelf = self else { return }
-            let c = Card(name: name, cardNumber: number, expiry: expiryText, cvv: cvv, bankType: type(), cardTheme: .alpha, logo: "", cardType: .bank)
+            let c = Card(personalName:"", name: name, cardNumber: number, expiry: expiryText, cvv: cvv, bankType: type(), cardTheme: .alpha, logo: "", cardType: .bank)
             strongSelf.cardManager?.addCard(c, completion: { 
                 strongSelf.newCardDelegate?.newCardViewController(newCardViewController: strongSelf, didAddCard: .bank)
                 DispatchQueue.main.async {
