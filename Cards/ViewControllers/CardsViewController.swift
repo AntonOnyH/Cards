@@ -20,7 +20,11 @@ class CardsViewController: UIViewController {
     private var shouldNotShowPattern: Bool {
         return UserDefaults.standard.bool(forKey: "shouldNotShowPattern")
     }
-        
+    
+    // The only working solution to get rid of the line between the navigationBar & segment
+    // https://stackoverflow.com/a/34453029/4940845
+    private var navBarLine: UIImageView?
+
     override func viewDidLoad() {
         super.viewDidLoad()
         setBackgroundColor()
@@ -29,18 +33,18 @@ class CardsViewController: UIViewController {
         tableView.delegate = self
         tableView.register(CardCell.self, forCellReuseIdentifier: "Cell")
         tableView.separatorInset = UIEdgeInsets(top: 0, left: 0, bottom: 0, right: 0)
-        
         configureNavigationBar()
-        
-        
         let longPress = UILongPressGestureRecognizer(target: self, action: #selector(handleLongPress(_:)))
         tableView.addGestureRecognizer(longPress)
     }
-    
+
     override func viewWillAppear(_ animated: Bool) {
         super.viewWillAppear(animated)
         cardManager.fetch()
         tableView.reloadData()
+        
+        navBarLine = findHairlineImageViewUnderView(view: navigationController?.navigationBar)
+        navBarLine?.isHidden = true
     }
     
     private func configureNavigationBar() {
@@ -177,8 +181,6 @@ extension CardsViewController: CardCellDelegate {
                 self?.tableView.reloadData()
                 })
             }
-            
-            
             print("Saved")
         }))
         
@@ -190,8 +192,20 @@ extension CardsViewController: CardCellDelegate {
         present(alert, animated: true)
     }
     
-    
+    func findHairlineImageViewUnderView(view: UIView?) -> UIImageView? {
+        guard let view = view else { return nil }
+        if view.isKind(of: UIImageView.classForCoder()) && view.bounds.height <= 1 {
+            return view as? UIImageView
+        }
+        for subView in view.subviews {
+            if let imageView = findHairlineImageViewUnderView(view: subView) {
+                return imageView
+            }
+        }
+        return nil
+    }
 }
+
 
 
 
